@@ -4,101 +4,85 @@ A Flutter application for tracking cryptocurrency prices, trends, and market dat
 
 ## Project Overview
 
-CryptoWave is a Flutter-based mobile application designed to provide users with real-time cryptocurrency market data. It offers a comprehensive view of cryptocurrency prices, historical trends, and detailed coin information, all powered by the CoinGecko API. The application aims to be an intuitive and informative tool for cryptocurrency enthusiasts and investors.
+CryptoWave provides real-time cryptocurrency market data, price charts, and detailed information about various cryptocurrencies. The application leverages the CoinGecko API to deliver up-to-date financial information directly to users.
 
-## Key Features
+## Features
 
-*   **Real-time Price Tracking:** Access up-to-the-minute prices for a wide range of cryptocurrencies.
-*   **Detailed Coin Information:** View comprehensive data for each cryptocurrency, including market capitalization, trading volume, and historical performance.
-*   **Interactive Price Charts:** Visualize price trends with interactive charts, allowing users to analyze historical data effectively.
-*   **Clean and Modern UI:** Experience a user-friendly interface designed for clarity and ease of navigation.
+*   **Real-time Cryptocurrency Price Tracking**: Monitor the current prices of a wide range of cryptocurrencies.
+*   **Detailed Coin Information**: Access comprehensive data for each cryptocurrency, including historical performance and market metrics.
+*   **Interactive Price Charts**: Visualize price trends and historical data with interactive charts powered by FL Chart.
+*   **Clean and Modern UI**: Experience a user-friendly interface designed for clarity and ease of use.
 
-## Target Audience and Use Cases
+## Tech Stack
 
-CryptoWave is intended for cryptocurrency traders, investors, and enthusiasts who need a reliable and accessible way to monitor the cryptocurrency market. It is ideal for:
-
-*   Tracking the performance of a cryptocurrency portfolio.
-*   Researching new investment opportunities.
-*   Staying updated on market trends and news.
-*   Making informed trading decisions based on real-time data.
+*   **Flutter**: The UI framework used for cross-platform application development.
+*   **Bloc Pattern**: State management is handled using the `flutter_bloc` library for predictable state changes.
+*   **CoinGecko API**: The primary data source for all cryptocurrency market information.
+*   **Freezed**: Used for generating immutable data models, ensuring data integrity.
+*   **GetIt**: A service locator for dependency injection.
 
 ## Quick Start
 
 ### Prerequisites
 
-*   **Flutter SDK:** Ensure you have the Flutter SDK installed. You can find installation instructions [here](https://docs.flutter.dev/get-started/install).
-*   **Dart SDK:** Included with the Flutter SDK.
-*   **IDE:** A code editor such as VS Code, Android Studio, or IntelliJ IDEA with Flutter and Dart plugins.
+*   **Flutter SDK**: Ensure you have Flutter installed and configured. You can find installation instructions [here](https://docs.flutter.dev/get-started/install).
+*   **Dart SDK**: Included with the Flutter SDK.
+*   **IDE**: A code editor such as VS Code, Android Studio, or IntelliJ IDEA with Flutter and Dart plugins.
 
 ### Installation
 
-1.  **Clone the repository:**
+1.  **Clone the repository**:
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/your-username/cryptowave.git
     cd cryptowave
     ```
 
-2.  **Install dependencies:**
+2.  **Install dependencies**:
     ```bash
     flutter pub get
     ```
 
-3.  **Obtain a CoinGecko API Key (Optional but Recommended):**
-    While the application may function with public API access, obtaining a free API key from [CoinGecko](https://www.coingecko.com/en/api/documentation) is recommended for consistent and reliable data access.
-    *   Create a `.env` file in the root of the project.
-    *   Add your CoinGecko API key to the `.env` file:
-        ```
-        COINGECKO_API_KEY=YOUR_API_KEY_HERE
-        ```
+3.  **Obtain API Key (if applicable)**:
+    *   While CryptoWave uses the CoinGecko API, which generally does not require an API key for basic usage, it's good practice to check the CoinGecko API documentation for any rate limits or specific usage policies.
 
-4.  **Run the application:**
+4.  **Run the application**:
     ```bash
     flutter run
     ```
 
 ### Basic Usage
 
-Upon launching the application, you will be presented with a list of cryptocurrencies.
+Upon launching the application, you will be presented with a list of cryptocurrencies. You can:
 
-*   **View Market Data:** The main screen displays a list of cryptocurrencies with their current prices and market capitalization.
-*   **Explore Coin Details:** Tap on any cryptocurrency in the list to navigate to its detailed view, which includes price charts and historical data.
-
-### First-Time Setup
-
-1.  Ensure all prerequisites are met.
-2.  Clone the repository and navigate to the project directory.
-3.  Run `flutter pub get` to install necessary dependencies.
-4.  If you have a CoinGecko API key, create a `.env` file in the project root and add your key as `COINGECKO_API_KEY=YOUR_API_KEY_HERE`.
-5.  Execute `flutter run` to launch the application.
+*   **View Prices**: Scroll through the list to see real-time prices and market data.
+*   **Explore Details**: Tap on any cryptocurrency to view its detailed information, including historical price charts and market cap data.
+*   **Search**: Utilize the search functionality to find specific cryptocurrencies.
 
 ## Navigation Guide
 
-### Documentation Structure
+This project is structured to provide a clear and maintainable codebase. The primary navigation and structure are as follows:
 
-This README serves as the primary entry point. For detailed information on specific components or functionalities, refer to the respective files within the `lib/` directory.
-
-### Key Sections
-
-*   **`lib/constants.dart`**: Contains application-wide constant values, including API endpoints.
-*   **`lib/models/`**: Houses the data models used for parsing API responses.
-*   **`lib/network/`**: Contains classes for network requests and error handling.
-*   **`lib/repositories/`**: Implements data fetching logic from the CoinGecko API.
-*   **`lib/ui/`**: Contains all the UI components and screens of the application.
-
-### Getting Help and Support
-
-For any issues or questions, please refer to the project's GitHub repository. You can find information on reporting bugs or suggesting features in the Contribution Guidelines section.
+*   **`lib/`**: Contains the core application logic and UI components.
+    *   **`constants/`**: Stores application-wide constants.
+    *   **`models/`**: Defines data structures for API responses and application state.
+    *   **`network/`**: Handles all network requests and API interactions.
+    *   **`repositories/`**: Implements data fetching logic, abstracting data sources.
+    *   **`ui/`**: Contains all user interface components, organized by feature.
+        *   **`home_page/`**: The main screen displaying a list of cryptocurrencies.
+        *   **`coin_details/`**: The screen for displaying detailed information about a specific cryptocurrency.
+    *   **`utils/`**: Houses utility functions and services, such as dependency injection.
+*   **`android/`**: Contains Android-specific project files.
+*   **`ios/`**: Contains iOS-specific project files.
+*   **`assets/`**: Includes static assets like images and Lottie animations.
 
 ## Project Status
 
-*   **Version:** 1.0.0
-*   **Release Status:** Stable
-*   **Development Roadmap:**
-    *   Enhanced charting capabilities with more customization options.
-    *   User authentication and portfolio management features.
-    *   Integration with additional market data sources.
-    *   Real-time price alerts and notifications.
-*   **Contribution Guidelines:**
-    Contributions are welcome! Please refer to the `CONTRIBUTING.md` file in the repository for guidelines on how to contribute.
-*   **License:**
-    This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+*   **Version**: 1.0.0
+*   **Release Status**: Stable
+*   **Development Roadmap**:
+    *   Enhanced charting capabilities with more timeframes and indicators.
+    *   User authentication for personalized watchlists.
+    *   Integration with additional data sources for broader market coverage.
+    *   Improved error handling and user feedback mechanisms.
+*   **Contribution Guidelines**: Contributions are welcome! Please refer to the `CONTRIBUTING.md` file for guidelines on how to contribute.
+*   **License**: This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
