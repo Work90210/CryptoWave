@@ -1,0 +1,134 @@
+# CryptoWave API Documentation
+
+This document provides a comprehensive reference for the CryptoWave API.
+
+## 1. API Overview
+
+CryptoWave leverages the CoinGecko API to provide real-time cryptocurrency market data, including prices, trends, and detailed coin information. The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions.
+
+## 2. Authentication
+
+Authentication is not explicitly handled or documented within the provided code snippets. Interactions with the CoinGecko API are assumed to be unauthenticated.
+
+## 3. Endpoint/Function Reference
+
+The primary interaction point for API data is through repository classes. The following repository is identified:
+
+### `lib/repositories/coin_repository.dart`
+
+This repository is responsible for fetching cryptocurrency market data.
+
+#### `CoinRepository.fetchCoinMarketData`
+
+Fetches market data for cryptocurrencies.
+
+**Parameters:**
+
+*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
+*   `order` (String): The parameter to order the results by. Defaults to 'market\_cap\_desc'.
+*   `perPage` (int): The number of results to return per page. Defaults to 10.
+*   `page` (int): The page number for pagination. Defaults to 1.
+
+**Returns:**
+
+*   A `Future<NetworkResponseModel<CoinModel>>` containing the fetched coin market data.
+
+#### `CoinRepository.fetchCoinDetails`
+
+Fetches detailed information for a specific cryptocurrency.
+
+**Parameters:**
+
+*   `id` (String): The unique identifier of the cryptocurrency (e.g., 'bitcoin').
+*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
+*   `days` (int): The number of days for which historical data should be fetched. Defaults to 7.
+
+**Returns:**
+
+*   A `Future<NetworkResponseModel<CryptoChartDataModel>>` containing the detailed cryptocurrency data.
+
+### `lib/network/exception_handler.dart`
+
+This utility class provides methods for handling API exceptions.
+
+#### `ExceptionHandler.enhanceException`
+
+Transforms a base `ApiException` into a more domain-specific exception with additional context.
+
+**Parameters:**
+
+*   `error` (Object): The original exception object.
+*   `contextMessage` (String): A message providing context about the operation being performed.
+
+**Returns:**
+
+*   An `ApiException` object with an enhanced error message.
+
+**Supported Exception Types:**
+
+*   `ConnectivityException`: Indicates a lack of internet connection.
+*   `ApiTimeoutException`: Indicates that an API request timed out.
+*   `RateLimitException` (implied by `Rat` in the snippet): Indicates that the API rate limit has been exceeded.
+
+## 4. Request/Response Examples
+
+Specific request and response examples are not provided in the current context. However, based on the repository method signatures, requests will be made to the CoinGecko API using parameters like `vsCurrency`, `order`, `perPage`, `page`, `id`, and `days`. Responses are expected to be structured according to the CoinGecko API's data formats, mapped into `CoinModel` and `CryptoChartDataModel` objects.
+
+## 5. Error Handling
+
+The `ExceptionHandler` class is utilized to manage and enhance API exceptions. It transforms generic API errors into more specific exceptions, such as `ConnectivityException` or `ApiTimeoutException`, by adding context to the error messages.
+
+```dart
+// Example of how an exception might be handled:
+try {
+  // Make an API call using a repository method
+  // ...
+} on ApiException catch (e) {
+  // Log or display the enhanced exception message
+  print('API Error: ${e.message}');
+}
+```
+
+## 6. Rate Limiting
+
+The presence of `Rat` in the `ExceptionHandler` suggests that rate limiting is a consideration. Specific details regarding rate limits, such as the number of requests allowed per minute or hour, are not provided in the current context. Developers should consult the CoinGecko API documentation for their specific rate limits.
+
+## 7. SDK/Client Usage Examples
+
+The application utilizes a custom `HttpClient` instance for making network requests. The repositories interact with this client.
+
+```dart
+// Example of using the HttpClient (conceptual):
+import 'package:cryptowave/network/http_client.dart';
+
+final httpClient = HttpClient.instance;
+
+// To make a GET request:
+// var response = await httpClient.get('some_api_endpoint');
+
+// To make a POST request:
+// var response = await httpClient.post('some_api_endpoint', data: {'key': 'value'});
+```
+
+The `main.dart` file indicates the use of `flutter_dotenv` for loading environment variables, which may include API keys or other configuration settings.
+
+```dart
+// In main.dart:
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(); // Loads environment variables from a .env file
+  // ... rest of the main function
+}
+```
+
+## 8. Testing Instructions
+
+Testing instructions are not provided within the given code context. However, typical testing strategies for such an application would involve:
+
+*   **Unit Tests:** For individual repository methods, ensuring they correctly interact with the `HttpClient` and process responses. Mocking the `HttpClient` would be crucial here.
+*   **Widget Tests:** To verify the UI components that consume data from the repositories and display it to the user.
+*   **Integration Tests:** To test the flow of data from the API calls through the repositories and into the UI.
+
+The presence of `setupDependencies()` in `main.dart` suggests a dependency injection setup (likely using `get_it`), which would be essential for managing testability and providing mock dependencies during testing.
