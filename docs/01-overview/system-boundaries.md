@@ -37,7 +37,7 @@ The CryptoWave application is designed to provide users with real-time cryptocur
 
 *   **Exclusion Criteria:**
     *   Direct trading or transaction capabilities within the application.
-    *   User account management or authentication features.
+    *   User account management or authentication systems.
     *   Cryptocurrency wallet functionalities.
 
 *   **Interface Points with External Systems:**
@@ -54,7 +54,7 @@ The CryptoWave application is designed to provide users with real-time cryptocur
     *   Wallet functionalities.
 
 *   **Related Systems and Their Boundaries:**
-    *   The CoinGecko API is an external system and its internal workings are outside the scope of this application's documentation.
+    *   The CoinGecko API is an external system and its internal operations are out of scope.
 
 *   **Future Scope Considerations:**
     *   TODO: Information on future scope considerations is not available in the provided context.
@@ -74,13 +74,13 @@ The CryptoWave application is designed to provide users with real-time cryptocur
     *   The application exchanges cryptocurrency market data with the CoinGecko API.
 
 *   **Service Level Dependencies:**
-    *   The application's ability to provide real-time data is dependent on the availability and performance of the CoinGecko API.
+    *   The application's real-time data fetching is dependent on the availability and performance of the CoinGecko API.
 
 ### 5. Constraints & Limitations
 
 *   **Technical Constraints:**
     *   The application is built using Flutter.
-    *   The Bloc pattern is used for state management.
+    *   State management is handled using the Bloc pattern.
 
 *   **Business Rule Limitations:**
     *   TODO: Information on business rule limitations is not available in the provided context.
@@ -89,15 +89,12 @@ The CryptoWave application is designed to provide users with real-time cryptocur
     *   TODO: Information on performance boundaries is not available in the provided context.
 
 *   **Compliance Boundaries:**
-    *   Documentation must adhere to WCAG 2.1 Level AA standards.
+    *   TODO: Information on compliance boundaries is not available in the provided context.
 
-## SOURCES
+## Sources
 
-- [S1] docs/01-overview/system-boundaries.md
-- [S5] docs/02-architecture/system-architecture.md
-- [S8] docs/00-meta/doc-accessibility.md
-- [S12] docs/01-overview/README.md
-- [S17] docs/04-apis/rest-api/status-codes.md
-- [S18] docs/04-apis/rest-api/endpoints/README.md
-- [S19] README.md
-- [S20] docs/04-apis/pagination.md
+*   [S1] docs/01-overview/system-boundaries.md
+*   [S5] docs/02-architecture/system-architecture.md
+*   [S12] docs/01-overview/README.md
+*   [S17] docs/04-apis/rest-api/status-codes.md
+*   [S19] README.md
