@@ -1,89 +1,59 @@
 # CryptoWave API Documentation
 
-This document provides comprehensive API documentation for the CryptoWave application.
+This document provides a comprehensive reference for the CryptoWave API, detailing its functionalities, endpoints, and error handling mechanisms.
 
 ## 1. API Overview
 
-CryptoWave utilizes the CoinGecko API to fetch real-time cryptocurrency market data, including prices, trends, and detailed coin information. The application's data fetching and management are handled through dedicated repository classes.
+CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users. [S15, S16, S17, S18, S19, S20, S21, S22, S23, S24] The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions. [S22]
 
 ## 2. Authentication
 
-Authentication is not explicitly managed or documented within the provided code snippets. The application interacts directly with the CoinGecko API, which may have its own authentication requirements not detailed here.
+Authentication is not explicitly handled or documented within the provided code snippets. [S15, S19, S21, S22] Interactions with the CoinGecko API are assumed to be unauthenticated. [S22] All data is publicly accessible through the CoinGecko API. [S15, S16, S20, S23]
 
 ## 3. Endpoint/Function Reference
 
-The primary interaction with external data occurs through repository classes. The following repositories are identified:
+The primary interaction with external data is handled through repositories that abstract API calls. [S16, S18, S20, S22, S23] The `lib/repositories/coin_repository.dart` file is identified as relevant for API interactions. [S16, S18, S22] The `BaseRepository` is also identified as a primary interaction point for API data. [S21]
 
-### 3.1. `BaseRepository`
+### `ExceptionHandler.enhanceException`
 
-This abstract class serves as the foundation for all repository implementations, providing common functionality for API calls.
+This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S24]
 
-*   **`_httpClient`**: An instance of `HttpClient` used for making network requests.
-*   **`_logger`**: An instance of `LoggerService` for logging repository operations.
-*   **`delete<T>`**: A method to perform DELETE requests.
-    *   **Parameters:**
-        *   `url` (required): The URL for the DELETE request.
-        *   `headers` (optional): A map of headers to include in the request.
-        *   `que` (optional): Query parameters for the request.
-    *   **Returns:** A `Future` containing a `NetworkResponseModel<T>`.
+**Parameters:**
 
-### 3.2. `CoinDetailsRepository`
-
-This repository is responsible for handling API calls related to specific cryptocurrency details.
-
-*   **`_logger`**: An instance of `LoggerService` for logging repository operations.
-*   **`fetchHistoricalChartData`**: Fetches historical chart data for a specific coin.
-    *   **Parameters:**
-        *   `id` (required): The unique identifier for the cryptocurrency (e.g., 'bitcoin').
-        *   `vsCurrency` (optional, default: 'usd'): The currency against which to compare the coin's price.
-        *   `days` (optional, default: 7): The number of days for which to fetch historical data.
-    *   **Returns:** A `Future` containing a `NetworkResponseModel<CryptoChartDataModel>`.
-
-### 3.3. `CoinRepository`
-
-This repository handles API calls for general cryptocurrency market data.
-
-*   **`_logger`**: An instance of `LoggerService` for logging repository operations.
-*   **`fetchCoinMarketData`**: Fetches market data for cryptocurrencies.
-    *   **Parameters:**
-        *   `vsCurrency` (optional, default: 'usd'): The currency to compare against.
-        *   `order` (optional, default: 'market\_cap\_desc'): The parameter by which to order the results.
-        *   `perPage` (optional, default: 10): The number of results to return per page.
-        *   `page` (optional, default: 1): The page number for paginated results.
-    *   **Returns:** A `Future` containing a `NetworkResponseModel<CoinModel>`.
-
-### 3.4. `ExceptionHandler`
-
-This utility class provides methods for handling API exceptions.
-
-*   **`enhanceException`**: Transforms a base `ApiException` into a domain-specific exception with enhanced context.
-    *   **Parameters:**
-        *   `error`: The original error object.
-        *   `contextMessage`: A string providing additional context about the operation.
-    *   **Returns:** An `ApiException` with an enhanced message. This method specifically handles:
-        *   `ConnectivityException`: Indicates no internet connection.
-        *   `ApiTimeoutException`: Indicates that a request timed out.
+*   `error`: The original exception object. [S24]
+*   `contextMessage`: A string. [S24]
 
 ## 4. Request/Response Examples
 
-Specific request and response examples are not provided in the current context. However, the structure suggests that API calls will return data encapsulated within a `NetworkResponseModel<T>`, where `T` is the expected data model (e.g., `CoinModel`, `CryptoChartDataModel`).
+TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class is central to error management. It is designed to transform generic API exceptions into more informative, domain-specific exceptions.
-
-*   **`ConnectivityException`**: Raised when there is no internet connection. The error message is augmented with the provided `contextMessage`.
-*   **`ApiTimeoutException`**: Raised when an API request exceeds its time limit, indicating a need to retry.
-*   Other `ApiException` types are handled by providing an enhanced message based on the original error.
+The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S13, S24]
 
 ## 6. Rate Limiting
 
-Rate limiting information for the CoinGecko API is not detailed in the provided code. Users should consult the CoinGecko API documentation for any applicable rate limits.
+TODO: Document rate limiting policies if applicable.
 
 ## 7. SDK/Client Usage Examples
 
-The application utilizes a custom `HttpClient` for network requests. The `BaseRepository` class abstracts the common logic for making these requests. Specific usage examples for SDKs or clients are not provided in this context.
+TODO: Provide examples for SDK or client usage.
 
 ## 8. Testing Instructions
 
-Testing instructions are not provided within the scope of this documentation.
+TODO: Provide instructions for testing API interactions.
+
+## SOURCES
+
+- [S1] README.md
+- [S13] docs/03-features/[feature-name]/platforms/api.md
+- [S15] docs/04-apis/api-overview.md
+- [S16] docs/04-apis/api.md
+- [S17] docs/04-apis/error-handling.md
+- [S18] docs/04-apis/filtering-sorting.md
+- [S19] docs/04-apis/pagination.md
+- [S20] docs/04-apis/rate-limiting.md
+- [S21] docs/04-apis/rest-api/endpoints/README.md
+- [S22] docs/04-apis/rest-api/openapi.yaml
+- [S23] docs/04-apis/rest-api/request-examples.md
+- [S24] docs/04-apis/rest-api/response-examples.md
