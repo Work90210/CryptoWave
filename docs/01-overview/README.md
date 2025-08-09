@@ -29,15 +29,15 @@ Before you begin, ensure you have the following:
 
 ### Installation
 
-TODO: Provide installation instructions.
+TODO: Add installation instructions.
 
 ### Basic Usage
 
-TODO: Provide basic usage examples.
+TODO: Add basic usage examples.
 
 ### First-Time Setup
 
-TODO: Provide a first-time setup guide.
+TODO: Add first-time setup guide.
 
 ## Navigation Guide
 
@@ -52,7 +52,7 @@ This documentation is structured to provide a comprehensive understanding of the
     *   [Documentation Maintenance Guidelines](docs/00-meta/doc-maintenance.md)
     *   [Documentation Performance Metrics and KPIs](docs/00-meta/doc-metrics.md)
     *   [Documentation Review and Approval Processes](docs/00-meta/doc-review-process.md)
-    *   [Version Control and Documentation Lifecycle Management](docs/00-meta/doc-versioning.md)
+    *   [Documentation Version Control and Lifecycle Management](docs/00-meta/doc-versioning.md)
     *   [Guidelines for Accessible Documentation](docs/00-meta/doc-accessibility.md)
 *   **Overview:** High-level information about the project.
     *   [Glossary of Terms and Concepts](docs/01-overview/key-concepts.md)
@@ -60,7 +60,7 @@ This documentation is structured to provide a comprehensive understanding of the
     *   [CryptoWave: Business Motivation and Objectives](docs/01-overview/business-context.md)
 *   **Architecture:** Details about the system's design.
     *   [CryptoWave: System Architecture Documentation](docs/02-architecture/system-architecture.md)
-*   **Features:** Detailed descriptions of implemented features.
+*   **Features:** In-depth explanation of implemented features.
     *   [CryptoWave Features Documentation](docs/03-features/feature-index.md)
 *   **APIs:** Information regarding API interactions.
     *   [CryptoWave API Documentation](docs/04-apis/rest-api/endpoints/README.md)
@@ -72,29 +72,29 @@ This documentation is structured to provide a comprehensive understanding of the
 
 ### Finding Specific Information
 
-To find specific information, navigate through the documentation structure outlined above. The `README.md` files within each section provide an overview and links to more detailed documents.
+Navigate through the documentation structure using the links provided above. Key sections like the [Quick Start Guide](docs/01-overview/quick-start.md) and [System Architecture](docs/02-architecture/system-architecture.md) offer foundational knowledge.
 
 ### Getting Help and Support
 
-TODO: Provide information on how to get help and support.
+TODO: Add information on how to get help and support.
 
 ## Project Status
 
 ### Current Version and Release Status
 
-TODO: Provide current version and release status.
+TODO: Add current version and release status.
 
 ### Development Roadmap Highlights
 
-TODO: Provide development roadmap highlights.
+TODO: Add development roadmap highlights.
 
 ### Contribution Guidelines
 
-TODO: Provide an overview of contribution guidelines.
+TODO: Add contribution guidelines overview.
 
 ### License and Legal Information
 
-TODO: Provide license and legal information.
+TODO: Add license and legal information.
 
 ## SOURCES
 
@@ -117,3 +117,4 @@ TODO: Provide license and legal information.
 - [S17] docs/04-apis/rest-api/status-codes.md
 - [S18] docs/04-apis/pagination.md
 - [S19] docs/04-apis/rate-limiting.md
+- [S20] assets/lottie/error.json
