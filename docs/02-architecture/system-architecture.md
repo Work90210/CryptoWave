@@ -1,117 +1,135 @@
-# CryptoWave: System Architecture Documentation
+# CryptoWave Architecture Documentation
 
 ## 1. System Overview
 
-CryptoWave is a Flutter application designed for real-time cryptocurrency price tracking and market data analysis. It leverages the CoinGecko API to provide users with up-to-date information on various cryptocurrencies, including price charts, historical data, and detailed coin metrics. The application employs the Bloc pattern for state management, ensuring a predictable and maintainable UI.
+CryptoWave is a Flutter application designed for tracking cryptocurrency prices, trends, and market data. It utilizes the CoinGecko API to fetch real-time information, providing users with detailed coin data and interactive price charts. The application is built with a focus on a clean UI and efficient state management.
 
 ## 2. Architecture Patterns Used
 
-The CryptoWave application adheres to a **Component-Based Architecture**. This pattern is evident in the modular structure of the UI, where distinct features and functionalities are encapsulated within reusable components. This approach promotes code reusability, maintainability, and testability.
+The CryptoWave application employs the following architectural patterns:
+
+*   **Bloc Pattern:** State management is handled using the `flutter_bloc` package, facilitating a predictable state management approach.
+*   **Component-Based Architecture:** The UI is structured into reusable components, promoting modularity and maintainability.
+*   **Modular Architecture:** The codebase exhibits a feature-based modular organization, with components categorized into `04-apis`, `rest-api`, and `common`.
 
 ## 3. Component Breakdown
 
-The project is organized into the following key directories and files:
+The project is organized into several key directories and files:
 
-*   **`README.md`**: Provides a high-level overview of the project, its features, and the technology stack.
-*   **`analysis_options.yaml`**: Configures the Dart analyzer for static code analysis, enforcing coding standards and identifying potential issues.
-*   **`android/`**: Contains platform-specific configurations and code for Android.
-    *   `app/src/debug/AndroidManifest.xml`: Android manifest for debug builds, including internet permissions.
-    *   `app/src/main/AndroidManifest.xml`: Main Android manifest file, defining application attributes and activities.
-    *   `app/src/main/kotlin/com/example/cryptowave/MainActivity.kt`: The primary activity for the Android application, extending FlutterActivity.
-    *   `app/src/main/res/drawable-v21/launch_background.xml` and `launch_background.xml`: Defines the splash screen background for different API levels.
-    *   `app/src/main/res/values-night/styles.xml` and `styles.xml`: Contains Android styling resources for light and dark modes.
-    *   `gradle.properties`: Gradle properties for build configuration.
-    *   `gradle/wrapper/gradle-wrapper.properties`: Specifies the Gradle distribution URL.
-    *   `settings.gradle.kts`: Gradle settings file for project configuration.
-*   **`assets/`**: Stores static assets for the application.
-    *   `lottie/error.json`: Contains Lottie animation data for error states.
-*   **`devtools_options.yaml`**: Configuration file for Dart and Flutter DevTools extensions.
-*   **`ios/`**: Contains platform-specific configurations and code for iOS.
-    *   `Runner/AppDelegate.swift`: The main AppDelegate for the iOS application.
-    *   `Runner/Assets.xcassets/AppIcon.appiconset/Contents.json`: Defines app icon assets for various device resolutions.
-    *   `Runner/Assets.xcassets/LaunchImage.imageset/Contents.json` and `README.md`: Defines launch screen assets and provides instructions for customization.
-    *   `RunnerTests/RunnerTests.swift`: Contains unit tests for the iOS application.
-*   **`lib/`**: Contains the core Dart code for the Flutter application.
-    *   `constants.dart`: Defines application-wide constant values, including API URLs.
-    *   `main.dart`: The entry point of the Flutter application, initializing services and running the MyApp widget.
-    *   `models/coin/coin_model.dart`, `coin_model.freezed.dart`, `coin_model.g.dart`: Defines the data model for cryptocurrency information, utilizing Freezed and JsonSerializable for immutable data classes and JSON serialization.
-    *   `models/coin_details/crypto_chart_data_model/`: Contains data models for cryptocurrency chart data, also using Freezed and Json Serializable.
-    *   `network/exception_handler.dart`: Handles API exceptions and provides enhanced error messages.
-    *   `network/http_client.dart`: Implements a custom HTTP client for making network requests, including timeout configurations.
-    *   `network/network_response.dart` and `network_response.freezed.dart`: Defines network response models and error types using Freezed for robust error handling.
-    *   `repositories/base_repository.dart`: An abstract base class for repositories, providing common HTTP client and logger instances.
-    *   `repositories/coin_details_repository.dart`: Handles API calls related to coin details.
-    *   `repositories/coin_repository.dart`: Manages API interactions for general coin data.
-    *   `ui/coin_details/coin_details.dart`: Implements the UI for displaying detailed coin information, including charts.
+*   **`README.md`**: Provides a high-level overview of the project, its features, and the tech stack.
+*   **`analysis_options.yaml`**: Configures the Dart analyzer for static code analysis, including lints from `package:very_good_analysis`.
+*   **`android/`**: Contains Android-specific configurations and resources for the Flutter application.
+    *   `android/app/src/debug/AndroidManifest.xml`: Defines permissions for the debug build, including `android.permission.INTERNET`.
+    *   `android/app/src/main/AndroidManifest.xml`: Specifies application-level settings, including the application label, icon, and main activity.
+    *   `android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt`: The main entry point for the Android activity, extending `FlutterActivity`.
+    *   `android/app/src/main/res/drawable-v21/launch_background.xml` and `android/app/src/main/res/drawable/launch_background.xml`: Define the splash screen background.
+    *   `android/app/src/main/res/values-night/styles.xml` and `android/app/src/main/res/values/styles.xml`: Define application themes, including `LaunchTheme`.
+    *   `android/gradle.properties`: Configures JVM arguments for Gradle.
+    *   `android/gradle/wrapper/gradle-wrapper.properties`: Specifies the Gradle distribution URL.
+    *   `android/settings.gradle.kts`: Configures plugin management and includes the Flutter SDK path.
+*   **`assets/lottie/error.json`**: Contains Lottie animation data for error states.
+*   **`devtools_options.yaml`**: Configuration for Dart & Flutter DevTools extensions.
+*   **`docs/`**: Contains project documentation, including:
+    *   `docs/00-meta/`: Meta-documentation on standards, processes, and tools.
+        *   `doc-accessibility.md`: Guidelines for accessible documentation (WCAG 2.1 Level AA).
+        *   `doc-maintenance.md`: Procedures for maintaining documentation.
+        *   `doc-metrics.md`: Documentation performance metrics and KPIs.
+        *   `doc-review-process.md`: Workflows for documentation review and approval.
+        *   `doc-standards.md`: Writing standards for clarity, conciseness, and technical accuracy.
+        *   `doc-templates.md`: Templates for various documentation types.
+        *   `doc-tools.md`: Tools used for documentation (Markdown, Git).
+        *   `doc-versioning.md`: Version control strategy for documentation.
+    *   `docs/01-overview/`: Overview documentation.
+        *   `README.md`: Project overview, features, and tech stack.
+        *   `business-context.md`: TODO: Content for business context.
+*   **`lib/`**: Contains the core application logic and UI code.
+    *   `lib/main.dart`: The application's entry point, likely extending `StatelessWidget`.
+    *   `lib/models/coin/coin_model.freezed.dart`: Generated code for `CoinModel`, likely using `freezed`.
+    *   `lib/models/coin/coin_model.freezed.dart` also shows relationships with `CoinModel.dart` (extends) and `RoiModel.dart` (implements).
+    *   `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.freezed.dart`: Generated code for `CryptoChartDataModel`, with relationships to `CryptoChartDataModel.dart` (implements) and `DataPointModel.dart` (implements).
+    *   `lib/network/exception_handler.dart`: Handles network exceptions, with relationships to `Exception.dart` (implements) and `ApiException.dart` (extends).
+    *   `lib/network/http_client.dart`: Handles HTTP requests, importing `dart:async` and `dart:convert`.
+*   **`pubspec.yaml`**: Defines project dependencies and metadata.
+*   **`test/`**: Contains unit and integration tests.
 
 ## 4. Data Flow and Dependencies
 
-The application follows a layered architecture:
+The application relies on the CoinGecko API for cryptocurrency data. The `lib/network/http_client.dart` file is responsible for making these API requests, likely handling asynchronous operations and data serialization/deserialization. The `lib/network/exception_handler.dart` is used to manage and process network-related errors.
 
-*   **UI Layer**: Components like `CoinDetailsPage` and `HomePage` are responsible for rendering the user interface. They interact with the state management layer (Bloc).
-*   **Bloc/State Management Layer**: Cubits (e.g., `CoinDetailsCubit`) manage the application's state and business logic, fetching data from repositories.
-*   **Repository Layer**: Classes like `CoinRepository` and `CoinDetailsRepository` abstract data sources, interacting with the `HttpClient` to fetch data from the CoinGecko API. They also handle data transformation and error management.
-*   **Network Layer**: `HttpClient` is responsible for making HTTP requests, and `ExceptionHandler` processes API errors.
-*   **Data Models**: `CoinModel` and `CryptoChartDataModel` (and their associated `.freezed.dart` and `.g.dart` files) define the structure of data fetched from the API, leveraging Freezed for immutability and `json_serializable` for efficient JSON parsing.
+Key relationships observed in the code include:
 
-**Key Relationships:**
-
-*   `lib/main.dart` imports and uses `home.dart` and `service_locator.dart`.
-*   `lib/models/coin/coin_model.dart` is used by `lib/repositories/coin_repository.dart`.
-*   `lib/repositories/coin_repository.dart` imports and uses `lib/network/http_client.dart` and `lib/network/exception_handler.dart`.
-*   `lib/ui/coin_details/coin_details.dart` imports and uses `lib/models/coin/coin_model.dart`, `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.dart`, and `lib/ui/coin_details/cubit/coin_details_cubit.dart`.
+*   **Inheritance:** `StatelessWidget.dart` is extended by `lib/main.dart`. `CoinModel.dart` is extended by `lib/models/coin/coin_model.freezed.dart`. `CryptoChartDataModel.dart` and `DataPointModel.dart` are implemented by `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.freezed.dart`. `ApiException.dart` is extended by `lib/network/exception_handler.dart`.
+*   **Implementation:** `RoiModel.dart` is implemented by `lib/models/coin/coin_model.freezed.dart`. `Exception.dart` is implemented by `lib/network/exception_handler.dart`.
+*   **Imports:** `lib/network/http_client.dart` imports `dart:async` and `dart:convert`.
 
 ## 5. Design Decisions and Rationale
 
-*   **Bloc Pattern for State Management**: The Bloc pattern is employed for state management, providing a clear separation of concerns between UI and business logic. This enhances predictability and testability.
-*   **Freezed for Data Models**: Freezed is used for generating immutable data classes, ensuring data integrity and simplifying state management.
-*   **JsonSerializable for API Data**: `json_serializable` is utilized for efficient and type-safe parsing of JSON responses from the CoinGecko API.
-*   **Dependency Injection with GetIt**: `GetIt` is used for service location and dependency injection, facilitating the management of dependencies across the application.
-*   **HTTP Client Abstraction**: A custom `HttpClient` abstracts network requests, allowing for centralized error handling and configuration.
-*   **Exception Handling**: A dedicated `ExceptionHandler` class centralizes the management of API-related exceptions, providing consistent error reporting.
+*   **Flutter:** Chosen for cross-platform development, enabling a single codebase for both iOS and Android.
+*   **Bloc Pattern:** Selected for robust state management, ensuring a clear separation of concerns and predictable state transitions.
+*   **Freezed:** Used for code generation of immutable models, improving code safety and reducing boilerplate.
+*   **CoinGecko API:** The primary data source, providing comprehensive and up-to-date cryptocurrency market data.
+*   **Markdown for Documentation:** Chosen for its simplicity, readability, and widespread support in development workflows.
 
 ## 6. Scalability Considerations
 
-The component-based architecture and clear separation of concerns facilitate scalability. New features or cryptocurrency data can be integrated by adding new models, repositories, and UI components that adhere to the established patterns. The use of Bloc ensures that state management remains manageable as the application grows.
+The modular architecture and the use of the Bloc pattern contribute to the application's scalability. Separating concerns into distinct components and managing state effectively allows for easier addition of new features and modifications without impacting other parts of the application.
 
 ## 7. Security Architecture
 
-*   **API Key Management**: API keys, if required for CoinGecko, are managed via environment variables loaded by `flutter_dotenv`, preventing hardcoding sensitive information directly in the codebase.
-*   **Data Protection**: While not explicitly detailed in the provided code, standard Flutter security practices should be followed for any sensitive user data. Network requests are made over HTTPS to ensure data in transit is encrypted.
+*   **Internet Permission:** The `android/app/src/debug/AndroidManifest.xml` and `android/app/src/profile/AndroidManifest.xml` files declare the `android.permission.INTERNET` permission, which is necessary for network communication.
+*   **Data Protection:** TODO: Specific data protection measures are not detailed in the provided context.
+*   **Authentication:** TODO: No explicit authentication system is described in the provided context.
 
 ## 8. Performance Considerations
 
-*   **Efficient Data Handling**: The use of Freezed and `json_serializable` ensures efficient data modeling and parsing, minimizing overhead.
-*   **State Management**: The Bloc pattern helps in managing UI state efficiently, preventing unnecessary widget rebuilds.
-*   **Network Caching**: While not explicitly shown, implementing caching strategies for API responses (e.g., using `http_cache` or similar packages) would further enhance performance by reducing redundant network requests.
-*   **Image Optimization**: For any image assets, using optimized image loading and caching mechanisms would be beneficial.
+*   **Interactive Charts:** The use of FL Chart for interactive price charts suggests a focus on providing a responsive and engaging user experience for data visualization.
+*   **State Management:** The Bloc pattern aids in managing application state efficiently, which can contribute to better performance by preventing unnecessary rebuilds.
+*   **Monitoring:** TODO: Specific performance monitoring tools or strategies are not detailed in the provided context.
 
 ## 9. Deployment Architecture
 
-The application is built using Flutter, allowing for cross-platform deployment to iOS and Android.
-
-*   **Android**: The `android/` directory contains all necessary configurations for building an Android application, including `AndroidManifest.xml` and Gradle build scripts.
-*   **iOS**: The `ios/` directory contains configurations for building an iOS application, including `AppDelegate.swift` and Xcode project settings.
+The application is built for Android and iOS using Flutter. The `android/` directory contains configurations for Android deployment, including Gradle settings and manifest files.
 
 ## 10. Future Architecture Improvements
 
-*   **Advanced Caching**: Implement a more sophisticated caching strategy for API data to improve performance and reduce reliance on constant network calls.
-*   **Error Handling Granularity**: Further refine error handling to provide more specific user feedback for different API error scenarios.
-*   **Testing Strategy**: Expand unit and widget testing coverage to ensure the robustness and reliability of the application.
-*   **Theming and Styling**: Centralize theme and style definitions for a more consistent and maintainable UI.
+TODO: Future architecture improvements are not detailed in the provided context.
 
 ## 11. Technology Stack Rationale
 
-*   **Flutter**: Chosen for its cross-platform capabilities, enabling a single codebase for both iOS and Android, and its rich UI toolkit for creating beautiful and performant applications.
-*   **Bloc Pattern (`flutter_bloc`)**: Selected for robust state management, promoting a clean separation of concerns, testability, and predictable state changes.
-*   **CoinGecko API**: The primary data source for cryptocurrency market data, chosen for its comprehensive and reliable API.
-*   **Freezed**: Used for generating immutable data classes, which are essential for predictable state management in Flutter applications and reduce boilerplate code.
-*   **JsonSerializable**: Leveraged for efficient and type-safe JSON serialization and deserialization, crucial for handling API responses.
-*   **GetIt**: Employed for dependency injection, simplifying the management of service and repository instances throughout the application.
-*   **HTTP Package**: Used for making network requests to the CoinGecko API.
-*   **Flutter Dotenv**: For managing environment variables, particularly API keys, securely.
+*   **Flutter:** Chosen for its ability to deliver high-performance, natively compiled applications for mobile, web, and desktop from a single codebase.
+*   **Bloc Pattern (`flutter_bloc`):** Provides a structured way to manage state, making the application more predictable and maintainable, especially as complexity grows.
+*   **Freezed:** Simplifies the creation of immutable data models, reducing the likelihood of bugs related to mutable state and improving code clarity.
+*   **CoinGecko API:** A widely recognized and comprehensive API for cryptocurrency market data, offering a rich dataset for the application's features.
+*   **FL Chart:** A powerful charting library for Flutter, enabling the creation of interactive and visually appealing price charts.
 
 ## 12. Integration Points
 
-*   **CoinGecko API**: The application integrates with the CoinGecko API (`https://api.coingecko.com/api/v3/`) to fetch cryptocurrency data, including prices, market capitalization, historical data, and charts. The `lib/constants.dart` file defines the base URL for these API interactions.
-*   **External Libraries**: The project utilizes various Flutter packages for UI, state management, networking, and code generation, as indicated by the import statements and `pubspec.yaml` (though not provided in the context).
+*   **CoinGecko API:** The primary external integration point for fetching cryptocurrency market data.
+*   **Flutter Tooling:** Integrates with Flutter's development tools for hot reload, debugging, and building.
+
+## SOURCES
+
+*   [S1] README.md
+*   [S2] analysis_options.yaml
+*   [S3] android/app/src/debug/AndroidManifest.xml
+*   [S4] android/app/src/main/AndroidManifest.xml
+*   [S5] android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt
+*   [S6] android/app/src/main/res/drawable-v21/launch_background.xml
+*   [S7] android/app/src/main/res/drawable/launch_background.xml
+*   [S8] android/app/src/main/res/values-night/styles.xml
+*   [S9] android/app/src/main/res/values/styles.xml
+*   [S10] android/app/src/profile/AndroidManifest.xml
+*   [S11] android/gradle.properties
+*   [S12] android/gradle/wrapper/gradle-wrapper.properties
+*   [S13] android/settings.gradle.kts
+*   [S14] assets/lottie/error.json
+*   [S15] devtools_options.yaml
+*   [S16] docs/00-meta/doc-accessibility.md
+*   [S17] docs/00-meta/doc-maintenance.md
+*   [S18] docs/00-meta/doc-metrics.md
+*   [S19] docs/00-meta/doc-review-process.md
+*   [S20] docs/00-meta/doc-standards.md
+*   [S21] docs/00-meta/doc-templates.md
+*   [S22] docs/00-meta/doc-tools.md
+*   [S23] docs/00-meta/doc-versioning.md
+*   [S24] docs/01-overview/README.md
