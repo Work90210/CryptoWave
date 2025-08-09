@@ -1,47 +1,78 @@
-## System Overview
+# CryptoWave: System Overview
 
-CryptoWave is a Flutter application designed for tracking cryptocurrency prices, trends, and market data. It leverages the CoinGecko API to provide users with real-time financial information.
+CryptoWave is a Flutter application designed for real-time cryptocurrency price tracking, market data analysis, and trend visualization. It leverages the CoinGecko API to provide users with up-to-date information on a wide range of cryptocurrencies. The application aims to offer a reliable, accessible, and user-friendly platform for monitoring market trends and individual coin performance.
 
-### System Purpose
+## 1. System Purpose
 
-*   **Primary Functions:** Real-time cryptocurrency price tracking, detailed coin information, historical data, and interactive price charts.
-*   **Problem Domain:** Provides users with up-to-date cryptocurrency market data.
-*   **Core Value Proposition:** Delivers real-time cryptocurrency market data, price charts, and detailed information about various cryptocurrencies.
-*   **Key Differentiators:** Utilizes the CoinGecko API for up-to-date information and FL Chart for interactive price charts.
+### Primary Functions and Capabilities:
+*   **Real-time Price Tracking:** Displays current prices for a vast array of cryptocurrencies.
+*   **Market Data Analysis:** Provides access to market capitalization, trading volume, and 24-hour price ranges.
+*   **Historical Data Visualization:** Presents interactive price charts for cryptocurrencies, allowing users to analyze trends over various timeframes.
+*   **Detailed Coin Information:** Offers comprehensive details about individual cryptocurrencies.
 
-### System Architecture
+### Problem Domain and Solutions Provided:
+The cryptocurrency market is characterized by its volatility and rapid evolution. Investors and enthusiasts require a reliable platform to monitor market trends and track coin performance. CryptoWave addresses this by offering real-time data and analysis tools.
 
-*   **High-Level Component Overview:** The application is built using Flutter.
-*   **Data Flow and Processing Patterns:** The application fetches data from the CoinGecko API.
-*   **Integration Points and Dependencies:** Integrates with the CoinGecko API.
-*   **Technology Stack Summary:**
-    *   Flutter
-    *   Bloc Pattern (flutter\_bloc)
-    *   CoinGecko API
-    *   Freezed
-    *   GetIt
-    *   FL Chart
+### Core Value Proposition:
+CryptoWave delivers up-to-date financial information directly to users, enabling them to stay informed about cryptocurrency market trends and make informed decisions.
 
-### Core Features
+### Key Differentiators:
+The application provides a clean and modern user interface, interactive price charts powered by FL Chart, and detailed coin information.
 
-*   **Main Feature Categories:**
-    *   Real-time cryptocurrency price tracking.
-    *   Detailed coin information and historical data.
-    *   Interactive price charts.
-*   **User-Facing Capabilities:**
-    *   Monitor current prices of a wide range of cryptocurrencies.
-    *   Access comprehensive data for each cryptocurrency, including historical performance and market metrics.
-    *   Visualize price trends and market data through intuitive and interactive charts.
-*   **Administrative Functions:** TODO: Information on administrative functions is not available in the provided context.
+## 2. System Architecture
 
-### System Scope
+### High-Level Component Overview:
+CryptoWave employs a Component-Based Architecture, evident in its modular UI structure where distinct features are encapsulated within reusable components. The application uses the Bloc pattern for state management.
 
-*   **What the System Handles:** Tracking cryptocurrency prices, trends, and market data.
-*   **Current Limitations and Boundaries:** TODO: Information on current limitations and boundaries is not available in the provided context.
-*   **Future Expansion Plans:** TODO: Information on future expansion plans is not available in the provided context.
-*   **Related Systems and Integrations:** Integrates with the CoinGecko API.
+### Data Flow and Processing Patterns:
+The application's core functionality revolves around fetching and displaying data from the CoinGecko API. Repositories abstract API calls, and an `ExceptionHandler` class processes and standardizes API responses.
+
+### Integration Points and Dependencies:
+*   **CoinGecko API:** The primary external data source for cryptocurrency market data.
+*   **FL Chart:** Used for interactive price charts.
+
+### Technology Stack Summary:
+*   **Framework:** Flutter
+
+## 3. Core Features
+
+### Main Feature Categories:
+*   **Market Data:** Real-time price feeds, historical charts, and market capitalization data for cryptocurrencies.
+*   **Portfolio Management:** Tools for users to track their cryptocurrency holdings.
+
+### User-Facing Capabilities:
+*   Monitor current prices of a wide range of cryptocurrencies.
+*   Access comprehensive data for each cryptocurrency, including historical performance and market metrics.
+*   Visualize price trends and market data through interactive charts.
+
+## 4. System Scope
+
+### What the System Handles:
+*   Real-time cryptocurrency price tracking.
+*   Market data analysis, including market capitalization and trading volume.
+*   Historical data visualization through interactive charts.
+*   Detailed coin information display.
+
+### Current Limitations and Boundaries:
+*   Authentication is not explicitly handled or documented, and interactions with the CoinGecko API are assumed to be unauthenticated.
+
+### Future Expansion Plans:
+TODO: Information on future expansion plans is not available in the provided context.
+
+### Related Systems and Integrations:
+*   CoinGecko API
 
 ## SOURCES
 
-*   [S1] README.md
-*   [S24] docs/01-overview/README.md
+- [S1] docs/02-architecture/system-architecture.md
+- [S2] docs/03-features/feature-index.md
+- [S3] docs/01-overview/business-context.md
+- [S4] docs/01-overview/system-overview.md
+- [S6] docs/04-apis/rest-api/status-codes.md
+- [S7] docs/04-apis/rest-api/request-examples.md
+- [S8] docs/01-overview/changelog.md
+- [S11] docs/04-apis/rest-api/endpoints/README.md
+- [S13] docs/04-apis/rest-api/response-examples.md
+- [S18] docs/03-features/[feature-name]/platforms/api.md
+- [S19] docs/04-apis/api-overview.md
+- [S20] docs/01-overview/README.md
