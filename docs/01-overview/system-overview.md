@@ -32,7 +32,7 @@ The application's core functionality revolves around fetching and displaying dat
 *   **FL Chart:** Used for interactive price charts.
 
 ### Technology Stack Summary:
-*   **Framework:** Flutter
+*   **Flutter:** The framework used for building the application.
 
 ## 3. Core Features
 
@@ -54,7 +54,7 @@ The application's core functionality revolves around fetching and displaying dat
 *   Detailed coin information display.
 
 ### Current Limitations and Boundaries:
-*   Authentication is not explicitly handled or documented, and interactions with the CoinGecko API are assumed to be unauthenticated.
+Authentication is not explicitly handled within the provided code snippets, and interactions with the CoinGecko API are assumed to be unauthenticated.
 
 ### Future Expansion Plans:
 TODO: Information on future expansion plans is not available in the provided context.
