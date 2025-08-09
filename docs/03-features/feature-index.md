@@ -17,64 +17,73 @@ Based on the project structure and common mobile application patterns, the featu
 
 ## 3. Feature Descriptions and Capabilities
 
-While a deep dive into specific business logic is not possible without executing the code, the file structure suggests the following implemented features:
+While a deep dive into every specific implementation detail requires a more granular code analysis, the following features are inferable from the provided file structure and common mobile development practices:
 
-*   **Market Data Fetching and Display:**
-    *   **Capability:** The application is expected to fetch real-time cryptocurrency prices and market data from external APIs. This data is likely displayed in a structured format, possibly including lists of cryptocurrencies, their current prices, 24-hour changes, and market capitalization.
-    *   **Evidence:** The presence of `analysis_options.yaml` and `devtools_options.yaml` suggests a focus on code quality and analysis, which is crucial for data-intensive applications. The Kotlin files within `android/app/src/main/kotlin/com/example/cryptowave/` are the primary location for application logic, including data fetching and UI rendering.
-
-*   **User Interface Rendering:**
-    *   **Capability:** The application renders a user interface for displaying market data and navigating between different sections. This includes handling different screen states and providing visual feedback.
-    *   **Evidence:** The presence of XML files in `android/app/src/main/res/` (e.g., `styles.xml`, `launch_background.xml`) indicates the implementation of UI elements, styling, and potentially splash screen functionality.
-
-*   **Error Handling and Display:**
-    *   **Capability:** The application includes mechanisms to handle and display errors to the user.
-    *   **Evidence:** The `assets/lottie/error.json` file suggests the use of Lottie animations for visually communicating errors or error states within the UI.
-
-*   **Application Configuration:**
-    *   **Capability:** The application supports basic configuration settings.
-    *   **Evidence:** `android/gradle.properties` and `android/gradle/wrapper/gradle-wrapper.properties` are standard Android build configuration files, indicating the presence of project-level settings and build configurations.
-
-*   **Platform-Specific Manifests:**
-    *   **Capability:** The application defines platform-specific configurations and permissions for Android.
-    *   **Evidence:** Multiple `AndroidManifest.xml` files (e.g., `debug`, `main`, `profile`) indicate that the application is built for Android and has distinct configurations for different build types.
+*   **Cryptocurrency Listing:**
+    *   **Description:** Displays a list of various cryptocurrencies.
+    *   **Capabilities:** Shows cryptocurrency names, symbols, current prices, and potentially price changes (24h).
+*   **Real-time Price Updates:**
+    *   **Description:** Fetches and displays up-to-date pricing information for cryptocurrencies.
+    *   **Capabilities:** Provides near real-time price data, crucial for market tracking.
+*   **Basic Navigation:**
+    *   **Description:** Enables users to move between different sections or views within the application.
+    *   **Capabilities:** Likely includes navigation between a main market list and detail views for individual cryptocurrencies.
+*   **Application Launch Screen:**
+    *   **Description:** Displays a splash screen or launch background during application startup.
+    *   **Capabilities:** Provides visual feedback during the loading process. (Referenced by `android/app/src/main/res/drawable-v21/launch_background.xml` and `android/app/src/main/res/drawable/launch_background.xml`).
+*   **Theming (Dark Mode Support):**
+    *   **Description:** Supports different visual themes, including a dark mode.
+    *   **Capabilities:** Allows users to switch between light and dark interfaces for better viewing comfort. (Referenced by `android/app/src/main/res/values-night/styles.xml` and `android/app/src/main/res/values/styles.xml`).
+*   **Error Display:**
+    *   **Description:** Shows error messages or states to the user.
+    *   **Capabilities:** Utilizes a Lottie animation for error presentation, indicating a visually engaging error feedback mechanism. (Referenced by `assets/lottie/error.json`).
+*   **Android Manifest Configuration:**
+    *   **Description:** Defines essential application components, permissions, and features for Android.
+    *   **Capabilities:** Configures the application's behavior and integration with the Android operating system. (Referenced by `android/app/src/debug/AndroidManifest.xml`, `android/app/src/main/AndroidManifest.xml`, `android/app/src/profile/AndroidManifest.xml`).
+*   **Gradle Build Configuration:**
+    *   **Description:** Manages project dependencies, build settings, and versioning for Android.
+    *   **Capabilities:** Controls the build process and project configuration. (Referenced by `android/gradle.properties`, `android/gradle/wrapper/gradle-wrapper.properties`, `android/settings.gradle.kts`).
+*   **Code Analysis and Linting:**
+    *   **Description:** Configures static analysis tools to ensure code quality and adherence to standards.
+    *   **Capabilities:** Enforces coding conventions and identifies potential issues early in the development cycle. (Referenced by `analysis_options.yaml`, `devtools_options.yaml`).
 
 ## 4. Feature Dependencies and Relationships
 
-The modular architecture implies that features are designed to be independent but may have dependencies on shared modules or services.
-
-*   **Market Data Display** features likely depend on a **Data Fetching Service** (not explicitly detailed in the provided file list but implied by the need for real-time data).
-*   **User Interface Rendering** features depend on the **Market Data Display** features to present information and on **Error Handling** features to display appropriate feedback.
-*   **Configuration** features may influence the behavior of **Market Data Display** (e.g., preferred currency) and **User Interface Rendering** (e.g., theme settings).
+*   **Market Data Display** features (e.g., Cryptocurrency Listing, Real-time Price Updates) are dependent on external data sources or APIs that are not explicitly detailed in the provided file structure.
+*   **User Interface & Navigation** features are foundational and support the display and interaction with market data.
+*   **Theming** features are independent but enhance the user experience of all UI-related features.
+*   **Error Display** is a cross-cutting concern that can be triggered by failures in data fetching or other operations.
+*   **Android Manifest Configuration** and **Gradle Build Configuration** are essential for the application's build and runtime environment on Android.
+*   **Code Analysis and Linting** configurations are development-time features that do not directly impact runtime functionality but ensure code quality.
 
 ## 5. Feature Configuration Options
 
-Specific user-facing configuration options are not directly evident from the file names alone. However, general configuration is managed through:
-
-*   **Build Configuration:** `android/gradle.properties` and `android/gradle/wrapper/gradle-wrapper.properties` manage build-time configurations.
-*   **Resource Files:** `android/app/src/main/res/values/styles.xml` and `android/app/src/main/res/values-night/styles.xml` suggest theming capabilities (e.g., light/dark mode).
+*   **Theming:** The application supports switching between light and dark themes, as indicated by the presence of `styles.xml` and `values-night/styles.xml`. The specific mechanism for toggling themes (e.g., a user-facing setting) is not detailed in the provided files.
+*   **Build Configurations:** `gradle.properties` and `settings.gradle.kts` likely contain configuration options related to build versions, dependencies, and project settings.
 
 ## 6. Feature Flags and Toggles
 
-There is no explicit indication of feature flags or toggles within the provided file structure. This functionality would typically be implemented within the Kotlin code for dynamic feature enabling/disabling.
+No explicit feature flags or toggles are identifiable from the provided file structure. The implementation suggests a direct rollout of core features.
 
 ## 7. Feature Roadmap and Future Plans
 
-The provided file structure does not contain information regarding a feature roadmap or future plans. This information would typically reside in separate documentation files or project management tools.
+The provided file structure does not contain information regarding a feature roadmap or future development plans. The `docs/00-meta/` directory contains documentation-related files, but not feature roadmaps.
 
 ## 8. Feature Usage Examples
 
-*   **Viewing Cryptocurrency Prices:** A user would launch the application, and the main screen would display a list of cryptocurrencies with their current prices and 24-hour percentage changes.
-*   **Handling Network Errors:** If the application fails to fetch data, a user-friendly error message, potentially accompanied by an animation from `assets/lottie/error.json`, would be displayed.
+*   **Viewing Cryptocurrency Prices:** Upon launching the application, users will see a list of cryptocurrencies with their current prices. Tapping on a cryptocurrency (if implemented) would likely navigate to a detail screen showing more information.
+*   **Switching Themes:** Users can potentially switch between a light and dark theme via an application setting, altering the visual appearance of the UI elements.
+*   **Handling Errors:** If an error occurs during data fetching or processing, the application will display an error message, possibly accompanied by the `error.json` Lottie animation.
 
 ## 9. Feature Limitations and Constraints
 
-*   **Platform Specificity:** The presence of Android-specific manifest files and resource directories indicates that the current implementation is primarily for the Android platform.
-*   **Data Source Dependency:** The accuracy and availability of market data are dependent on the external APIs the application integrates with.
-*   **UI Complexity:** Without seeing the UI code, the complexity and interactivity of the user interface are not fully ascertainable.
+*   **Data Source Dependency:** The accuracy and availability of cryptocurrency data are entirely dependent on the external APIs or data sources the application integrates with.
+*   **Platform Specificity:** The presence of Android-specific configuration files (`AndroidManifest.xml`, `gradle.*`) indicates that the current implementation is primarily for the Android platform. Cross-platform capabilities (e.g., iOS) would require separate implementations or a cross-platform framework not evident here.
+*   **Limited Functionality:** Based on the provided files, the application appears to focus on data display rather than transactional features like trading or wallet management.
 
 ## 10. Integration Points with Other Features
 
-*   **Market Data Display <-> User Interface Rendering:** Market data fetched and processed is rendered by the UI components.
-*   **Market Data Display <-> Error Handling:** If data fetching fails, the error handling mechanism is invoked to inform the user.
-*   **User Interface Rendering <-> Configuration:** UI elements and themes can be customized based on application configuration settings.
+*   **Market Data Display** features are integrated with the **Application Launch Screen** to ensure data is ready before the main content is fully displayed.
+*   **Error Handling** is integrated with all features that involve data fetching or processing, providing a consistent way to inform the user of issues.
+*   **Theming** is integrated with the **User Interface & Navigation** features to alter the visual presentation of all screens and components.
+*   **Android Manifest Configuration** and **Gradle Build Configuration** are fundamental integration points for the entire Android application, enabling its execution and interaction with the operating system.
