@@ -1,53 +1,55 @@
-## Glossary
+# Glossary of Terms and Concepts
 
-### Domain Terminology
+This glossary defines the key terminology, concepts, and technical aspects relevant to the CryptoWave application. It serves as a foundational reference for understanding the project's domain and architecture.
 
-*   **Cryptocurrency:** A digital or virtual currency that is secured by cryptography, which makes it nearly impossible to counterfeit or double-spend. Many cryptocurrencies are decentralized networks based on blockchain technology—a distributed ledger enforced by a disparate network of computers.
-*   **Market Data:** Information related to the trading of financial assets, including prices, trading volumes, and other relevant statistics.
-*   **Price Tracking:** The process of monitoring and displaying the current and historical prices of financial assets, such as cryptocurrencies.
+## Table of Contents
 
-### System Concepts
+1.  [Domain Terminology](#domain-terminology)
+2.  [System Concepts](#system-concepts)
+3.  [Technical Concepts](#technical-concepts)
+4.  [Acronyms & Abbreviations](#acronyms--abbreviations)
+5.  [Concept Relationships](#concept-relationships)
 
-*   **CryptoWave:** A Flutter application designed for tracking cryptocurrency prices, trends, and market data. It utilizes the CoinGecko API as its data source.
-    *   **Features:**
-        *   Real-time cryptocurrency price tracking.
-        *   Detailed coin information and historical data.
-        *   Interactive price charts using FL Chart.
-        *   Clean and modern UI.
-    *   **Tech Stack:**
-        *   Flutter
-        *   Bloc Pattern (flutter_bloc)
-        *   CoinGecko API
-        *   Freezed
-        *   GetIt
+---
 
-### Technical Concepts
+## 1. Domain Terminology
 
-*   **Flutter:** A UI framework used for cross-platform application development.
-*   **Bloc Pattern:** A state management pattern implemented using `flutter_bloc`.
-*   **CoinGecko API:** An external API used to fetch cryptocurrency information.
-*   **Freezed:** A code generation tool for creating immutable models.
-*   **FL Chart:** A charting library used for creating interactive price charts within the application.
-*   **Markdown:** A lightweight markup language used for writing documentation content.
-*   **Version Control System (e.g., Git):** Used for managing documentation alongside the codebase.
-*   **Semantic Versioning (SemVer):** A versioning scheme where documentation versions align with application versions.
+### Cryptocurrency
 
-### Acronyms & Abbreviations
+*   **Definition:** A digital or virtual currency that is secured by cryptography, which makes it nearly impossible to counterfeit or double-spend. Many cryptocurrencies are decentralized networks based on blockchain technology. [S7]
 
-*   **UI:** User Interface
-*   **API:** Application Programming Interface
-*   **WCAG:** Web Content Accessibility Guidelines
-*   **KPI:** Key Performance Indicator
-*   **SemVer:** Semantic Versioning
+## 2. System Concepts
 
-### Concept Relationships
+TODO: System Concepts section is not sufficiently detailed in the provided context.
 
-*   The **CryptoWave** application uses the **CoinGecko API** to obtain **market data** for **cryptocurrencies**.
-*   **FL Chart** is used to visualize **price tracking** data within the **CryptoWave** application.
-*   **Markdown** is the primary tool for writing project documentation, which is managed using a **Version Control System**.
-*   **Documentation versions** are aligned with the application's **Semantic Versioning (SemVer)**.
+## 3. Technical Concepts
+
+### Architecture Patterns
+
+*   **Component-Based Architecture:** This pattern is evident in the modular structure of the UI, where distinct features and functionalities are encapsulated within reusable components. This approach promotes code reusability, maintainability, and testability. [S6]
+
+### Technologies
+
+*   **Flutter:** A UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase. [S6]
+*   **Bloc pattern:** Used for state management in the CryptoWave application, ensuring a predictable and maintainable UI. [S6]
+*   **CoinGecko API:** Used by CryptoWave to provide real-time cryptocurrency market data, price charts, and detailed coin information. [S6, S11, S12, S18]
+*   **FL Chart:** Used for displaying interactive price charts. [S13]
+*   **Markdown:** Used for writing all documentation content due to its simplicity, readability, and widespread support across development platforms. [S5]
+
+## 4. Acronyms & Abbreviations
+
+TODO: Acronyms & Abbreviations section is not sufficiently detailed in the provided context.
+
+## 5. Concept Relationships
+
+TODO: Concept Relationships section is not sufficiently detailed in the provided context.
 
 ## SOURCES
 
-*   [S1] README.md
-*   [S24] docs/01-overview/README.md
+- [S5] docs/00-meta/doc-tools.md
+- [S6] docs/02-architecture/system-architecture.md
+- [S7] docs/01-overview/key-concepts.md
+- [S11] docs/04-apis/sdk-libraries.md
+- [S12] docs/04-apis/pagination.md
+- [S13] docs/01-overview/changelog.md
+- [S18] docs/04-apis/rest-api/endpoints/README.md
