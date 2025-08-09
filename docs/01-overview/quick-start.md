@@ -1,94 +1,94 @@
-# CryptoWave Quick Start Guide
+## Quick Start Guide
 
-This guide will help you get CryptoWave up and running in approximately 5 minutes.
+This guide provides a streamlined process for setting up and running the system.
 
-## 1. Prerequisites Check
+### 1. Prerequisites Check
 
-Before you begin, ensure you have the following:
+*   **Required Software and Tools:**
+    *   Flutter SDK
+    *   Android SDK
+*   **Environment Requirements:**
+    *   Java Development Kit (JDK)
+*   **Access Permissions:**
+    *   Internet permission is required for the Flutter tool to communicate with the running application for features like hot reload and debugging. This is declared in `android/app/src/debug/AndroidManifest.xml` and `android/app/src/profile/AndroidManifest.xml`.
+*   **Dependency Verification:**
+    *   The project utilizes `very_good_analysis` for linting, configured in `analysis_options.yaml`.
 
-*   **Flutter SDK:** The Flutter framework is required for building the application.
-*   **Dart:** Included with the Flutter SDK.
-*   **IDE:** An Integrated Development Environment such as Android Studio or VS Code with Flutter and Dart plugins.
-*   **Internet Connection:** Required for fetching cryptocurrency data from the CoinGecko API and for dependency management.
+### 2. Fast Installation
 
-**Dependency Verification:**
+*   **Minimal Setup Commands:**
+    *   Clone the repository.
+    *   Navigate to the project directory.
+    *   Run `flutter pub get` to fetch dependencies.
+    *   Run `flutter run` to build and launch the application on an connected Android device or emulator.
+*   **Quick Configuration Options:**
+    *   The `android/gradle.properties` file contains JVM arguments for Gradle, such as `-Xmx8G` for maximum heap size.
+*   **Default Settings:**
+    *   The application uses AndroidX (`android.useAndroidX=true`) and enables Jetifier (`android.enableJetifier=true`), as specified in `android/gradle.properties`.
+    *   The default launch theme for Android is defined in `android/app/src/main/res/values/styles.xml` and `android/app/src/main/res/values-night/styles.xml`. The `LaunchTheme` uses `@drawable/launch_background` for the window background.
+*   **Verification Steps:**
+    *   Observe the application launching on your device or emulator.
 
-The project utilizes `package:very_good_analysis` for linting, as indicated in `analysis_options.yaml` [S2].
+### 3. First Success
 
-## 2. Fast Installation
+*   **Simple Working Example:**
+    *   Upon successful launch, the application will display its main interface, which is designed to fetch and present real-time cryptocurrency data.
+*   **Expected Output/Results:**
+    *   The application should load and display cryptocurrency information without errors.
+*   **Common Success Indicators:**
+    *   The application starts without crashing.
+    *   Data is visible on the screen.
+*   **Basic Functionality Demonstration:**
+    *   The core functionality involves fetching data from the CoinGecko API via `lib/repositories/coin_repository.dart` to display cryptocurrency market data.
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone <repository_url>
-    cd cryptowave
-    ```
-2.  **Install Dependencies:**
-    ```bash
-    flutter pub get
-    ```
-3.  **Run the Application:**
-    ```bash
-    flutter run
-    ```
+### 4. Immediate Next Steps
 
-**Default Settings:**
+*   **More Detailed Setup:**
+    *   Refer to `docs/00-meta/doc-standards.md` for documentation standards.
+    *   Consult `docs/00-meta/doc-maintenance.md` for maintenance guidelines.
+    *   Review `docs/00-meta/doc-tools.md` for information on documentation tools.
+    *   Understand version control for documentation in `docs/00-meta/doc-versioning.md`.
+    *   Explore accessibility guidelines in `docs/00-meta/doc-accessibility.md`.
+*   **Common Customization Options:**
+    *   Customize the launch screen background by modifying `android/app/src/main/res/drawable/launch_background.xml` and `android/app/src/main/res/drawable-v21/launch_background.xml`.
+*   **Troubleshooting Quick Fixes:**
+    *   Ensure all prerequisites are met.
+    *   Clean the build cache with `flutter clean` and then run `flutter run` again.
+*   **Links to Full Documentation:**
+    *   API Documentation: `docs/04-apis/sdk-libraries.md`, `docs/04-apis/rest-api/request-examples.md`, `docs/04-apis/rest-api/status-codes.md`, `docs/04-apis/versioning.md`.
+    *   Key Concepts: `docs/01-overview/key-concepts.md`.
+    *   Stakeholders: `docs/01-overview/stakeholders.md`.
 
-The application is configured to use the CoinGecko API for data retrieval. No additional configuration is required for initial setup.
+### 5. Common Issues
 
-**Verification:**
-
-Upon successful execution, the application will launch on your connected device or emulator.
-
-## 3. First Success
-
-Once the application is running, you should see the main dashboard displaying cryptocurrency prices and trends.
-
-**Expected Output:**
-
-*   A list of cryptocurrencies with their current prices.
-*   Interactive charts displaying price history.
-
-**Common Success Indicators:**
-
-*   The application launches without errors.
-*   Real-time price data is displayed.
-
-**Basic Functionality Demonstration:**
-
-Navigate through the application to view different cryptocurrency details and price charts.
-
-## 4. Immediate Next Steps
-
-*   **Detailed Setup:** For more in-depth setup instructions, refer to the main `README.md` file [S1].
-*   **Customization:** Explore customization options for the UI and data fetching.
-*   **Troubleshooting:** If you encounter issues, consult the "Common Issues" section below or the project's documentation.
-*   **Full Documentation:** Access comprehensive documentation at `docs/` [S16, S17, S18, S19, S20, S21, S22, S23].
-
-## 5. Common Issues
-
-*   **Dependency Errors:** Ensure you have run `flutter pub get` after cloning the repository.
-*   **Flutter SDK Path:** Verify that your Flutter SDK path is correctly configured in your environment variables.
-
-**Quick Resolution:**
-
-*   Clean the Flutter build: `flutter clean` followed by `flutter pub get`.
-*   Ensure your Flutter SDK is up to date: `flutter upgrade`.
-
-**When to Seek Help:**
-
-If persistent issues arise, refer to the project's issue tracker or community forums.
-
----
+*   **Typical Setup Problems:**
+    *   Missing or incorrectly configured SDKs (Flutter, Android).
+    *   Network issues preventing dependency downloads.
+*   **Quick Resolution Steps:**
+    *   Verify SDK installations and environment variables.
+    *   Check internet connectivity and proxy settings.
+*   **When to Seek Help:**
+    *   If persistent issues arise after checking common problems, consult project maintainers or relevant community forums.
+*   **Alternative Approaches:**
+    *   TODO: Provide alternative approaches for common issues if documented.
 
 ## SOURCES
 
-- [S1] README.md
-- [S2] analysis_options.yaml
-- [S16] docs/00-meta/doc-accessibility.md
-- [S17] docs/00-meta/doc-maintenance.md
-- [S18] docs/00-meta/doc-metrics.md
-- [S19] docs/00-meta/doc-review-process.md
-- [S20] docs/00-meta/doc-standards.md
-- [S21] docs/00-meta/doc-templates.md
-- [S22] docs/00-meta/doc-tools.md
-- [S23] docs/00-meta/doc-versioning.md
+*   [S1] android/gradle.properties
+*   [S3] android/app/src/main/res/values-night/styles.xml
+*   [S4] docs/00-meta/doc-standards.md
+*   [S5] docs/00-meta/doc-maintenance.md
+*   [S6] android/app/src/main/res/drawable/launch_background.xml
+*   [S7] android/app/src/main/res/drawable-v21/launch_background.xml
+*   [S8] android/app/src/main/res/values/styles.xml
+*   [S9] analysis_options.yaml
+*   [S10] docs/00-meta/doc-accessibility.md
+*   [S11] android/app/src/debug/AndroidManifest.xml
+*   [S12] android/app/src/profile/AndroidManifest.xml
+*   [S14] docs/04-apis/sdk-libraries.md
+*   [S15] docs/01-overview/key-concepts.md
+*   [S16] docs/00-meta/doc-tools.md
+*   [S17] docs/00-meta/doc-versioning.md
+*   [S18] docs/04-apis/rest-api/request-examples.md
+*   [S19] docs/04-apis/rest-api/status-codes.md
+*   [S20] docs/04-apis/versioning.md
