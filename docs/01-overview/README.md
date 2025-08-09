@@ -11,78 +11,69 @@ CryptoWave provides real-time cryptocurrency market data, price charts, and deta
 *   **Real-time Cryptocurrency Price Tracking**: Monitor the current prices of a wide range of cryptocurrencies.
 *   **Detailed Coin Information**: Access comprehensive data for each cryptocurrency, including historical performance and market metrics.
 *   **Interactive Price Charts**: Visualize price trends and market data through intuitive and interactive charts powered by FL Chart.
-*   **Clean and Modern UI**: Experience a user-friendly interface designed for clarity and ease of navigation.
+*   **Clean and Modern UI**: Features a clean and modern user interface.
 
 ## Tech Stack
 
-*   **Flutter**: The UI framework used for cross-platform application development.
-*   **Bloc Pattern**: State management is handled using the `flutter_bloc` library for predictable state changes.
-*   **CoinGecko API**: The primary data source for all cryptocurrency market information.
-*   **Freezed**: Used for generating immutable data models, ensuring data integrity.
-*   **GetIt**: A service locator for dependency injection.
+*   **Flutter**: UI framework for cross-platform application development
+*   **Bloc Pattern**: State management using flutter_bloc
+*   **CoinGecko API**: Data source for cryptocurrency information
+*   **Freezed**: Code generation for immutable models
+*   **GetIt**
 
-## Quick Start
+## Documentation
 
-### Prerequisites
-
-*   **Flutter SDK**: Ensure you have Flutter installed and configured. You can find installation instructions on the [official Flutter website](https://flutter.dev/docs/get-started/install).
-*   **Dart SDK**: Included with the Flutter SDK.
-*   **IDE**: A code editor such as VS Code, Android Studio, or IntelliJ IDEA with Flutter and Dart plugins.
-
-### Installation
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/your-username/cryptowave.git
-    cd cryptowave
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    flutter pub get
-    ```
-
-3.  **Obtain API Key (Optional but Recommended)**:
-    While the application functions without an API key for basic usage, obtaining a CoinGecko API key can provide access to higher rate limits and additional features. Sign up on the [CoinGecko API website](https://www.coingecko.com/en/api/documentation) to get your key.
-    *   Create a `.env` file in the root of the project.
-    *   Add your API key to the `.env` file:
-        ```
-        COINGECKO_API_KEY=YOUR_API_KEY_HERE
-        ```
-
-### Basic Usage
-
-1.  **Run the application**:
-    ```bash
-    flutter run
-    ```
-
-    This command will build and launch the application on your connected device or emulator.
-
-### First-Time Setup
-
-Upon first launch, the application will fetch cryptocurrency data from the CoinGecko API. Ensure you have an active internet connection. The application will display a list of cryptocurrencies with their current prices and market data.
-
-## Navigation Guide
+This project utilizes Markdown for its documentation, managed alongside the codebase within a version control system.
 
 ### Documentation Structure
 
-This README serves as the primary entry point for understanding the CryptoWave project. For more detailed information on specific components or functionalities, please refer to the following:
+The documentation is organized into several key sections:
 
-*   **`lib/constants.dart`**: Contains application-wide constant values, including API endpoints.
-*   **`lib/models/`**: Houses the data models used for parsing API responses, generated with `freezed` and `json_serializable`.
-*   **`lib/network/`**: Contains classes responsible for network requests and error handling.
-*   **`lib/repositories/`**: Implements data fetching logic, abstracting API interactions.
-*   **`lib/ui/`**: Contains all the UI components and screens of the application.
+*   **Overview**: Provides a high-level introduction to the project.
+*   **Meta Documentation**: Contains guidelines and standards for documentation itself, including:
+    *   Accessibility Guidelines (`docs/00-meta/doc-accessibility.md`)
+    *   Maintenance Guidelines (`docs/00-meta/doc-maintenance.md`)
+    *   Performance Metrics (`docs/00-meta/doc-metrics.md`)
+    *   Review Processes (`docs/00-meta/doc-review-process.md`)
+    *   Writing Standards (`docs/00-meta/doc-standards.md`)
+    *   Templates and Patterns (`docs/00-meta/doc-templates.md`)
+    *   Tools and Systems (`docs/00-meta/doc-tools.md`)
+    *   Versioning (`docs/00-meta/doc-versioning.md`)
 
-### Getting Help and Support
+### Getting Help
 
-For any issues or questions, please refer to the project's GitHub repository. You can also find support through community forums and developer channels related to Flutter and cryptocurrency data APIs.
+TODO: Specify how users can get help and support.
 
 ## Project Status
 
-*   **Version**: 1.0.0
-*   **Release Status**: Stable
-*   **Development Roadmap**: Future updates may include enhanced charting capabilities, portfolio tracking features, and real-time price alerts.
-*   **Contribution Guidelines**: Contributions are welcome. Please refer to the `CONTRIBUTING.md` file in the repository for guidelines on how to contribute.
-*   **License**: This project is licensed under the MIT License - see the `LICENSE` file for details.
+TODO: Provide current version and release status.
+TODO: Outline development roadmap highlights.
+TODO: Include contribution guidelines overview.
+TODO: Specify license and legal information.
+
+## Sources
+
+*   [S1] README.md
+*   [S2] analysis_options.yaml
+*   [S3] android/app/src/debug/AndroidManifest.xml
+*   [S4] android/app/src/main/AndroidManifest.xml
+*   [S5] android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt
+*   [S6] android/app/src/main/res/drawable-v21/launch_background.xml
+*   [S7] android/app/src/main/res/drawable/launch_background.xml
+*   [S8] android/app/src/main/res/values-night/styles.xml
+*   [S9] android/app/src/main/res/values/styles.xml
+*   [S10] android/app/src/profile/AndroidManifest.xml
+*   [S11] android/gradle.properties
+*   [S12] android/gradle/wrapper/gradle-wrapper.properties
+*   [S13] android/settings.gradle.kts
+*   [S14] assets/lottie/error.json
+*   [S15] devtools_options.yaml
+*   [S16] docs/00-meta/doc-accessibility.md
+*   [S17] docs/00-meta/doc-maintenance.md
+*   [S18] docs/00-meta/doc-metrics.md
+*   [S19] docs/00-meta/doc-review-process.md
+*   [S20] docs/00-meta/doc-standards.md
+*   [S21] docs/00-meta/doc-templates.md
+*   [S22] docs/00-meta/doc-tools.md
+*   [S23] docs/00-meta/doc-versioning.md
+*   [S24] docs/01-overview/README.md
