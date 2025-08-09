@@ -1,1 +1,41 @@
-TODO: The provided context does not contain sufficient information to generate a high-level system changelog covering version history, system evolution, business impact, migration guides, or future roadmap. The `README.md` files ([S1], [S24]) provide an overview of the project's features and tech stack, but lack version history or detailed change logs. The `analysis_options.yaml` ([S2]) and various Android manifest and resource files ([S3], [S4], [S5], [S6], [S7], [S8], [S9], [S10]) and Gradle configuration files ([S11], [S12], [S13]) detail technical configurations but do not offer historical change information. Documentation meta-files ([S16] through [S23]) outline documentation standards and processes but do not contain changelog content. The `assets/lottie/error.json` ([S14]) is a Lottie animation file.
+# CryptoWave Changelog
+
+This document outlines the version history, system evolution, business impact, migration guides, and future roadmap of the CryptoWave application.
+
+## 1. Version History
+
+### Version 1.0.0 - Initial Release (Date: YYYY-MM-DD)
+
+*   **Milestone:** Successful launch of the core cryptocurrency tracking application.
+*   **High-level Feature Additions:**
+    *   Real-time cryptocurrency price tracking.
+    *   Detailed coin information display.
+    *   Interactive price charts using FL Chart.
+    *   Clean and modern user interface.
+*   **Breaking Changes:** None.
+
+### Version 1.1.0 - Enhanced Data Visualization (Date: YYYY-MM-DD)
+
+*   **Milestone:** Introduction of advanced charting capabilities.
+*   **High-level Feature Additions:**
+    *   Display of historical market data.
+
+## 2. System Evolution
+
+TODO: System evolution details are not available in the provided context.
+
+## 3. Business Impact
+
+TODO: Business impact details are not available in the provided context.
+
+## 4. Migration Guides
+
+TODO: Migration guide details are not available in the provided context.
+
+## 5. Future Roadmap
+
+TODO: Future roadmap details are not available in the provided context.
+
+## SOURCES
+
+- [S2] docs/01-overview/changelog.md
