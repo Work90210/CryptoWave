@@ -1,76 +1,59 @@
 # CryptoWave API Documentation
 
-This document provides comprehensive API documentation for the CryptoWave application.
+This document provides a comprehensive reference for the CryptoWave API, detailing its functionalities, endpoints, and error handling mechanisms.
 
 ## 1. API Overview
 
-CryptoWave utilizes the CoinGecko API to fetch real-time cryptocurrency market data, including prices, trends, and detailed coin information. The application's network layer is designed to interact with this external API.
+CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users. [S15, S16, S17, S18, S19, S20, S21, S22, S23, S24] The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions. [S22]
 
 ## 2. Authentication
 
-Authentication is not explicitly handled within the provided code snippets. Interactions with the CoinGecko API are assumed to be unauthenticated, relying on the API's public access.
+Authentication is not explicitly handled or documented within the provided code snippets. [S15, S19, S21, S22] Interactions with the CoinGecko API are assumed to be unauthenticated. [S22] All data is publicly accessible through the CoinGecko API. [S15, S16, S20, S23]
 
 ## 3. Endpoint/Function Reference
 
-The primary interaction with external APIs is managed through the `ExceptionHandler` class, which is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context.
+The primary interaction with external data is handled through repositories that abstract API calls. [S16, S18, S20, S22, S23] The `lib/repositories/coin_repository.dart` file is identified as relevant for API interactions. [S16, S18, S22] The `BaseRepository` is also identified as a primary interaction point for API data. [S21]
 
-### 3.1. `ExceptionHandler.enhanceException`
+### `ExceptionHandler.enhanceException`
 
-This static method takes an `Object` representing an error and a `String` context message. It checks if the error is an instance of `ApiException` and, if so, enhances the exception message based on the specific type of `ApiException`.
+This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S24]
 
 **Parameters:**
 
-*   `error`: The exception object caught during an API call.
-*   `contextMessage`: A string providing context about the operation being performed when the error occurred.
-
-**Functionality:**
-
-*   If `error` is a `ConnectivityException`, the `contextMessage` is prepended to "No internet connection."
-*   If `error` is an `ApiTimeoutException`, the message is set to "Request timed out. Please try again."
-*   The function handles other `ApiException` types, including `Rat` (though the full type is truncated in the provided context).
-
-**Example Usage (Conceptual):**
-
-```dart
-try {
-  // ... API call ...
-} catch (e) {
-  ApiException enhancedError = ExceptionHandler.enhanceException(e, 'Fetching coin data');
-  // Handle enhancedError
-}
-```
+*   `error`: The original exception object. [S24]
+*   `contextMessage`: A string. [S24]
 
 ## 4. Request/Response Examples
 
-The provided code snippets do not include direct examples of API requests or responses. However, the application's architecture suggests that repositories like `CoinRepository` and `CoinDetailsRepository` are responsible for constructing these requests and parsing their responses.
+TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class centralizes the handling of API-related errors. It aims to provide more user-friendly and context-specific error messages by enhancing the original exceptions.
-
-### 5.1. `ApiException`
-
-This is the base class for API-related exceptions. Specific exceptions derived from it include:
-
-*   `ConnectivityException`: Indicates a lack of internet connection.
-*   `ApiTimeoutException`: Indicates that an API request exceeded its time limit.
-
-The `enhanceException` method customizes the error messages for these specific scenarios.
+The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S13, S24]
 
 ## 6. Rate Limiting
 
-Rate limiting information is not explicitly detailed in the provided code. Interactions with the CoinGecko API should adhere to their documented rate limits to prevent service disruptions.
+TODO: Document rate limiting policies if applicable.
 
 ## 7. SDK/Client Usage Examples
 
-The application utilizes a custom `HttpClient` instance, as seen in `BaseRepository`. Specific usage examples for this client are not provided in the given context.
+TODO: Provide examples for SDK or client usage.
 
 ## 8. Testing Instructions
 
-Testing instructions are not available in the provided code snippets. However, typical testing strategies for such an application would involve:
+TODO: Provide instructions for testing API interactions.
 
-*   **Unit Tests:** For individual repository methods and utility functions like `ExceptionHandler`. Mocking network responses and dependencies is crucial here.
-*   **Widget Tests:** To verify the UI components' behavior, including how they display data fetched via repositories and how they handle loading and error states.
-*   **Integration Tests:** To test the flow of data from the UI through the Bloc pattern, repositories, and network layer.
+## SOURCES
 
-When testing network interactions, it is essential to mock the `HttpClient` to control responses and simulate various network conditions and error scenarios.
+- [S1] README.md
+- [S13] docs/03-features/[feature-name]/platforms/api.md
+- [S15] docs/04-apis/api-overview.md
+- [S16] docs/04-apis/api.md
+- [S17] docs/04-apis/error-handling.md
+- [S18] docs/04-apis/filtering-sorting.md
+- [S19] docs/04-apis/pagination.md
+- [S20] docs/04-apis/rate-limiting.md
+- [S21] docs/04-apis/rest-api/endpoints/README.md
+- [S22] docs/04-apis/rest-api/openapi.yaml
+- [S23] docs/04-apis/rest-api/request-examples.md
+- [S24] docs/04-apis/rest-api/response-examples.md
