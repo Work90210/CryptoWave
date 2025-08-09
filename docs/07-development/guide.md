@@ -1,467 +1,447 @@
 # CryptoWave Developer Guide
 
-This guide provides comprehensive information for developers contributing to the CryptoWave project. It covers environment setup, project structure, development workflows, coding standards, testing, debugging, deployment, troubleshooting, and contribution guidelines.
+This guide provides comprehensive information for developers working on the CryptoWave project. It covers environment setup, project structure, development workflows, coding standards, testing, debugging, deployment, troubleshooting, contribution guidelines, and the code review process.
 
 ## 1. Development Environment Setup
 
-To develop CryptoWave, you will need the following tools and dependencies installed on your system.
+To develop CryptoWave, you will need the following tools and dependencies installed on your development machine.
 
 ### 1.1. Prerequisites
 
 *   **Java Development Kit (JDK):** CryptoWave utilizes Kotlin, which requires a compatible JDK.
-    *   **Recommendation:** JDK 17 or later.
-    *   **Installation:** Download from [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or use a package manager like Homebrew (`brew install openjdk@17`).
-    *   **Verification:** Open your terminal and run `java -version`.
+    *   **Recommended Version:** JDK 17 or later.
+    *   **Installation:** Download from the [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or [OpenJDK](https://openjdk.java.net/install/) website.
+    *   **Verification:** Open your terminal or command prompt and run `java -version`.
 
-*   **Android Studio:** The primary IDE for Android development.
-    *   **Installation:** Download from the [official Android Developers website](https://developer.android.com/studio).
-    *   **SDK Components:** Ensure you have the necessary Android SDK platforms and build tools installed via the SDK Manager in Android Studio.
+*   **Android Studio:** The primary IDE for Android development, essential for building and running the Android client.
+    *   **Installation:** Download from the [official Android Studio website](https://developer.android.com/studio).
+    *   **Setup:**
+        *   Upon first launch, Android Studio will guide you through setting up the SDK, build tools, and emulator.
+        *   Ensure you install the necessary SDK Platforms and Build-Tools versions as specified in the project's `build.gradle` files.
 
-*   **Xcode (for iOS development):** Required for building and running the iOS version of the application.
+*   **Xcode:** Required for developing and building the iOS client.
     *   **Installation:** Download from the [Mac App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12).
-    *   **Command Line Tools:** Install Xcode command-line tools by running `xcode-select --install` in your terminal after installing Xcode.
+    *   **Setup:**
+        *   Install the Xcode command-line tools: Open Terminal and run `xcode-select --install`.
+        *   Ensure you have the necessary iOS SDKs installed within Xcode.
 
-*   **Flutter SDK:** CryptoWave is built using Flutter.
+*   **Flutter SDK:** CryptoWave uses Flutter for cross-platform mobile development.
     *   **Installation:** Follow the official Flutter installation guide for your operating system: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
-    *   **Verification:** Run `flutter doctor` in your terminal to check for any missing dependencies.
+    *   **Verification:** Run `flutter doctor` in your terminal to check for any missing dependencies or configuration issues. Address any reported problems before proceeding.
 
-*   **Git:** Version control system.
-    *   **Installation:** Download from [git-scm.com](https://git-scm.com/downloads).
+*   **Node.js and npm/yarn:** Required for managing frontend dependencies and running build scripts.
+    *   **Recommended Version:** Node.js LTS (Long Term Support).
+    *   **Installation:** Download from the [official Node.js website](https://nodejs.org/). npm is included with Node.js. Alternatively, use yarn: `npm install -g yarn`.
+    *   **Verification:** Run `node -v` and `npm -v` (or `yarn -v`) in your terminal.
+
+*   **Git:** Version control system for managing the codebase.
+    *   **Installation:** Download from the [official Git website](https://git-scm.com/downloads).
     *   **Verification:** Run `git --version` in your terminal.
 
-*   **IDE Plugins:**
-    *   **Android Studio/IntelliJ IDEA:**
-        *   Flutter and Dart plugins.
-        *   Kotlin plugin.
-    *   **VS Code:**
-        *   Flutter extension.
-        *   Dart extension.
+### 1.2. Project Dependencies
 
-### 1.2. Project Setup
+After setting up the environment, clone the repository and install project-specific dependencies.
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/Work90210/CryptoWave.git
+    git clone <repository_url>
     cd CryptoWave
     ```
 
-2.  **Install Dependencies:**
-    Navigate to the root of the cloned repository and run:
+2.  **Install Flutter Dependencies:**
+    Navigate to the root of the project and run:
     ```bash
     flutter pub get
     ```
-    This command fetches all the Dart and Flutter dependencies specified in `pubspec.yaml`.
 
-3.  **Configure Environment Variables (if any):**
-    *   Check for a `.env.example` file in the root directory. If present, copy it to `.env` and populate it with the necessary API keys and credentials.
-    *   ```bash
-        cp .env.example .env
-        # Edit .env with your credentials
-        ```
-    *   **Note:** Sensitive credentials should not be committed to the repository.
+3.  **Install Node.js Dependencies (if applicable for shared tooling/scripts):**
+    If there are shared Node.js packages or scripts, navigate to the relevant directory (e.g., `packages/shared_ui`) and run:
+    ```bash
+    cd packages/shared_ui # Example directory
+    npm install # or yarn install
+    ```
 
-4.  **Run the Application:**
-    *   **Android:**
-        ```bash
-        flutter run -d android
-        ```
-    *   **iOS:**
-        ```bash
-        flutter run -d ios
-        ```
-    *   Ensure you have an Android emulator running or a physical device connected and authorized for debugging. For iOS, ensure a connected iPhone or iPad is authorized.
+### 1.3. IDE Configuration
+
+*   **Android Studio:**
+    *   Open the `android` directory of the project in Android Studio.
+    *   Android Studio will automatically detect the Gradle project and prompt you to sync.
+    *   Ensure the correct SDK and build tools are configured in `File > Settings > Appearance & Behavior > System Settings > Android SDK`.
+
+*   **VS Code (for Flutter/Dart):**
+    *   Install the official "Flutter" and "Dart" extensions from the VS Code Marketplace.
+    *   Open the root of the CryptoWave project in VS Code.
+    *   VS Code will typically detect the Flutter project and offer to run `flutter pub get`.
+
+*   **Xcode:**
+    *   Open the `ios/Runner.xcworkspace` file in Xcode.
+    *   Ensure your Xcode project is configured to use the correct signing certificates and provisioning profiles for development and testing.
 
 ## 2. Project Structure Explanation
 
-CryptoWave employs a modular, feature-based architecture. This structure promotes maintainability, scalability, and separation of concerns.
+CryptoWave employs a modular, feature-based architecture. This structure promotes maintainability, scalability, and parallel development.
 
 ```
 CryptoWave/
-├── android/              # Native Android project files
-├── ios/                  # Native iOS project files
-├── lib/                  # Flutter project source code
-│   ├── core/             # Core functionalities, utilities, and base classes
-│   │   ├── constants/    # Application-wide constants
-│   │   ├── errors/       # Custom error classes and handling
-│   │   ├── network/      # Network layer implementation (e.g., Dio, http)
+├── android/              # Android-specific project files and build configurations
+├── ios/                  # iOS-specific project files and build configurations
+├── lib/                  # Core Flutter application code
+│   ├── main.dart         # Application entry point
+│   ├── app.dart          # Root widget, MaterialApp/CupertinoApp setup
+│   ├── config/           # Application configuration files (e.g., constants, themes)
+│   │   ├── app_config.dart
+│   │   ├── theme/
+│   │   └── constants.dart
+│   ├── core/             # Core utilities, base classes, and shared logic
+│   │   ├── errors/       # Error handling mechanisms
+│   │   ├── network/      # Network client setup and interceptors
+│   │   ├── usecases/     # Abstract base classes for use cases
 │   │   ├── utils/        # General utility functions
-│   │   └── widgets/      # Reusable UI components not specific to a feature
+│   │   └── ...
 │   ├── features/         # Feature modules
-│   │   ├── auth/         # Authentication feature
-│   │   │   ├── data/     # Data layer (repositories, data sources)
-│   │   │   ├── domain/   # Domain layer (entities, use cases, abstract repos)
-│   │   │   └── presentation/ # UI layer (screens, widgets, view models)
-│   │   ├── home/         # Home screen feature
+│   │   ├── authentication/ # Example feature module
+│   │   │   ├── data/       # Data layer (repositories, data sources, models)
+│   │   │   │   ├── datasources/
+│   │   │   │   ├── models/
+│   │   │   │   └── repositories/
+│   │   │   ├── domain/     # Domain layer (entities, use cases, abstract repositories)
+│   │   │   │   ├── entities/
+│   │   │   │   ├── repositories/
+│   │   │   │   └── usecases/
+│   │   │   ├── presentation/ # Presentation layer (UI, widgets, state management)
+│   │   │   │   ├── pages/
+│   │   │   │   ├── widgets/
+│   │   │   │   └── providers/ # Or controllers/blocs depending on state management
+│   │   │   └── authentication_feature.dart # Feature entry point/initializer
+│   │   ├── wallet/         # Another example feature module
+│   │   │   ├── ...
+│   │   └── ...
+│   ├── generated/        # Auto-generated files (e.g., from build_runner)
+│   ├── routes/           # Routing configuration
+│   │   └── app_router.dart
+│   └── shared/           # Shared components, widgets, or utilities used across features
+│       ├── widgets/      # Reusable UI components
+│       ├── models/       # Shared data models
+│       └── ...
+├── test/                 # Unit and widget tests
+│   ├── core/
+│   ├── features/
+│   │   ├── authentication/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
-│   │   └── ...           # Other features (e.g., portfolio, trading, settings)
-│   ├── generated/        # Auto-generated files (e.g., localization, code generation)
-│   ├── main.dart         # Application entry point
-│   ├── routes/           # Routing configuration
-│   │   └── app_router.dart
-│   ├── shared/           # Shared resources and configurations
-│   │   ├── theme/        # Application theme definitions
-│   │   └── localization/ # Localization setup
-│   └── pubspec.yaml      # Project dependencies and metadata
-├── test/                 # Unit and widget tests
-├── .env.example          # Example environment variables
-├── .gitignore            # Git ignore file
-├── analysis_options.yaml # Dart analysis options
+│   │   └── ...
+│   └── ...
 ├── pubspec.yaml          # Project dependencies and metadata
-└── README.md             # Project README
+├── analysis_options.yaml # Dart analysis options
+├── .gitignore            # Git ignore rules
+├── README.md             # Project overview
+└── ...                   # Other configuration files (e.g., .env, CI/CD configs)
 ```
 
-*   **`android/` & `ios/`:** Contain the native project files for each platform. These are managed by Flutter but can be accessed for platform-specific configurations.
-*   **`lib/`:** The main directory for Flutter application code.
-    *   **`core/`:** Houses cross-cutting concerns like networking, utilities, error handling, and base UI components.
-    *   **`features/`:** Each subdirectory here represents a distinct feature of the application (e.g., authentication, user profile, trading). This modularity is key to the project's structure.
-        *   **`data/`:** Contains data sources (e.g., API clients, local storage) and repository implementations.
-        *   **`domain/`:** Holds the core business logic, including entities, use cases, and abstract repository interfaces. This layer is platform-agnostic.
-        *   **`presentation/`:** Implements the UI layer, including screens, widgets, state management (e.g., Provider, BLoC), and view models.
-    *   **`generated/`:** Stores files generated by build tools or code generation processes.
-    *   **`main.dart`:** The application's entry point, where the Flutter widget tree is initialized.
-    *   **`routes/`:** Defines the application's navigation structure.
-    *   **`shared/`:** Contains shared resources like theming, localization configurations, and common assets.
-*   **`test/`:** Contains unit, widget, and integration tests.
-*   **`analysis_options.yaml`:** Configures static analysis for Dart code, enforcing coding standards.
-*   **`.env.example`:** Provides a template for environment-specific configurations.
+*   **`android/` & `ios/`:** Contain platform-specific project configurations and native code. These directories are managed by Flutter.
+*   **`lib/`:** The heart of the Flutter application.
+    *   **`main.dart`:** The entry point of the application. It initializes services and runs the root widget.
+    *   **`app.dart`:** Sets up the main application structure, including `MaterialApp` or `CupertinoApp`, theme, and routing.
+    *   **`config/`:** Holds global application settings, themes, constants, and environment configurations.
+    *   **`core/`:** Contains foundational elements like error handling, network clients, abstract use case definitions, and general utility functions that are not tied to a specific feature.
+    *   **`features/`:** This is the core of the modular architecture. Each subdirectory represents a distinct feature of the application (e.g., `authentication`, `wallet`, `trading`).
+        *   Each feature module is further divided into `data`, `domain`, and `presentation` layers, following Clean Architecture principles.
+        *   **`data`:** Handles data retrieval and persistence (e.g., API clients, local storage, repository implementations, data models).
+        *   **`domain`:** Contains the business logic, entities, use cases, and abstract repository interfaces. This layer is platform-agnostic.
+        *   **`presentation`:** Manages the UI and user interaction. This includes widgets, pages, state management (e.g., BLoC, Provider, Riverpod), and view models.
+    *   **`generated/`:** Stores files automatically generated by build tools (e.g., code generation for serialization, localization).
+    *   **`routes/`:** Defines the application's navigation structure and routes.
+    *   **`shared/`:** Houses reusable components, widgets, utilities, or models that are used across multiple features.
+*   **`test/`:** Contains all unit, widget, and integration tests for the application, mirroring the structure of `lib/`.
+*   **`pubspec.yaml`:** The manifest file for the Flutter project, defining dependencies, assets, and metadata.
+*   **`analysis_options.yaml`:** Configures the Dart analyzer to enforce coding standards and catch potential issues.
+*   **`.gitignore`:** Specifies intentionally untracked files that Git should ignore.
+*   **`README.md`:** Provides an overview of the project.
 
 ## 3. Development Workflow
 
-A typical development workflow involves fetching the latest changes, implementing new features or fixing bugs, testing, and submitting changes for review.
+A typical development workflow within CryptoWave involves the following steps:
 
-1.  **Update Local Repository:**
-    *   Ensure your local branch is up-to-date with the main development branch (e.g., `develop` or `main`).
+1.  **Task Assignment:** Pick up a task from the project management tool (e.g., Jira, Trello). Understand the requirements and acceptance criteria.
+2.  **Branching Strategy:**
+    *   Create a new feature branch from the `develop` branch. Use a descriptive naming convention, e.g., `feature/user-profile-update` or `fix/login-button-bug`.
     *   ```bash
-        git checkout develop # Or your main development branch
+        git checkout develop
         git pull origin develop
+        git checkout -b feature/your-feature-name
         ```
-
-2.  **Create a New Feature/Bugfix Branch:**
-    *   Create a new branch for your work, following the naming convention `feature/<feature-name>` or `fix/<bug-description>`.
+3.  **Development:**
+    *   Implement the feature or fix the bug, adhering to the project's coding standards and architecture.
+    *   Write unit and widget tests for new logic and UI components.
+    *   Run the application on emulators or physical devices to test functionality.
+    *   Use `flutter analyze` and `flutter format` regularly to maintain code quality.
+4.  **Testing:**
+    *   Ensure all relevant tests pass (`flutter test`).
+    *   Perform manual testing on target platforms (Android and iOS).
+5.  **Committing:**
+    *   Commit changes frequently with clear and concise commit messages.
     *   ```bash
-        git checkout -b feature/add-new-coin-listing
-        ```
-
-3.  **Implement Changes:**
-    *   Develop the feature or fix the bug according to the project's architecture and coding standards.
-    *   Write unit and widget tests for your changes.
-
-4.  **Test Locally:**
-    *   Run the application on emulators or physical devices to verify your changes.
-    *   Execute tests:
-        *   Unit tests: `flutter test test/unit/`
-        *   Widget tests: `flutter test test/widget/`
-        *   All tests: `flutter test`
-
-5.  **Commit Changes:**
-    *   Stage your changes:
-        ```bash
         git add .
+        git commit -m "feat: Implement user profile editing functionality"
         ```
-    *   Commit with a clear and concise message following conventional commits.
-        ```bash
-        git commit -m "feat: Add CoinListingCard widget for displaying coin data"
-        ```
-
-6.  **Push Changes:**
-    *   Push your branch to the remote repository.
+6.  **Pushing:**
+    *   Push your feature branch to the remote repository.
     *   ```bash
-        git push origin feature/add-new-coin-listing
+        git push origin feature/your-feature-name
         ```
-
-7.  **Create a Pull Request (PR):**
-    *   Navigate to the project's repository on GitHub.
-    *   Create a new Pull Request from your feature branch to the main development branch (e.g., `develop`).
-    *   Provide a clear description of your changes, including the problem solved, the solution implemented, and any relevant context. Link to related issues.
-
+7.  **Pull Request (PR):**
+    *   Create a Pull Request from your feature branch to the `develop` branch.
+    *   Provide a clear description of the changes, including the problem solved, the solution implemented, and any relevant context. Link to the associated task/issue.
 8.  **Code Review:**
-    *   Team members will review your PR. Address any feedback or requested changes.
-
-9.  **Merge:**
-    *   Once the PR is approved and all checks pass, it will be merged into the target branch.
+    *   Your PR will be reviewed by other team members. Address feedback promptly and make necessary adjustments.
+9.  **Merging:**
+    *   Once the PR is approved and all checks pass, it will be merged into the `develop` branch.
+10. **Release/Main Branch Update:** Periodically, the `develop` branch is merged into the `main` (or `master`) branch for releases.
 
 ## 4. Coding Standards and Conventions
 
-Adhering to consistent coding standards ensures code readability, maintainability, and collaboration.
+Adhering to consistent coding standards is crucial for maintainability and collaboration.
 
 ### 4.1. Dart & Flutter Style Guide
 
-*   Follow the official [Effective Dart](https://dart.dev/guides/language/effective-dart) and [Flutter Style Guide](https://flutter.dev/docs/development/tools/formatting).
-*   Use `dart format` to automatically format your code. This is often integrated into IDEs.
-    ```bash
-    dart format .
-    ```
+*   **Official Style Guide:** Follow the [Effective Dart](https://dart.dev/guides/language/effective-dart) and [Flutter Style Guide](https://flutter.dev/docs/development/tools/formatting).
+*   **Formatting:** Use `dart format` to automatically format your code. This is often integrated into IDEs.
+*   **Linting:** The `analysis_options.yaml` file is configured with a comprehensive set of lints to enforce style and catch potential errors. Ensure your code passes all linting checks.
 
 ### 4.2. Naming Conventions
 
-*   **Classes:** `PascalCase` (e.g., `CoinListingCard`, `AuthRepository`).
-*   **Functions/Methods:** `lowerCamelCase` (e.g., `fetchCoinData`, `buildListItem`).
-*   **Variables:** `lowerCamelCase` (e.g., `coinPrice`, `isLoading`).
+*   **Classes and Types:** `PascalCase` (e.g., `UserProfile`, `WalletRepository`).
+*   **Functions and Methods:** `lowerCamelCase` (e.g., `fetchUserData`, `updateProfile`).
+*   **Variables:** `lowerCamelCase` (e.g., `userName`, `isLoading`).
 *   **Constants:** `SCREAMING_SNAKE_CASE` (e.g., `API_KEY`, `MAX_RETRIES`).
+*   **Private Members:** Prefix with an underscore (`_`) (e.g., `_privateVariable`, `_internalMethod`).
 *   **Enums:** `PascalCase` for the enum type, `PascalCase` for enum values (e.g., `enum Status { Loading, Success, Error }`).
-*   **File Names:** `snake_case.dart` (e.g., `coin_listing_card.dart`, `auth_repository.dart`).
-*   **Feature Directories:** `snake_case` (e.g., `auth`, `home`).
+*   **File Names:** `lower_snake_case` for Dart files (e.g., `user_profile_page.dart`). Feature modules should follow `feature_name/` structure.
+*   **Widgets:** `PascalCase` (e.g., `CustomButton`, `UserProfileCard`).
 
-### 4.3. File Structure within Features
+### 4.3. Project Structure Adherence
 
-As outlined in Section 2, each feature follows a `data`, `domain`, `presentation` structure.
+*   **Feature Modules:** New features should be created as new modules within the `lib/features/` directory.
+*   **Layered Architecture:** Maintain the `data`, `domain`, and `presentation` separation within each feature module.
+*   **Shared Components:** Place reusable widgets, utilities, or models in the `lib/shared/` directory.
 
 ### 4.4. State Management
 
-*   CryptoWave utilizes [Provider](https://pub.dev/packages/provider) for state management.
-*   Organize state management logic within the `presentation` layer of each feature.
-*   Use `ChangeNotifier` for simple state management and consider BLoC/Cubit for more complex scenarios if adopted.
+*   CryptoWave primarily uses [Riverpod](https://riverpod.dev/) for state management.
+*   Organize providers logically within feature modules or shared directories.
+*   Prefer immutable state and functional programming paradigms where applicable.
 
 ### 4.5. Error Handling
 
-*   Implement custom error classes in `lib/core/errors/`.
-*   Use `try-catch` blocks for handling exceptions, especially in asynchronous operations.
-*   Return `Either<Failure, Success>` (using `dartz` package) for repository methods to clearly indicate success or failure.
+*   Implement robust error handling using custom exception classes and a consistent error reporting mechanism.
+*   Utilize the `core/errors/` directory for defining error types and failure classes.
 
 ### 4.6. Asynchronous Operations
 
-*   Use `async`/`await` for all asynchronous operations.
-*   Handle loading and error states appropriately in the UI.
-
-### 4.7. Code Analysis
-
-*   The `analysis_options.yaml` file enforces linting rules. Run `dart analyze` to check for potential issues.
-    ```bash
-    dart analyze
-    ```
+*   Use `async`/`await` for asynchronous operations.
+*   Handle potential errors using `try-catch` blocks.
+*   Consider using `FutureBuilder` or Riverpod's `FutureProvider` for managing asynchronous states in the UI.
 
 ## 5. Testing Strategy
 
-A robust testing strategy ensures the reliability and correctness of the application. CryptoWave employs a multi-layered testing approach.
+A comprehensive testing strategy ensures the reliability and stability of CryptoWave.
 
 ### 5.1. Unit Tests
 
 *   **Purpose:** Test individual functions, methods, or classes in isolation.
-*   **Location:** `test/unit/`
-*   **Framework:** `package:test`
-*   **Mocking:** Use `mockito` for mocking dependencies.
-*   **Focus:** Business logic, utility functions, data transformations.
+*   **Location:** `test/` directory, mirroring the `lib/` structure (e.g., `test/features/authentication/domain/usecases/login_usecase_test.dart`).
+*   **Framework:** `package:test` and `package:mocktail` for mocking dependencies.
+*   **Focus:** Business logic, use cases, repository implementations, utility functions.
+*   **Coverage:** Aim for high unit test coverage for critical business logic.
 
 ### 5.2. Widget Tests
 
-*   **Purpose:** Test individual Flutter widgets in isolation.
-*   **Location:** `test/widget/`
-*   **Framework:** `flutter_test`
-*   **Focus:** Widget rendering, user interaction, state changes within a widget.
+*   **Purpose:** Test individual Flutter widgets in isolation, verifying their UI and interaction.
+*   **Location:** `test/` directory, mirroring the `lib/` structure (e.g., `test/features/authentication/presentation/widgets/login_form_widget_test.dart`).
+*   **Framework:** `flutter_test` package.
+*   **Focus:** Widget rendering, user interactions (taps, text input), state changes within the widget.
 
 ### 5.3. Integration Tests
 
 *   **Purpose:** Test the interaction between multiple components or features, simulating real user flows.
-*   **Location:** `integration_test/`
+*   **Location:** `integration_test/` directory.
 *   **Framework:** `integration_test` package.
-*   **Focus:** End-to-end testing of user journeys, ensuring components work together correctly.
+*   **Focus:** End-to-end testing of user journeys, ensuring different parts of the application work together correctly. These tests run on a device or emulator.
 
-### 5.4. Writing Tests
+### 5.4. Mocking
 
-*   **Arrange, Act, Assert (AAA):** Structure your tests using this pattern.
-*   **Descriptive Names:** Use clear test names that explain what is being tested.
-*   **Mock Dependencies:** Mock external services, repositories, and other dependencies to ensure tests are isolated and fast.
-*   **Coverage:** Aim for high test coverage, especially for critical business logic.
+*   Use `package:mocktail` for creating mock objects for dependencies like repositories, services, and data sources.
+*   Mocking allows you to isolate the unit under test and control its dependencies.
 
-**Example Unit Test (Conceptual):**
+### 5.5. Running Tests
 
-```dart
-// lib/features/auth/domain/usecases/login_usecase_test.dart
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:crypto_wave/features/auth/domain/repositories/auth_repository.dart';
-import 'package:crypto_wave/features/auth/domain/usecases/login_usecase.dart';
-import 'package:crypto_wave/core/errors/failures.dart';
-
-class MockAuthRepository extends Mock implements AuthRepository {}
-
-void main() {
-  late LoginUseCase useCase;
-  late MockAuthRepository mockAuthRepository;
-
-  setUp(() {
-    mockAuthRepository = MockAuthRepository();
-    useCase = LoginUseCase(mockAuthRepository);
-  });
-
-  final tEmail = 'test@example.com';
-  final tPassword = 'password123';
-  final tUser = User(id: '1', email: tEmail); // Assuming User entity exists
-
-  test('should call login on the repository', () async {
-    // Arrange
-    when(mockAuthRepository.login(any, any))
-        .thenAnswer((_) async => Right(tUser));
-
-    // Act
-    final result = await useCase(LoginParams(email: tEmail, password: tPassword));
-
-    // Assert
-    expect(result, Right(tUser));
-    verify(mockAuthRepository.login(tEmail, tPassword)).called(1);
-    verifyNoMoreInteractions(mockAuthRepository);
-  });
-
-  test('should return server failure when repository fails', () async {
-    // Arrange
-    when(mockAuthRepository.login(any, any))
-        .thenAnswer((_) async => Left(ServerFailure('Server Error')));
-
-    // Act
-    final result = await useCase(LoginParams(email: tEmail, password: tPassword));
-
-    // Assert
-    expect(result, Left(ServerFailure('Server Error')));
-    verify(mockAuthRepository.login(tEmail, tPassword)).called(1);
-    verifyNoMoreInteractions(mockAuthRepository);
-  });
-}
-```
+*   **Unit & Widget Tests:**
+    ```bash
+    flutter test
+    ```
+    To run tests for a specific file:
+    ```bash
+    flutter test test/features/authentication/domain/usecases/login_usecase_test.dart
+    ```
+*   **Integration Tests:**
+    ```bash
+    flutter test integration_test/your_integration_test.dart
+    ```
+    Ensure a device or emulator is connected and running.
 
 ## 6. Debugging Guide
 
-Effective debugging is crucial for identifying and resolving issues quickly.
+Effective debugging is essential for identifying and resolving issues.
 
-### 6.1. Using `flutter run`
+### 6.1. Using IDE Debugger
 
-*   Run your application from the terminal using `flutter run`. This provides detailed console output, including logs, errors, and warnings.
-*   Use `print()` statements judiciously to inspect variable values and execution flow.
+*   **Android Studio/IntelliJ IDEA:**
+    *   Set breakpoints by clicking in the gutter next to the line numbers.
+    *   Run the application in debug mode (usually a bug icon).
+    *   Use the debug toolbar to step over, step into, step out of functions, and inspect variable values.
+*   **VS Code:**
+    *   Ensure you have the Dart/Flutter extensions installed.
+    *   Set breakpoints in your `.dart` files.
+    *   Launch the Flutter debugger from the Run and Debug view (Ctrl+Shift+D or Cmd+Shift+D).
 
-### 6.2. Android Studio / IntelliJ IDEA Debugger
+### 6.2. Logging
 
-*   **Breakpoints:** Set breakpoints in your Kotlin or Dart code by clicking in the gutter next to the line numbers.
-*   **Step Through Code:** Use the debugger controls (Step Over, Step Into, Step Out) to execute code line by line.
-*   **Variable Inspection:** Inspect the values of variables, objects, and expressions in the "Variables" pane.
-*   **Evaluate Expressions:** Use the "Evaluate Expression" feature to test code snippets in the current context.
-*   **Logcat (Android):** Use the Logcat window in Android Studio to view system logs, including messages from `android.util.Log` or `print()` statements.
-*   **Console Output (iOS):** View logs from iOS devices or simulators in the Debug Console.
+*   Utilize the `dart:developer` library for logging.
+    ```dart
+    import 'dart:developer' as developer;
 
-### 6.3. VS Code Debugger
+    // ...
 
-*   Similar to Android Studio, VS Code offers robust debugging capabilities for Flutter and Dart.
-*   Ensure you have the Flutter and Dart extensions installed.
-*   Use the "Run and Debug" view to set breakpoints, step through code, and inspect variables.
+    developer.log('User logged in successfully', name: 'AuthService');
+    ```
+*   Consider using a dedicated logging package like `logger` for more advanced features (e.g., log levels, formatting, output destinations).
 
-### 6.4. Flutter DevTools
+### 6.3. Flutter DevTools
 
-*   **Access:** Open DevTools by running `flutter pub global activate devtools` and then `devtools` in your terminal, or by clicking the "Open DevTools" link in the `flutter run` output.
+*   Flutter DevTools is a powerful suite of performance and debugging tools.
+*   **Access:**
+    *   When running in debug mode, DevTools will often open automatically in your browser.
+    *   Alternatively, run `flutter pub global activate devtools` and then `devtools` in your terminal.
 *   **Features:**
     *   **Inspector:** Inspect the widget tree, view widget properties, and debug layout issues.
-    *   **Performance:** Profile your application's performance, identify bottlenecks, and analyze frame rendering.
-    *   **Logging:** View application logs and events.
+    *   **Performance:** Profile CPU usage, frame rendering times, and identify performance bottlenecks.
     *   **Network:** Inspect network requests and responses.
-    *   **Memory:** Analyze memory usage and detect leaks.
+    *   **Logging:** View application logs.
+    *   **Memory:** Analyze memory usage.
 
-### 6.5. Common Debugging Scenarios
+### 6.4. Hot Reload and Hot Restart
 
-*   **UI Glitches:** Use the Inspector tab in DevTools to examine the widget tree and identify layout or rendering issues. Check for incorrect constraints, alignment, or sizing.
-*   **State Management Issues:** Use `print` statements or the debugger to trace state changes and ensure your `ChangeNotifier` or BLoC is updating correctly.
-*   **Network Errors:** Inspect network requests in DevTools or use `print` statements to log API responses and error messages. Verify API endpoints, headers, and request bodies.
-*   **Platform-Specific Bugs:** Use platform-specific debugging tools (Logcat for Android, Console for iOS) and conditional logic in your code to isolate issues.
+*   **Hot Reload (r):** Injects updated code into the running Dart VM. Preserves application state. Ideal for UI changes.
+*   **Hot Restart (R):** Resets the application state and restarts the Dart VM. Useful for more significant code changes or when hot reload doesn't work as expected.
+
+### 6.5. Assertions
+
+*   Use `assert()` statements for debugging logic that should always hold true in development builds.
+    ```dart
+    assert(user != null, 'User object cannot be null');
+    ```
+    Assertions are only active in debug and profile modes.
 
 ## 7. Deployment Process
 
-The deployment process ensures that the application is built, tested, and released to the respective app stores.
+The deployment process ensures that new versions of CryptoWave are released to users reliably.
 
-### 7.1. Building Release Versions
+### 7.1. Build Process
 
 *   **Android:**
-    ```bash
-    flutter build apk --release
-    # or for app bundles:
-    flutter build appbundle --release
-    ```
-    The output will be in the `build/app/outputs/flutter-apk/` or `build/app/outputs/bundle/release/` directory.
+    *   Generate a signed APK or App Bundle using Gradle.
+    *   ```bash
+        # For App Bundle (recommended for Play Store)
+        flutter build appbundle --release
+
+        # For APK
+        flutter build apk --release
+        ```
+    *   The output will be in the `build/app/outputs/bundle/release/` or `build/app/outputs/apk/release/` directory.
 
 *   **iOS:**
-    ```bash
-    flutter build ipa --release
-    ```
-    This command prepares the `.ipa` file for distribution. You will typically use Xcode to archive and distribute the app.
+    *   Build and archive the application using Xcode.
+    *   ```bash
+        flutter build ipa --release
+        ```
+    *   This command generates an `.ipa` file, typically located in `build/ios/ipa/`. You can then distribute this via TestFlight or upload it to App Store Connect.
 
-### 7.2. App Store Submission
+### 7.2. CI/CD Pipeline
 
-*   **Android (Google Play Store):**
-    1.  Create a new release in the Google Play Console.
-    2.  Upload the generated App Bundle (`.aab`) file.
-    3.  Provide release notes, screenshots, and other required metadata.
-    4.  Submit for review.
+*   CryptoWave utilizes a Continuous Integration/Continuous Deployment (CI/CD) pipeline for automated builds, testing, and deployments.
+*   **Tools:** [TODO: Specify CI/CD tools used, e.g., GitHub Actions, GitLab CI, Jenkins].
+*   **Triggers:** The pipeline is typically triggered by pushes to specific branches (e.g., `main` for releases, `develop` for staging).
+*   **Stages:**
+    1.  **Checkout:** Fetches the latest code.
+    2.  **Setup:** Installs Flutter SDK, dependencies, and environment variables.
+    3.  **Analyze:** Runs `flutter analyze`.
+    4.  **Test:** Executes unit, widget, and integration tests.
+    5.  **Build:** Creates release builds for Android and iOS.
+    6.  **Deploy:** Uploads builds to distribution platforms (e.g., App Store Connect, Google Play Console, Firebase App Distribution).
 
-*   **iOS (App Store):**
-    1.  Open the `ios/Runner.xcworkspace` file in Xcode.
-    2.  Configure signing and capabilities (e.g., Bundle Identifier, Provisioning Profiles).
-    3.  Select "Product" > "Archive".
-    4.  In the Organizer window, select the archive and click "Distribute App".
-    5.  Follow the prompts to upload to App Store Connect.
-    6.  In App Store Connect, create a new version, add release notes, screenshots, and submit for review.
+### 7.3. Release Management
 
-### 7.3. CI/CD Integration
-
-*   The project may integrate with CI/CD pipelines (e.g., GitHub Actions, Codemagic, Bitrise) for automated building, testing, and deployment.
-*   Refer to the CI/CD configuration files (e.g., `.github/workflows/`) for specific details on the automated deployment process.
+*   **Versioning:** Follow Semantic Versioning (SemVer) for application versioning (`major.minor.patch`).
+*   **Branching:** Releases are typically cut from the `main` branch.
+*   **Deployment Platforms:**
+    *   **Android:** Google Play Store.
+    *   **iOS:** App Store (via TestFlight for beta testing).
 
 ## 8. Troubleshooting Common Issues
 
-This section addresses frequently encountered problems and their solutions.
+This section addresses common problems developers might encounter.
 
-### 8.1. Dependency Issues (`flutter pub get` fails)
+### 8.1. Dependency Issues
 
-*   **Problem:** `flutter pub get` fails with errors related to missing packages or version conflicts.
+*   **Problem:** `flutter pub get` fails, or build errors related to missing dependencies.
 *   **Solution:**
-    1.  Ensure your Flutter SDK is up-to-date: `flutter upgrade`.
-    2.  Clean the build cache: `flutter clean`.
-    3.  Delete the `pubspec.lock` file and run `flutter pub get` again.
-    4.  Check for version conflicts in `pubspec.yaml`.
+    *   Ensure your Flutter SDK is up-to-date: `flutter upgrade`.
+    *   Clean the build cache: `flutter clean`.
+    *   Re-fetch dependencies: `flutter pub get`.
+    *   Check `pubspec.yaml` for correct dependency versions and constraints.
+    *   If issues persist, try deleting the `pubspec.lock` file and running `flutter pub get` again.
 
-### 8.2. Build Errors (Android/iOS)
+### 8.2. Build Failures (Android/iOS)
 
-*   **Problem:** Build fails with native compilation errors.
+*   **Problem:** Build errors specific to native platforms.
 *   **Solution:**
     *   **Android:**
-        *   Run `flutter doctor -v` to check for missing SDK components or environment issues.
-        *   Clean the project: `flutter clean`.
-        *   Invalidate caches and restart Android Studio.
-        *   Check `android/build.gradle` and `android/app/build.gradle` for correct SDK versions and dependencies.
+        *   Ensure your `android/local.properties` file has the correct `sdk.dir` pointing to your Android SDK location.
+        *   Check Gradle version compatibility in `android/gradle/wrapper/gradle-wrapper.properties`.
+        *   Sync Gradle files in Android Studio.
+        *   Clean the project: `cd android && ./gradlew clean && cd ..`.
     *   **iOS:**
-        *   Run `flutter doctor -v`.
-        *   Clean the project: `flutter clean`.
-        *   In Xcode, go to "Product" > "Clean Build Folder".
-        *   Ensure your CocoaPods are up-to-date: `cd ios && pod install && cd ..`.
+        *   Open `ios/Runner.xcworkspace` in Xcode and try building from there.
+        *   Ensure your Xcode version is compatible with the Flutter SDK.
         *   Check signing and provisioning profiles in Xcode.
+        *   Clean build folder in Xcode (Product > Clean Build Folder).
 
-### 8.3. Hot Reload/Restart Issues
+### 8.3. State Management Errors
 
-*   **Problem:** Hot Reload or Hot Restart stops working or behaves unexpectedly.
+*   **Problem:** Unexpected UI updates, state not reflecting changes, or errors related to providers.
 *   **Solution:**
-    1.  Try a full restart of the application (`flutter run` again).
-    2.  Run `flutter clean` and then `flutter pub get`.
-    3.  Ensure your code changes are syntactically correct.
+    *   Verify that providers are correctly defined and accessible.
+    *   Ensure state updates are immutable.
+    *   Use `ref.watch()` or `ref.read()` correctly in Riverpod.
+    *   Check for circular dependencies between providers.
+    *   Utilize DevTools' Inspector to examine widget rebuilds and state changes.
 
-### 8.4. Network Connectivity Problems
+### 8.4. Network Request Failures
 
-*   **Problem:** Application cannot connect to APIs or fetch data.
+*   **Problem:** API calls failing, incorrect data being fetched.
 *   **Solution:**
-    1.  Verify device/emulator network connection.
-    2.  Check API endpoints and credentials in `.env` file.
-    3.  Use DevTools Network tab to inspect requests.
-    4.  Ensure necessary permissions (e.g., `INTERNET`) are declared in native manifests (`AndroidManifest.xml`, `Info.plist`).
-
-### 8.5. State Management Not Updating
-
-*   **Problem:** UI does not reflect changes in the application state.
-*   **Solution:**
-    1.  Ensure `notifyListeners()` is called after state changes in `ChangeNotifier`.
-    2.  Verify that widgets are correctly listening to the state provider (e.g., using `context.watch<MyNotifier>()`).
-    3.  Check for potential issues with immutable state updates if using a more complex state management solution.
+    *   Use Flutter DevTools' Network tab to inspect requests and responses.
+    *   Verify API endpoints, headers, and request bodies.
+    *   Check for network connectivity issues on the device/emulator.
+    *   Ensure proper error handling is implemented for network failures.
+    *   Validate SSL certificates if using HTTPS.
 
 ## 9. Contributing Guidelines
 
 We welcome contributions to CryptoWave! Please follow these guidelines to ensure a smooth contribution process.
 
-### 9.1. How to Contribute
+### 9.1. Getting Started
 
 1.  **Fork the Repository:** Fork the official CryptoWave repository to your GitHub account.
 2.  **Clone Your Fork:** Clone your forked repository to your local machine.
@@ -469,61 +449,66 @@ We welcome contributions to CryptoWave! Please follow these guidelines to ensure
     git clone https://github.com/<your-username>/CryptoWave.git
     cd CryptoWave
     ```
-3.  **Set Upstream Remote:** Add the original repository as an upstream remote.
+3.  **Set Upstream Remote:** Add the original repository as an upstream remote to fetch the latest changes.
     ```bash
     git remote add upstream https://github.com/Work90210/CryptoWave.git
     ```
-4.  **Keep Your Fork Synced:** Regularly pull changes from the upstream repository.
+4.  **Keep Your Fork Updated:** Regularly pull changes from the upstream repository.
     ```bash
-    git checkout main # Or develop
-    git pull upstream main # Or develop
-    git push origin main # Or develop
+    git checkout develop
+    git pull upstream develop
+    git push origin develop
     ```
-5.  **Create a Feature Branch:** Create a new branch for your contribution as described in Section 3.
-6.  **Make Changes:** Implement your feature or fix.
-7.  **Test Your Changes:** Ensure all tests pass and write new tests if necessary.
-8.  **Commit Your Changes:** Use conventional commits for your commit messages.
-9.  **Push to Your Fork:** Push your branch to your fork on GitHub.
-10. **Create a Pull Request:** Open a Pull Request from your fork's branch to the `develop` branch of the main CryptoWave repository.
 
-### 9.2. Code of Conduct
+### 9.2. Contribution Workflow
 
-*   Please adhere to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/).
+1.  **Create a New Branch:** Before starting work, create a new branch from the `develop` branch.
+    ```bash
+    git checkout -b feature/your-contribution-name
+    ```
+2.  **Make Changes:** Implement your feature or fix, adhering to the project's coding standards and architecture.
+3.  **Write Tests:** Add unit and/or widget tests for your changes. Ensure all tests pass.
+4.  **Commit Changes:** Commit your changes with clear, descriptive messages.
+5.  **Push Changes:** Push your branch to your fork.
+    ```bash
+    git push origin feature/your-contribution-name
+    ```
+6.  **Create a Pull Request:** Open a Pull Request from your feature branch to the `develop` branch of the **original** CryptoWave repository.
+    *   Provide a detailed description of your changes.
+    *   Link to any relevant issues or tasks.
 
-### 9.3. Reporting Bugs
+### 9.3. Code of Conduct
 
-*   If you find a bug, please check if it has already been reported.
-*   If not, open a new issue on the GitHub repository with a clear title, detailed description, steps to reproduce, expected behavior, and actual behavior. Include relevant logs or screenshots.
-
-### 9.4. Suggesting Features
-
-*   For feature requests, open a new issue describing the proposed feature and its benefits.
+*   All contributors are expected to adhere to the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/).
 
 ## 10. Code Review Process
 
-All code contributions must go through a code review process before being merged.
+Code reviews are a critical part of our development process to maintain code quality, share knowledge, and catch potential issues early.
 
-### 10.1. Pull Request Requirements
+### 10.1. Submitting for Review
 
-*   **Clear Description:** Provide a comprehensive description of the changes, including the problem solved, the solution, and any relevant context. Link to related issues.
-*   **Tests:** Ensure that all relevant tests are written and passing.
-*   **Code Formatting:** Code must be formatted according to the project's standards (`dart format`).
-*   **Linting:** Code must pass all linting checks (`dart analyze`).
-*   **No Breaking Changes:** Avoid introducing breaking changes without prior discussion and agreement.
+*   Once you have pushed your branch and created a Pull Request (PR), assign at least one reviewer from the core team.
+*   Ensure your PR description is clear, concise, and includes:
+    *   A summary of the changes.
+    *   The problem being solved or the feature being added.
+    *   How to test the changes.
+    *   Screenshots or GIFs if UI changes are involved.
+    *   Links to relevant issues.
 
 ### 10.2. Reviewer Responsibilities
 
-*   Reviewers should provide constructive feedback in a timely manner.
-*   Focus on code quality, correctness, adherence to standards, and potential performance or security implications.
-*   Approve or request changes on the Pull Request.
+*   **Thoroughness:** Review the code for correctness, adherence to standards, potential bugs, performance issues, and security vulnerabilities.
+*   **Constructiveness:** Provide clear, actionable, and respectful feedback. Explain the reasoning behind suggestions.
+*   **Timeliness:** Aim to provide feedback within a reasonable timeframe (e.g., 1-2 business days).
 
 ### 10.3. Author Responsibilities
 
-*   Address reviewer feedback promptly and politely.
-*   Push updated code to the same branch.
-*   Respond to comments and questions.
+*   **Address Feedback:** Carefully review all feedback provided by reviewers.
+*   **Respond:** Respond to comments, ask clarifying questions, and make necessary code changes.
+*   **Push Updates:** Push updated commits to your feature branch. The PR will automatically update.
+*   **Resolve Conflicts:** If merge conflicts arise, resolve them locally and push the updated branch.
 
-### 10.4. Merging
+### 10.4. Approval and Merging
 
-*   Once a Pull Request has been approved by at least one maintainer and all automated checks pass, it can be merged into the `develop` branch.
-*   The PR author or a designated maintainer can perform the merge.
+*   A PR requires at least one approval from a designated reviewer before it can be merged.
+*   Once approved and all CI checks pass, the PR will be merged into the `develop` branch by a maintainer.
