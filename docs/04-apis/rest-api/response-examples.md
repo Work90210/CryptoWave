@@ -1,67 +1,59 @@
 # CryptoWave API Documentation
 
-This document provides comprehensive API documentation for the CryptoWave application.
+This document provides a comprehensive reference for the CryptoWave API, detailing its functionalities, endpoints, and error handling mechanisms.
 
 ## 1. API Overview
 
-CryptoWave utilizes the CoinGecko API to fetch real-time cryptocurrency market data, including prices, trends, and detailed coin information.
+CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users. [S15, S16, S17, S18, S19, S20, S21, S22, S23, S24] The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions. [S22]
 
 ## 2. Authentication
 
-Authentication is not explicitly handled or documented within the provided code snippets.
+Authentication is not explicitly handled or documented within the provided code snippets. [S15, S19, S21, S22] Interactions with the CoinGecko API are assumed to be unauthenticated. [S22] All data is publicly accessible through the CoinGecko API. [S15, S16, S20, S23]
 
 ## 3. Endpoint/Function Reference
 
-The following functions are identified as relevant to API interactions:
+The primary interaction with external data is handled through repositories that abstract API calls. [S16, S18, S20, S22, S23] The `lib/repositories/coin_repository.dart` file is identified as relevant for API interactions. [S16, S18, S22] The `BaseRepository` is also identified as a primary interaction point for API data. [S21]
 
 ### `ExceptionHandler.enhanceException`
 
-This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context.
+This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S24]
 
 **Parameters:**
 
-*   `error`: The original exception object.
-*   `contextMessage`: A string providing additional context about the operation being performed.
-
-**Behavior:**
-
-The function checks the type of the `error` object. If it is an `ApiException`, it creates a new `ApiException` with a more descriptive message based on the specific exception type (e.g., `ConnectivityException`, `ApiTimeoutException`) and the provided `contextMessage`.
-
-**Example Usage:**
-
-```dart
-try {
-  // ... API call ...
-} catch (e) {
-  final enhancedError = ExceptionHandler.enhanceException(e, 'Failed to fetch coin data');
-  // Handle enhancedError
-}
-```
+*   `error`: The original exception object. [S24]
+*   `contextMessage`: A string. [S24]
 
 ## 4. Request/Response Examples
 
-The provided code snippets do not contain explicit examples of API requests or responses. However, the `CoinRepository` and `CoinDetailsRepository` classes indicate interactions with an API, likely for fetching coin market data and historical chart data respectively.
+TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class is dedicated to managing API exceptions. It provides a mechanism to create more informative exceptions by adding context to the original error.
-
-The following exception types are handled:
-
-*   `ApiException`: A base class for API-related errors.
-*   `ConnectivityException`: Indicates a lack of internet connection.
-*   `ApiTimeoutException`: Signifies that a request has timed out.
-
-The `enhanceException` method augments these exceptions with user-friendly messages.
+The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S13, S24]
 
 ## 6. Rate Limiting
 
-Rate limiting information is not available in the provided code snippets.
+TODO: Document rate limiting policies if applicable.
 
 ## 7. SDK/Client Usage Examples
 
-The code utilizes a `HttpClient` instance, suggesting an underlying HTTP client is used for making API calls. Specific examples of SDK or client usage are not detailed in the provided context.
+TODO: Provide examples for SDK or client usage.
 
 ## 8. Testing Instructions
 
-Testing instructions are not provided within the scope of this documentation.
+TODO: Provide instructions for testing API interactions.
+
+## SOURCES
+
+- [S1] README.md
+- [S13] docs/03-features/[feature-name]/platforms/api.md
+- [S15] docs/04-apis/api-overview.md
+- [S16] docs/04-apis/api.md
+- [S17] docs/04-apis/error-handling.md
+- [S18] docs/04-apis/filtering-sorting.md
+- [S19] docs/04-apis/pagination.md
+- [S20] docs/04-apis/rate-limiting.md
+- [S21] docs/04-apis/rest-api/endpoints/README.md
+- [S22] docs/04-apis/rest-api/openapi.yaml
+- [S23] docs/04-apis/rest-api/request-examples.md
+- [S24] docs/04-apis/rest-api/response-examples.md
