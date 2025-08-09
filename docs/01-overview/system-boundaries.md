@@ -1,120 +1,88 @@
-## System Scope and Boundaries
+## System Scope
 
-This document defines the scope and boundaries of the CryptoWave application.
+CryptoWave is a Flutter application designed for tracking cryptocurrency prices, trends, and market data.
 
-### 1. System Scope
+### Core Functionalities
+*   Real-time cryptocurrency price tracking.
+*   Display of detailed coin information and historical data.
+*   Interactive price charts using FL Chart.
 
-The CryptoWave application is designed to provide users with real-time cryptocurrency market data and related functionalities.
+### Primary Use Cases
+*   Monitoring current prices of a wide range of cryptocurrencies.
+*   Accessing comprehensive data for each cryptocurrency, including historical performance and market metrics.
+*   Visualizing price trends and market data through interactive charts.
 
-*   **Core Functionalities:**
-    *   Real-time tracking of cryptocurrency prices.
-    *   Display of cryptocurrency market data, including market capitalization, trading volume, and price changes over 24 hours.
-    *   Presentation of detailed coin information, including historical data.
-    *   Interactive price charts for cryptocurrencies.
-    *   A clean and modern user interface.
+### Data Types and Domains
+*   Cryptocurrency prices.
+*   Cryptocurrency trends.
+*   Market data for cryptocurrencies.
 
-*   **Primary Use Cases Supported:**
-    *   Users can view a list of cryptocurrencies with their current prices and market data.
-    *   Users can access detailed information and historical price charts for individual cryptocurrencies.
-    *   Users can track the performance of their cryptocurrency investments.
+### Geographic and Temporal Scope
+*   The application provides real-time data, implying a global scope for market data.
+*   Historical data is also supported.
 
-*   **Data Types and Domains Handled:**
-    *   Cryptocurrency prices (real-time and historical).
-    *   Market capitalization.
-    *   Trading volumes.
-    *   Coin metadata (e.g., name, symbol, image).
+## System Boundaries
 
-*   **Geographic and Temporal Scope:**
-    *   The application provides global cryptocurrency market data.
-    *   Data is presented in real-time, with historical data available for analysis.
+### Inclusion Criteria
+*   Functionalities related to fetching and displaying cryptocurrency market data.
+*   Features for tracking prices and trends.
+*   Integration with the CoinGecko API for data retrieval.
 
-### 2. System Boundaries
+### Explicit Exclusion Criteria
+*   No explicit exclusion criteria are detailed in the provided context.
 
-The CryptoWave application operates within clearly defined boundaries to ensure focused development and maintainability.
+### Interface Points with External Systems
+*   **CoinGecko API:** The application uses the CoinGecko API to fetch cryptocurrency information.
 
-*   **Inclusion Criteria:**
-    *   All functionalities directly related to fetching, processing, and displaying cryptocurrency market data from the CoinGecko API.
-    *   User interface elements that facilitate the presentation and interaction with this data.
-    *   State management using the Bloc pattern for efficient UI updates.
-    *   Dependency injection using GetIt for service management.
+### Responsibility Boundaries
+*   The application is responsible for presenting cryptocurrency market data to the user.
 
-*   **Exclusion Criteria:**
-    *   Direct trading or transaction capabilities for cryptocurrencies.
-    *   User account management or authentication features beyond basic application setup.
-    *   News aggregation or sentiment analysis related to cryptocurrencies.
-    *   Portfolio management features beyond simple price tracking.
+## Out of Scope
 
-*   **Interface Points with External Systems:**
-    *   **CoinGecko API:** The primary external system for all cryptocurrency data. The application interacts with this API to retrieve market data, coin information, and historical charts.
-    *   **Flutter Framework:** The core UI and application development framework.
-    *   **Dart Ecosystem:** Libraries and packages used for state management, networking, and data serialization.
+### Functionalities Explicitly Not Included
+*   No functionalities are explicitly stated as out of scope in the provided context.
 
-*   **Responsibility Boundaries:**
-    *   The application is responsible for the presentation and user interaction with cryptocurrency market data.
-    *   Data fetching, validation, and error handling are managed by dedicated repositories and services.
-    *   The UI layer is responsible for rendering the data and capturing user input.
+### Related Systems and Their Boundaries
+*   No related systems or their boundaries are detailed in the provided context.
 
-### 3. Out of Scope
+### Future Scope Considerations
+*   No future scope considerations are detailed in the provided context.
 
-Certain functionalities and related systems are explicitly excluded from the current scope of CryptoWave to maintain focus and manage complexity.
+### Alternative Solutions for Excluded Needs
+*   No alternative solutions for excluded needs are detailed in the provided context.
 
-*   **Functionalities Explicitly Not Included:**
-    *   Direct cryptocurrency trading or exchange functionalities.
-    *   User registration, login, or profile management.
-    *   Push notifications for price alerts or news.
-    *   Advanced portfolio tracking with buy/sell order history.
-    *   Integration with blockchain explorers or wallet services.
-    *   Fiat currency conversion beyond what is provided by the CoinGecko API.
+## Dependencies & Integrations
 
-*   **Related Systems and Their Boundaries:**
-    *   **Cryptocurrency Exchanges:** These are external entities that CryptoWave does not directly interact with for trading.
-    *   **Blockchain Networks:** CryptoWave does not directly interact with any blockchain networks.
-    *   **News Aggregators/Sentiment Analysis Platforms:** While related to cryptocurrency, these are not integrated into the current version of CryptoWave.
+### Required External Systems
+*   **CoinGecko API:** Essential for obtaining cryptocurrency market data.
 
-*   **Future Scope Considerations:**
-    *   User watchlists and personalized alerts.
-    *   Integration with additional data sources for broader market coverage.
-    *   Enhanced portfolio tracking features.
+### Optional Integrations
+*   No optional integrations are detailed in the provided context.
 
-*   **Alternative Solutions for Excluded Needs:**
-    *   For cryptocurrency trading, users should refer to dedicated cryptocurrency exchange platforms.
-    *   For detailed blockchain analysis, users should consult blockchain explorers.
+### Data Exchange Boundaries
+*   Data is exchanged with the CoinGecko API to retrieve cryptocurrency prices, trends, and market data.
 
-### 4. Dependencies & Integrations
+### Service Level Dependencies
+*   The availability and performance of the CoinGecko API directly impact the application's ability to provide real-time data.
 
-CryptoWave relies on specific external systems and libraries to function.
+## Constraints & Limitations
 
-*   **Required External Systems:**
-    *   **CoinGecko API:** Essential for all cryptocurrency data. The application's functionality is directly dependent on the availability and structure of this API.
+### Technical Constraints
+*   The application is built using Flutter.
+*   State management is handled using the Bloc Pattern (`flutter_bloc`).
+*   Code generation for immutable models is performed using Freezed.
+*   The `GetIt` package is utilized.
 
-*   **Optional Integrations:**
-    *   **Flutter Environment:** The application requires a Flutter SDK for development and deployment.
-    *   **Dart Packages:** Specific packages are utilized for state management (`flutter_bloc`), data serialization (`json_serializable`, `freezed`), dependency injection (`get_it`), and environment variable loading (`flutter_dotenv`).
+### Business Rule Limitations
+*   No specific business rule limitations are detailed in the provided context.
 
-*   **Data Exchange Boundaries:**
-    *   Data is exchanged with the CoinGecko API via RESTful HTTP requests.
-    *   The application primarily consumes JSON data from the API, which is then parsed into Dart objects using `json_serializable`.
+### Performance Boundaries
+*   No specific performance boundaries are detailed in the provided context.
 
-*   **Service Level Dependencies:**
-    *   The application's performance and data accuracy are directly dependent on the CoinGecko API's uptime, response times, and data integrity.
+### Compliance Boundaries
+*   No specific compliance boundaries are detailed in the provided context.
 
-### 5. Constraints & Limitations
+## SOURCES
 
-The CryptoWave application operates within several constraints and limitations.
-
-*   **Technical Constraints:**
-    *   **API Rate Limits:** Adherence to CoinGecko API rate limits is crucial to avoid service disruptions.
-    *   **Flutter/Dart Version Compatibility:** The application is built using specific versions of Flutter and Dart, and compatibility with future versions is not guaranteed without testing.
-    *   **Platform Dependencies:** The application relies on Flutter's cross-platform capabilities but may encounter platform-specific nuances during development or deployment.
-
-*   **Business Rule Limitations:**
-    *   The application strictly adheres to the data provided by the CoinGecko API. Any limitations or inaccuracies in the CoinGecko API's data will be reflected in the application.
-    *   The application does not provide financial advice or investment recommendations.
-
-*   **Performance Boundaries:**
-    *   UI responsiveness is dependent on the efficiency of data fetching, processing, and rendering.
-    *   The application aims for smooth performance on typical mobile devices, but performance may vary based on device capabilities and network conditions.
-
-*   **Compliance Boundaries:**
-    *   The application complies with standard data privacy practices. User data is not collected or stored beyond what is necessary for application functionality.
-    *   All data displayed is sourced from the CoinGecko API, and the application adheres to their terms of service.
+*   [S1] README.md
+*   [S24] docs/01-overview/README.md
