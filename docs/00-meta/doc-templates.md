@@ -51,32 +51,34 @@ TODO: Information on when to use each template, how to customize templates, and 
 ### 3.1 Common Documentation Sections
 
 *   **API Overview:** A section detailing the application's interaction with external APIs, such as the CoinGecko API.
-*   **Authentication:** A section describing the authentication mechanisms, or lack thereof, for API interactions.
-*   **Endpoint/Function Reference:** A section listing and describing available endpoints or functions for API interactions.
+*   **Authentication:** Information regarding the authentication mechanisms, or lack thereof, for API interactions.
+*   **Endpoint/Function Reference:** A detailed listing of available endpoints or functions, including their purpose and parameters.
+*   **Error Handling:** Documentation on how errors are processed and standardized.
 
 ### 3.2 Standard Formatting Patterns
 
 *   **Markdown:** Used for writing all documentation content due to its simplicity, readability, and widespread support.
 *   **Clarity and Conciseness:** Direct language, active voice, short sentences and paragraphs, and action-oriented content are preferred.
+*   **Technical Writing Best Practices:** Content should be tailored to the intended audience.
 
 ### 3.3 Consistent Naming Conventions
 
-*   **File Naming:** Documentation files are organized within a clear directory structure, e.g., `docs/04-apis/rest-api/`.
-*   **Code References:** Exact function, class, and file path names are used when referencing implementation details.
+*   File paths for documentation are organized hierarchically, starting with `docs/`.
+*   Specific directories like `00-meta`, `01-overview`, `03-features`, and `04-apis` are used to categorize documentation.
 
 ### 3.4 Cross-Reference Patterns
 
-Cross-referencing is used to link related documentation sections. For example, API documentation files are linked within the broader API documentation structure.
+Cross-referencing is implicitly used through the organization of documentation files and the mention of specific files within other documentation sections.
 
 ## 4. Template Maintenance
 
-### 4.1 Updating Templates
+### 4.1 How to Update Templates
 
 TODO: Information on how to update templates is not available in the provided context.
 
 ### 4.2 Version Control for Templates
 
-Documentation is managed alongside the codebase using a version control system (e.g., Git), enabling version tracking, branching, and collaborative workflows. Documentation versions align with the application's semantic versioning (SemVer) where applicable.
+Documentation is managed alongside the codebase using a Version Control System (e.g., Git), enabling version tracking, branching, and collaborative workflows.
 
 ### 4.3 Template Feedback and Improvement
 
