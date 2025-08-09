@@ -12,13 +12,17 @@ Authentication is not explicitly handled or documented within the provided code 
 
 ## 3. Endpoint/Function Reference
 
-The primary interaction with external data is managed through repositories that abstract API calls. The `lib/repositories` directory contains specific repository classes for different data interactions.
+The primary interaction with external data is managed through repositories that abstract API calls. The following repositories are identified:
 
 ### `lib/repositories/coin_repository.dart`
 
 This repository is responsible for fetching cryptocurrency data.
 
-### `ExceptionHandler.enhanceException`
+### `ExceptionHandler` Class
+
+The `ExceptionHandler` class is responsible for processing and standardizing API exceptions.
+
+#### `ExceptionHandler.enhanceException`
 
 This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context.
 
@@ -33,19 +37,19 @@ TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class is responsible for processing and standardizing API exceptions. It transforms base API exceptions into domain-specific exceptions with enhanced context.
+The `ExceptionHandler` class is utilized for error handling, transforming base API exceptions into domain-specific exceptions with enhanced context.
 
 ## 6. Rate Limiting
 
-TODO: Document rate limiting policies if applicable.
+TODO: Information on rate limiting is not available in the provided context.
 
 ## 7. SDK/Client Usage Examples
 
-TODO: Provide examples for SDK or client usage.
+TODO: Information on SDK/Client usage examples is not available in the provided context.
 
 ## 8. Testing Instructions
 
-TODO: Provide instructions for testing the API.
+TODO: Information on testing instructions is not available in the provided context.
 
 ## SOURCES
 
@@ -63,4 +67,19 @@ TODO: Provide instructions for testing the API.
 - [S12] docs/04-apis/rest-api/openapi.yaml
 - [S13] docs/04-apis/rate-limiting.md
 - [S14] docs/04-apis/error-handling.md
+- [S15] docs/04-apis/sdk-libraries.md
+- [S3] docs/03-features/[feature-name]/platforms/api.md
+- [S7] docs/04-apis/rest-api/response-examples.md
+- [S14] docs/04-apis/error-handling.md
+- [S12] docs/04-apis/rest-api/openapi.yaml
+- [S4] docs/04-apis/api.md
+- [S11] docs/04-apis/rest-api/endpoints/README.md
+- [S5] docs/04-apis/rest-api/request-examples.md
+- [S10] docs/04-apis/versioning.md
+- [S13] docs/04-apis/rate-limiting.md
+- [S8] docs/04-apis/pagination.md
+- [S1] docs/04-apis/filtering-sorting.md
+- [S2] docs/04-apis/webhooks.md
+- [S9] docs/04-apis/api-overview.md
+- [S6] docs/04-apis/rest-api/status-codes.md
 - [S15] docs/04-apis/sdk-libraries.md
