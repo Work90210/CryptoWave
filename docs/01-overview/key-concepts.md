@@ -26,15 +26,15 @@ TODO: System Concepts section is not sufficiently detailed in the provided conte
 
 ### Architecture Patterns
 
-*   **Component-Based Architecture:** This pattern is evident in the modular structure of the UI, where distinct features and functionalities are encapsulated within reusable components. This approach promotes code reusability, maintainability, and testability. [S6]
+*   **Component-Based Architecture:** A pattern where distinct features and functionalities are encapsulated within reusable components, promoting code reusability, maintainability, and testability. [S6]
 
 ### Technologies
 
 *   **Flutter:** A UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase. [S6]
-*   **Bloc pattern:** Used for state management in the CryptoWave application, ensuring a predictable and maintainable UI. [S6]
-*   **CoinGecko API:** Used by CryptoWave to provide real-time cryptocurrency market data, price charts, and detailed coin information. [S6, S11, S12, S18]
-*   **FL Chart:** Used for displaying interactive price charts. [S13]
-*   **Markdown:** Used for writing all documentation content due to its simplicity, readability, and widespread support across development platforms. [S5]
+*   **Bloc Pattern:** A state management pattern used in Flutter applications to ensure a predictable and maintainable UI. [S6]
+*   **CoinGecko API:** An API used by CryptoWave to provide real-time cryptocurrency market data, price charts, and detailed coin information. [S6, S11, S12, S18]
+*   **FL Chart:** A charting library used for displaying interactive price charts. [S13]
+*   **Markdown:** A lightweight markup language used for writing documentation content due to its simplicity, readability, and widespread support. [S5]
 
 ## 4. Acronyms & Abbreviations
 
@@ -42,11 +42,12 @@ TODO: Acronyms & Abbreviations section is not sufficiently detailed in the provi
 
 ## 5. Concept Relationships
 
-TODO: Concept Relationships section is not sufficiently detailed in the provided context.
+*   The CryptoWave application utilizes the **CoinGecko API** to fetch real-time cryptocurrency market data. [S6, S11, S12, S18]
+*   The application employs the **Bloc pattern** for state management. [S6]
+*   **FL Chart** is used for displaying interactive price charts. [S13]
 
 ## SOURCES
 
-- [S5] docs/00-meta/doc-tools.md
 - [S6] docs/02-architecture/system-architecture.md
 - [S7] docs/01-overview/key-concepts.md
 - [S11] docs/04-apis/sdk-libraries.md
