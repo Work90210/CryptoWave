@@ -20,7 +20,7 @@ TODO: Escalation procedures are not specified in the provided context.
 
 ## 2. Team Contacts
 
-TODO: Team contacts are not specified in the provided context.
+TODO: Team contact information is not specified in the provided context.
 
 ## 3. Issue Categories
 
@@ -28,14 +28,14 @@ TODO: Specific issue categories and their corresponding contact methods or proce
 
 ## 4. Self-Service Resources
 
-*   **Documentation:** The project documentation is available, written in Markdown and managed via a version control system. [S1]
+*   **Documentation:** The project documentation is available, utilizing Markdown rendered through a static site generator or directly within version control platforms. [S1]
 *   **API Documentation:** Comprehensive API documentation is available, detailing functionalities, endpoints, and error handling mechanisms. [S12, S13, S16, S17, S18, S19, S20]
 
 TODO: FAQ and troubleshooting guides, community forums and discussions, and knowledge base articles are not specified in the provided context.
 
 ## 5. Support Procedures
 
-TODO: Procedures for reporting issues effectively, information to include in requests, priority levels and triage process, and follow-up and resolution tracking are not specified in the provided context.
+TODO: Procedures for reporting issues effectively, information to include in requests, priority levels and triage process, and follow-up and resolution tracking are not detailed in the provided context.
 
 ## SOURCES
 
