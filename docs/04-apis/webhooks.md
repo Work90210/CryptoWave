@@ -1,214 +1,59 @@
 # CryptoWave API Documentation
 
-This document provides comprehensive API documentation for the CryptoWave application.
+This document provides a comprehensive reference for the CryptoWave API, detailing its functionalities, endpoints, and error handling mechanisms.
 
 ## 1. API Overview
 
-CryptoWave leverages the CoinGecko API to provide real-time cryptocurrency market data, including prices, trends, and detailed coin information. The application's backend interacts with the CoinGecko API to fetch and process this data.
+CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users. [S15, S16, S17, S18, S19, S20, S21, S22, S23, S24] The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions. [S22]
 
 ## 2. Authentication
 
-This API does not require authentication. All data is publicly accessible through the CoinGecko API.
+Authentication is not explicitly handled or documented within the provided code snippets. [S15, S19, S21, S22] Interactions with the CoinGecko API are assumed to be unauthenticated. [S22] All data is publicly accessible through the CoinGecko API. [S15, S16, S20, S23]
 
 ## 3. Endpoint/Function Reference
 
-The primary interaction with external data is handled through repositories that abstract API calls. The following repository is relevant for API interactions:
+The primary interaction with external data is handled through repositories that abstract API calls. [S16, S18, S20, S22, S23] The `lib/repositories/coin_repository.dart` file is identified as relevant for API interactions. [S16, S18, S22] The `BaseRepository` is also identified as a primary interaction point for API data. [S21]
 
-### `lib/repositories/coin_repository.dart`
+### `ExceptionHandler.enhanceException`
 
-This repository is responsible for fetching cryptocurrency market data.
-
-#### `CoinRepository.fetchCoinMarketData`
-
-Fetches market data for cryptocurrencies.
+This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S24]
 
 **Parameters:**
 
-*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
-*   `order` (String): The parameter to order the results by (e.g., 'market_cap_desc'). Defaults to 'market_cap_desc'.
-*   `perPage` (int): The number of results to return per page. Defaults to 10.
-*   `page` (int): The page number of the results to retrieve. Defaults to 1.
-
-**Returns:**
-
-A `Future<NetworkResponseModel<CoinModel>>` containing the market data for the requested cryptocurrencies.
-
-#### `lib/repositories/coin_details_repository.dart`
-
-This repository is responsible for fetching detailed information and historical data for individual cryptocurrencies.
-
-##### `CoinDetailsRepository.fetchCoinChartData`
-
-Fetches historical chart data for a specific coin.
-
-**Parameters:**
-
-*   `id` (String): The unique identifier of the cryptocurrency (e.g., 'bitcoin').
-*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
-*   `days` (int): The number of days for which to retrieve data. Defaults to 7.
-
-**Returns:**
-
-A `Future<NetworkResponseModel<CryptoChartDataModel>>` containing the historical chart data for the specified coin.
+*   `error`: The original exception object. [S24]
+*   `contextMessage`: A string. [S24]
 
 ## 4. Request/Response Examples
 
-### Fetching Coin Market Data
-
-**Request:**
-
-```dart
-final coinRepository = CoinRepository();
-final response = await coinRepository.fetchCoinMarketData(
-  vsCurrency: 'usd',
-  perPage: 50,
-  page: 1,
-);
-```
-
-**Successful Response (Conceptual):**
-
-```json
-{
-  "data": [
-    {
-      "id": "bitcoin",
-      "symbol": "btc",
-      "name": "Bitcoin",
-      "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-      "current_price": 60000.50,
-      "market_cap": 1200000000000,
-      "price_change_percentage_24h": 2.5
-    },
-    {
-      "id": "ethereum",
-      "symbol": "eth",
-      "name": "Ethereum",
-      "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348590",
-      "current_price": 4000.75,
-      "market_cap": 480000000000,
-      "price_change_percentage_24h": 1.8
-    }
-    // ... more coins
-  ]
-}
-```
-
-### Fetching Coin Chart Data
-
-**Request:**
-
-```dart
-final coinDetailsRepository = CoinDetailsRepository();
-final response = await coinDetailsRepository.fetchCoinChartData(
-  id: 'bitcoin',
-  vsCurrency: 'usd',
-  days: 30,
-);
-```
-
-**Successful Response (Conceptual):**
-
-```json
-{
-  "prices": [
-    [1678886400000, 60000.50],
-    [1678972800000, 60500.75],
-    // ... more data points
-  ],
-  "market_caps": [
-    [1678886400000, 1200000000000],
-    [1678972800000, 1210000000000],
-    // ... more data points
-  ],
-  "total_volumes": [
-    [1678886400000, 50000000000],
-    [1678972800000, 51000000000],
-    // ... more data points
-  ]
-}
-```
+TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The application utilizes a custom exception handling mechanism to manage API-related errors. The `ExceptionHandler` class in `lib/network/exception_handler.dart` is responsible for transforming base API exceptions into more context-specific ones.
-
-Common exceptions include:
-
-*   `ConnectivityException`: Indicates a lack of internet connection.
-*   `ApiTimeoutException`: Signals that a request to the API timed out.
-*   `RateLimitException`: Occurs when the API rate limits are exceeded.
-
-The `enhanceException` method within `ExceptionHandler` provides a way to add context to these exceptions based on the operation being performed.
+The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S13, S24]
 
 ## 6. Rate Limiting
 
-The CoinGecko API enforces rate limits. While this documentation does not specify the exact limits, developers should be mindful of them to avoid service disruptions. Implementations should include strategies for handling rate limiting, such as exponential backoff or caching, to ensure stable operation.
+TODO: Document rate limiting policies if applicable.
 
 ## 7. SDK/Client Usage Examples
 
-The application's data fetching logic is encapsulated within repository classes. These classes abstract the underlying HTTP client and data parsing, providing a clean interface for data retrieval.
-
-### Example: Fetching Top 10 Cryptocurrencies by Market Cap
-
-```dart
-import 'package:cryptowave/repositories/coin_repository.dart';
-import 'package:cryptowave/network/network_response.dart'; // Assuming NetworkResponseModel is defined here
-
-Future<void> displayTopCryptocurrencies() async {
-  final coinRepository = CoinRepository();
-  try {
-    final NetworkResponseModel<CoinModel> response = await coinRepository.fetchCoinMarketData(
-      vsCurrency: 'usd',
-      order: 'market_cap_desc',
-      perPage: 10,
-      page: 1,
-    );
-
-    if (response.data != null) {
-      print('Top 10 Cryptocurrencies:');
-      for (var coin in response.data!) {
-        print('- ${coin.name} (${coin.symbol}): \$${coin.currentPrice}');
-      }
-    } else {
-      print('Failed to fetch coin data.');
-    }
-  } catch (e) {
-    print('An error occurred: $e');
-  }
-}
-```
+TODO: Provide examples for SDK or client usage.
 
 ## 8. Testing Instructions
 
-To test the API interactions:
+TODO: Provide instructions for testing API interactions.
 
-1.  **Ensure Dependencies:** Verify that all necessary Flutter and Dart dependencies are installed.
-2.  **Network Connectivity:** Ensure the device or emulator has a stable internet connection.
-3.  **Mocking (for unit/widget tests):** For unit and widget testing, mock the `HttpClient` and repository methods to isolate the logic being tested. This allows for controlled testing of data fetching and error handling without making actual network requests.
-4.  **Integration Testing:** For integration tests, ensure the application can successfully connect to the CoinGecko API endpoints. Use tools like `http_client_testing` or similar packages to intercept and assert network requests and responses.
+## SOURCES
 
-**Example of mocking a repository call (conceptual):**
-
-```dart
-// Assuming you are using a mocking framework like Mockito
-
-// Mock the CoinRepository
-final mockCoinRepository = MockCoinRepository();
-
-// Stub the fetchCoinMarketData method to return a mock response
-when(mockCoinRepository.fetchCoinMarketData(
-  vsCurrency: 'usd',
-  perPage: 10,
-  page: 1,
-)).thenAnswer((_) async => NetworkResponseModel<CoinModel>(
-  data: [
-    CoinModel(id: 'bitcoin', symbol: 'btc', name: 'Bitcoin', imageUrl: '', currentPrice: 60000.50, priceChangePercentage24h: 2.5),
-    // ... other mock coins
-  ],
-  error: null,
-));
-
-// Use the mocked repository in your widget/bloc test
-// ...
-```
+- [S1] README.md
+- [S13] docs/03-features/[feature-name]/platforms/api.md
+- [S15] docs/04-apis/api-overview.md
+- [S16] docs/04-apis/api.md
+- [S17] docs/04-apis/error-handling.md
+- [S18] docs/04-apis/filtering-sorting.md
+- [S19] docs/04-apis/pagination.md
+- [S20] docs/04-apis/rate-limiting.md
+- [S21] docs/04-apis/rest-api/endpoints/README.md
+- [S22] docs/04-apis/rest-api/openapi.yaml
+- [S23] docs/04-apis/rest-api/request-examples.md
+- [S24] docs/04-apis/rest-api/response-examples.md
