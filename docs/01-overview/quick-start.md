@@ -32,14 +32,14 @@ This guide provides a streamlined process for setting up and running the system.
 ### 3. First Success
 
 *   **Simple Working Example:**
-    *   Upon successful launch, the application will display its main interface, which is designed to fetch and present real-time cryptocurrency data.
+    *   Upon successful launch, the application will display its main interface, which is designed to fetch and display real-time cryptocurrency data.
 *   **Expected Output/Results:**
-    *   The application should load and display cryptocurrency information without errors.
+    *   The application should load and present cryptocurrency market information.
 *   **Common Success Indicators:**
     *   The application starts without crashing.
     *   Data is visible on the screen.
 *   **Basic Functionality Demonstration:**
-    *   The core functionality involves fetching data from the CoinGecko API via `lib/repositories/coin_repository.dart` to display cryptocurrency market data.
+    *   The core functionality involves fetching data from the CoinGecko API via `lib/repositories/coin_repository.dart` to display cryptocurrency prices and charts.
 
 ### 4. Immediate Next Steps
 
@@ -53,7 +53,7 @@ This guide provides a streamlined process for setting up and running the system.
     *   Customize the launch screen background by modifying `android/app/src/main/res/drawable/launch_background.xml` and `android/app/src/main/res/drawable-v21/launch_background.xml`.
 *   **Troubleshooting Quick Fixes:**
     *   Ensure all prerequisites are met.
-    *   Clean the build cache with `flutter clean` and then run `flutter run` again.
+    *   Clean the build cache with `flutter clean` and then run `flutter pub get` followed by `flutter run`.
 *   **Links to Full Documentation:**
     *   API Documentation: `docs/04-apis/sdk-libraries.md`, `docs/04-apis/rest-api/request-examples.md`, `docs/04-apis/rest-api/status-codes.md`, `docs/04-apis/versioning.md`.
     *   Key Concepts: `docs/01-overview/key-concepts.md`.
@@ -62,15 +62,16 @@ This guide provides a streamlined process for setting up and running the system.
 ### 5. Common Issues
 
 *   **Typical Setup Problems:**
-    *   Missing or incorrectly configured SDKs (Flutter, Android).
-    *   Network issues preventing dependency downloads.
+    *   Missing SDKs or environment variables.
+    *   Dependency conflicts.
 *   **Quick Resolution Steps:**
-    *   Verify SDK installations and environment variables.
-    *   Check internet connectivity and proxy settings.
+    *   Verify SDK installations and PATH configurations.
+    *   Run `flutter doctor` to diagnose environment issues.
+    *   Delete the `pubspec.lock` file and run `flutter pub get`.
 *   **When to Seek Help:**
-    *   If persistent issues arise after checking common problems, consult project maintainers or relevant community forums.
+    *   If persistent issues arise after following troubleshooting steps.
 *   **Alternative Approaches:**
-    *   TODO: Provide alternative approaches for common issues if documented.
+    *   TODO: Information on alternative setup approaches is not available in the provided context.
 
 ## SOURCES
 
@@ -85,6 +86,7 @@ This guide provides a streamlined process for setting up and running the system.
 *   [S10] docs/00-meta/doc-accessibility.md
 *   [S11] android/app/src/debug/AndroidManifest.xml
 *   [S12] android/app/src/profile/AndroidManifest.xml
+*   [S13] docs/01-overview/stakeholders.md
 *   [S14] docs/04-apis/sdk-libraries.md
 *   [S15] docs/01-overview/key-concepts.md
 *   [S16] docs/00-meta/doc-tools.md
