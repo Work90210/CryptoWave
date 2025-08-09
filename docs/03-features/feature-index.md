@@ -1,118 +1,78 @@
 # CryptoWave Features Documentation
 
-This document details the implemented features of the CryptoWave application.
+This document outlines the implemented features of the CryptoWave application, detailing their capabilities, dependencies, and integration points.
 
 ## 1. Core Features Overview
 
-CryptoWave is a mobile application designed for cryptocurrency enthusiasts and traders. It provides real-time market data, portfolio tracking, and news aggregation related to various cryptocurrencies. The application focuses on delivering a user-friendly interface for monitoring digital asset performance and staying updated with market trends.
+CryptoWave is a mobile application designed to provide users with real-time cryptocurrency market data and related functionalities. Its core features revolve around displaying cryptocurrency prices, market trends, and potentially facilitating user interaction with this data. The application employs a modular, feature-based architecture, allowing for organized development and maintainability.
 
 ## 2. Feature Categories and Groups
 
-The features of CryptoWave are organized into the following categories:
+Based on the project structure and common mobile application patterns, the features can be broadly categorized as follows:
 
-*   **Market Data:** Real-time price feeds, historical charts, and market capitalization data for cryptocurrencies.
-*   **Portfolio Management:** Tools for users to track their cryptocurrency holdings, including purchase price, quantity, and current value.
-*   **News and Updates:** Aggregation of cryptocurrency-related news from various reputable sources.
-*   **User Interface:** The visual presentation and interaction elements of the application.
-*   **Platform Integration:** Code specific to Android and iOS platforms.
+*   **Market Data Display:** Features related to fetching, processing, and presenting cryptocurrency market information.
+*   **User Interface & Navigation:** Features concerning the application's visual presentation, user interaction, and navigation flow.
+*   **Configuration & Settings:** Features that allow users to customize their application experience.
+*   **Error Handling & Feedback:** Features that manage and communicate errors or application states to the user.
 
 ## 3. Feature Descriptions and Capabilities
 
-### 3.1. Market Data
+While a deep dive into every specific implementation detail requires a more granular code analysis, the following features are inferable from the provided file structure and common mobile development practices:
 
-*   **Real-time Price Tracking:**
-    *   **Description:** Displays the current trading price of various cryptocurrencies.
-    *   **Capabilities:** Fetches and updates cryptocurrency prices in real-time.
-    *   **Implementation:** Likely utilizes external APIs for market data. The presence of `analysis_options.yaml` and `devtools_options.yaml` suggests a focus on code quality and analysis, which would be crucial for reliable data fetching.
-*   **Historical Charts:**
-    *   **Description:** Provides visual representations of cryptocurrency price movements over different timeframes.
-    *   **Capabilities:** Renders candlestick or line charts for historical price data.
-    *   **Implementation:** Requires data fetching and charting libraries.
-*   **Market Capitalization Display:**
-    *   **Description:** Shows the total market value of cryptocurrencies.
-    *   **Capabilities:** Displays market cap alongside price and other relevant metrics.
-    *   **Implementation:** Data is sourced from market data APIs.
-
-### 3.2. Portfolio Management
-
-*   **Asset Holdings Tracking:**
-    *   **Description:** Allows users to add and manage their cryptocurrency holdings.
-    *   **Capabilities:** Records cryptocurrency name, quantity, and purchase price. Calculates the current value of holdings based on real-time prices.
-    *   **Implementation:** Data persistence mechanisms are required for storing user portfolio information.
-*   **Profit/Loss Calculation:**
-    *   **Description:** Calculates the profit or loss on individual assets and the overall portfolio.
-    *   **Capabilities:** Compares current market value against the total cost basis of holdings.
-    *   **Implementation:** Relies on accurate real-time price data and user-inputted purchase details.
-
-### 3.3. News and Updates
-
-*   **Cryptocurrency News Aggregation:**
-    *   **Description:** Gathers and displays news articles related to the cryptocurrency market.
-    *   **Capabilities:** Fetches news from various online sources.
-    *   **Implementation:** Likely involves API integrations with news providers or web scraping techniques.
-
-### 3.4. User Interface
-
-*   **Intuitive Navigation:**
-    *   **Description:** Provides a clear and easy-to-use interface for accessing different features.
-    *   **Capabilities:** Standard mobile UI patterns for navigation.
-    *   **Implementation:** Defined by the UI components and navigation structure within the application.
-*   **Theming (Light/Dark Mode):**
-    *   **Description:** Supports different visual themes, including a dark mode.
-    *   **Capabilities:** Adapts the application's color scheme based on user preference or system settings.
-    *   **Implementation:** The `android/app/src/main/res/values-night/styles.xml` and `android/app/src/main/res/values/styles.xml` files indicate distinct styling for different themes.
-
-### 3.5. Platform Integration
-
-*   **Android Application:**
-    *   **Description:** The native implementation of CryptoWave for the Android operating system.
-    *   **Capabilities:** Leverages Android SDK and platform-specific features.
-    *   **Implementation:** Code resides within the `android/` directory, including `MainActivity.kt` for the main activity and `AndroidManifest.xml` for application configuration. `gradle.properties` and `settings.gradle.kts` manage build configurations.
-*   **iOS Application:**
-    *   **Description:** The native implementation of CryptoWave for the iOS operating system.
-    *   **Capabilities:** Leverages iOS SDK and platform-specific features.
-    *   **Implementation:** Code resides within the `ios/` directory, with `AppDelegate.swift` handling application lifecycle events. Asset management for icons and launch images is present in `ios/Runner/Assets.xcassets/`.
+*   **Cryptocurrency Listing:**
+    *   **Description:** Displays a list of various cryptocurrencies.
+    *   **Capabilities:** Likely fetches and presents cryptocurrency names, symbols, current prices, and potentially price changes (24h, 7d).
+*   **Real-time Price Updates:**
+    *   **Description:** Provides up-to-date pricing information for cryptocurrencies.
+    *   **Capabilities:** Implies an integration with a market data API to receive and display live price feeds.
+*   **Basic Navigation:**
+    *   **Description:** Allows users to move between different sections of the application.
+    *   **Capabilities:** Suggests the presence of navigation components (e.g., bottom navigation, app bars) to access various features.
+*   **Error Display:**
+    *   **Description:** Informs the user when an error occurs.
+    *   **Capabilities:** The presence of `assets/lottie/error.json` suggests a visual component for displaying error states, likely integrated into a UI element.
+*   **Theming (Dark Mode):**
+    *   **Description:** Supports a dark mode interface.
+    *   **Capabilities:** Indicated by `android/app/src/main/res/values-night/styles.xml`, this feature allows users to switch to a darker color scheme for the UI.
+*   **Application Launch Screen:**
+    *   **Description:** Displays a background during application startup.
+    *   **Capabilities:** The presence of `launch_background.xml` files in `drawable-v21` and `drawable` directories indicates the implementation of a splash screen or launch background.
 
 ## 4. Feature Dependencies and Relationships
 
-*   **Market Data** is a foundational dependency for **Portfolio Management**, as accurate real-time prices are required for calculating portfolio value and profit/loss.
-*   **News and Updates** is an independent feature that aggregates external information.
-*   **User Interface** elements are used across all features to present data and facilitate user interaction.
-*   **Platform Integration** (Android and iOS) dictates how the core features are delivered to users on their respective devices.
+*   **Market Data Display** features (e.g., Cryptocurrency Listing, Real-time Price Updates) are dependent on external APIs for data.
+*   **User Interface & Navigation** features are foundational and support the presentation and accessibility of all other features.
+*   **Error Display** is a cross-cutting concern that can be triggered by failures in any feature that interacts with external services or performs complex operations.
+*   **Theming** is a UI-level feature that affects the visual presentation of all other UI-related features.
 
 ## 5. Feature Configuration Options
 
-Based on the provided file structure, specific configuration options for features are not explicitly detailed. However, typical configurations would include:
-
-*   **API Endpoints:** URLs for fetching market data and news.
-*   **Refresh Intervals:** How frequently market data and news are updated.
-*   **Currency Display:** Preferred fiat currency for displaying values.
-*   **Theme Selection:** User choice between light and dark modes.
-
-These configurations are likely managed within the application's code or through configuration files not explicitly listed in the provided structure.
+*   **`android/gradle.properties` and `android/gradle/wrapper/gradle-wrapper.properties`:** These files likely contain build-time configurations, such as Gradle version, SDK versions, and potentially API keys or endpoint URLs for data fetching. Specific configuration options are not detailed without further analysis of their content.
+*   **`analysis_options.yaml` and `devtools_options.yaml`:** These files are related to code analysis and linting, not user-facing application configuration.
 
 ## 6. Feature Flags and Toggles
 
-No explicit feature flags or toggles are identifiable from the provided file list. The application appears to present all core features as consistently available.
+No explicit feature flags or toggles are identifiable from the provided file structure. This suggests that features are either always enabled or managed through build configurations rather than runtime toggles.
 
 ## 7. Feature Roadmap and Future Plans
 
-The provided file structure does not contain documentation for a feature roadmap or future plans.
+The provided file structure does not contain information regarding a feature roadmap or future plans.
 
 ## 8. Feature Usage Examples
 
-*   **Viewing Real-time Prices:** Upon launching the application, the user sees a list of cryptocurrencies with their current prices and percentage changes.
-*   **Tracking a Portfolio:** A user navigates to the portfolio section, adds "Bitcoin" with a purchase price of $50,000 and a quantity of 0.5. The application then displays the current value of this holding and any unrealized profit or loss.
-*   **Reading News:** The user accesses the news section to view recent articles about market trends or specific cryptocurrency developments.
+*   **Viewing Cryptocurrency Prices:** A user opens the app, sees a list of cryptocurrencies with their current prices, and can observe price changes over time.
+*   **Switching to Dark Mode:** A user navigates to settings (if implemented) and selects a dark theme option, causing the application's UI to adopt a darker color palette.
+*   **Encountering an Error:** If the application fails to fetch market data, a visual indicator (potentially using `error.json`) is displayed to the user, informing them of the issue.
 
 ## 9. Feature Limitations and Constraints
 
-*   **Data Source Dependency:** The accuracy and availability of market data and news are dependent on external API providers.
-*   **Platform Specificity:** While the core logic is likely shared, platform-specific implementations (Android/iOS) may have minor differences in UI rendering or performance.
-*   **No Trading Functionality:** The current features focus on data display and tracking, not on executing trades.
+*   **Data Source Dependency:** The accuracy and availability of market data are entirely dependent on the external APIs integrated by the application.
+*   **Platform Specificity:** The presence of `android/` directory indicates an Android-specific implementation. Features may differ or not be present on other platforms.
+*   **Limited Functionality:** Based on the provided files, the application appears to focus on data display rather than transactional features (e.g., trading, portfolio management).
 
 ## 10. Integration Points with Other Features
 
-*   **Market Data** is integrated into the **Portfolio Management** feature to provide real-time valuation of assets.
-*   The **User Interface** is the primary integration point for all features, presenting data and user interactions consistently across the application.
-*   Platform-specific code (`android/`, `ios/`) integrates the core application logic with the underlying operating system's capabilities.
+*   **Market Data API Integration:** The core market data features (listing, real-time updates) integrate with external APIs. The results of these integrations are then consumed by the UI components for display.
+*   **UI Component Integration:** Various UI components (e.g., lists, text views, image views) are integrated to present the fetched market data and user interface elements.
+*   **Error Handling Integration:** The error handling mechanism (potentially using `error.json`) is integrated across features that might encounter operational failures, providing a consistent user feedback loop.
+*   **Theming Integration:** The dark mode feature integrates with the UI rendering system to apply theme-specific styles to all visual elements.
