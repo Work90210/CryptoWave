@@ -1,88 +1,103 @@
-## System Scope
+## System Scope and Boundaries
 
-CryptoWave is a Flutter application designed for tracking cryptocurrency prices, trends, and market data.
+This document defines the scope and boundaries of the CryptoWave application.
 
-### Core Functionalities
-*   Real-time cryptocurrency price tracking.
-*   Display of detailed coin information and historical data.
-*   Interactive price charts using FL Chart.
+### 1. System Scope
 
-### Primary Use Cases
-*   Monitoring current prices of a wide range of cryptocurrencies.
-*   Accessing comprehensive data for each cryptocurrency, including historical performance and market metrics.
-*   Visualizing price trends and market data through interactive charts.
+The CryptoWave application is designed to provide users with real-time cryptocurrency market data and related functionalities.
 
-### Data Types and Domains
-*   Cryptocurrency prices.
-*   Cryptocurrency trends.
-*   Market data for cryptocurrencies.
+*   **Core Functionalities:**
+    *   Real-time tracking of cryptocurrency prices.
+    *   Display of cryptocurrency market data, including market capitalization, trading volume, and price changes over 24 hours.
+    *   Presentation of detailed coin information, including historical data.
+    *   Interactive price charts for cryptocurrencies.
+    *   A clean and modern user interface.
 
-### Geographic and Temporal Scope
-*   The application provides real-time data, implying a global scope for market data.
-*   Historical data is also supported.
+*   **Primary Use Cases Supported:**
+    *   Users can view a list of cryptocurrencies with their current prices and market data.
+    *   Users can access detailed information for each cryptocurrency.
+    *   Users can visualize price trends through interactive charts.
 
-## System Boundaries
+*   **Data Types and Domains Handled:**
+    *   Cryptocurrency prices.
+    *   Market capitalization.
+    *   Trading volume.
+    *   24-hour price changes.
+    *   Historical cryptocurrency data.
 
-### Inclusion Criteria
-*   Functionalities related to fetching and displaying cryptocurrency market data.
-*   Features for tracking prices and trends.
-*   Integration with the CoinGecko API for data retrieval.
+*   **Geographic and Temporal Scope:**
+    *   The application provides real-time data, implying a global and current temporal scope for market information.
 
-### Explicit Exclusion Criteria
-*   No explicit exclusion criteria are detailed in the provided context.
+### 2. System Boundaries
 
-### Interface Points with External Systems
-*   **CoinGecko API:** The application uses the CoinGecko API to fetch cryptocurrency information.
+*   **Inclusion Criteria:**
+    *   Functionalities directly related to fetching, processing, and displaying cryptocurrency market data.
+    *   User interface elements that present this data.
+    *   State management for displaying cryptocurrency information.
 
-### Responsibility Boundaries
-*   The application is responsible for presenting cryptocurrency market data to the user.
+*   **Exclusion Criteria:**
+    *   Direct trading or transaction capabilities within the application.
+    *   User account management or authentication features.
+    *   Cryptocurrency wallet functionalities.
 
-## Out of Scope
+*   **Interface Points with External Systems:**
+    *   The application interfaces with the CoinGecko API for fetching cryptocurrency data.
 
-### Functionalities Explicitly Not Included
-*   No functionalities are explicitly stated as out of scope in the provided context.
+*   **Responsibility Boundaries:**
+    *   The application is responsible for presenting data obtained from the CoinGecko API in a user-friendly format.
 
-### Related Systems and Their Boundaries
-*   No related systems or their boundaries are detailed in the provided context.
+### 3. Out of Scope
 
-### Future Scope Considerations
-*   No future scope considerations are detailed in the provided context.
+*   **Functionalities Explicitly Not Included:**
+    *   Direct cryptocurrency trading.
+    *   User authentication and profile management.
+    *   Wallet functionalities.
 
-### Alternative Solutions for Excluded Needs
-*   No alternative solutions for excluded needs are detailed in the provided context.
+*   **Related Systems and Their Boundaries:**
+    *   The CoinGecko API is an external system and its internal workings are outside the scope of this application's documentation.
 
-## Dependencies & Integrations
+*   **Future Scope Considerations:**
+    *   TODO: Information on future scope considerations is not available in the provided context.
 
-### Required External Systems
-*   **CoinGecko API:** Essential for obtaining cryptocurrency market data.
+*   **Alternative Solutions for Excluded Needs:**
+    *   TODO: Information on alternative solutions for excluded needs is not available in the provided context.
 
-### Optional Integrations
-*   No optional integrations are detailed in the provided context.
+### 4. Dependencies & Integrations
 
-### Data Exchange Boundaries
-*   Data is exchanged with the CoinGecko API to retrieve cryptocurrency prices, trends, and market data.
+*   **Required External Systems:**
+    *   CoinGecko API: Used for fetching real-time cryptocurrency market data.
 
-### Service Level Dependencies
-*   The availability and performance of the CoinGecko API directly impact the application's ability to provide real-time data.
+*   **Optional Integrations:**
+    *   TODO: Information on optional integrations is not available in the provided context.
 
-## Constraints & Limitations
+*   **Data Exchange Boundaries:**
+    *   The application exchanges cryptocurrency market data with the CoinGecko API.
 
-### Technical Constraints
-*   The application is built using Flutter.
-*   State management is handled using the Bloc Pattern (`flutter_bloc`).
-*   Code generation for immutable models is performed using Freezed.
-*   The `GetIt` package is utilized.
+*   **Service Level Dependencies:**
+    *   The application's ability to provide real-time data is dependent on the availability and performance of the CoinGecko API.
 
-### Business Rule Limitations
-*   No specific business rule limitations are detailed in the provided context.
+### 5. Constraints & Limitations
 
-### Performance Boundaries
-*   No specific performance boundaries are detailed in the provided context.
+*   **Technical Constraints:**
+    *   The application is built using Flutter.
+    *   The Bloc pattern is used for state management.
 
-### Compliance Boundaries
-*   No specific compliance boundaries are detailed in the provided context.
+*   **Business Rule Limitations:**
+    *   TODO: Information on business rule limitations is not available in the provided context.
+
+*   **Performance Boundaries:**
+    *   TODO: Information on performance boundaries is not available in the provided context.
+
+*   **Compliance Boundaries:**
+    *   Documentation must adhere to WCAG 2.1 Level AA standards.
 
 ## SOURCES
 
-*   [S1] README.md
-*   [S24] docs/01-overview/README.md
+- [S1] docs/01-overview/system-boundaries.md
+- [S5] docs/02-architecture/system-architecture.md
+- [S8] docs/00-meta/doc-accessibility.md
+- [S12] docs/01-overview/README.md
+- [S17] docs/04-apis/rest-api/status-codes.md
+- [S18] docs/04-apis/rest-api/endpoints/README.md
+- [S19] README.md
+- [S20] docs/04-apis/pagination.md
