@@ -4,88 +4,56 @@ This document provides a comprehensive reference for the CryptoWave API, detaili
 
 ## 1. API Overview
 
-CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users.
+CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality revolves around fetching and displaying this data to users. [S15, S16, S17, S18, S19, S20, S21, S22, S23, S24] The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions. [S22]
 
 ## 2. Authentication
 
-This API does not require authentication. All data is publicly accessible through the CoinGecko API.
+Authentication is not explicitly handled or documented within the provided code snippets. [S15, S19, S21, S22] Interactions with the CoinGecko API are assumed to be unauthenticated. [S22] All data is publicly accessible through the CoinGecko API. [S15, S16, S20, S23]
 
 ## 3. Endpoint/Function Reference
 
-The primary interaction with external data is managed through repositories that abstract API calls. The following repository is identified:
+The primary interaction with external data is handled through repositories that abstract API calls. [S16, S18, S20, S22, S23] The `lib/repositories/coin_repository.dart` file is identified as relevant for API interactions. [S16, S18, S22] The `BaseRepository` is also identified as a primary interaction point for API data. [S21]
 
-### `lib/repositories/coin_repository.dart`
+### `ExceptionHandler.enhanceException`
 
-This repository is responsible for fetching cryptocurrency market data.
-
-#### `CoinRepository.fetchCoinMarketData`
-
-This function retrieves market data for cryptocurrencies.
+This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S24]
 
 **Parameters:**
 
-*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
-*   `order` (String): The parameter to order the results by (e.g., 'market_cap_desc'). Defaults to 'market_cap_desc'.
-*   `perPage` (int): The number of results to return per page. Defaults to 10.
-*   `page` (int): The page number for pagination. Defaults to 1.
-
-**Returns:**
-
-*   A `Future<NetworkResponseModel<CoinModel>>` containing the fetched coin market data.
-
-#### `CoinRepository.fetchCoinDetails`
-
-This function retrieves detailed information for a specific cryptocurrency.
-
-**Parameters:**
-
-*   `id` (String): The unique identifier of the cryptocurrency (e.g., 'bitcoin').
-*   `vsCurrency` (String): The currency to compare against (e.g., 'usd'). Defaults to 'usd'.
-*   `days` (int): The number of days for which historical data should be fetched. Defaults to 7.
-
-**Returns:**
-
-*   A `Future<NetworkResponseModel<CryptoChartDataModel>>` containing the detailed coin data and chart information.
-
-### `lib/network/exception_handler.dart`
-
-This utility class provides methods for handling API exceptions.
-
-#### `ExceptionHandler.enhanceException`
-
-This static method transforms a base `ApiException` into a more domain-specific exception with additional context.
-
-**Parameters:**
-
-*   `error` (Object): The original exception object.
-*   `contextMessage` (String): A message providing context about the operation being performed.
-
-**Returns:**
-
-*   An `ApiException` object with an enhanced error message.
-
-**Supported Exception Types:**
-
-*   `ConnectivityException`: Indicates a lack of internet connection.
-*   `ApiTimeoutException`: Indicates that a request timed out.
-*   `RateLimitException`: Indicates that the API rate limit has been exceeded.
+*   `error`: The original exception object. [S24]
+*   `contextMessage`: A string. [S24]
 
 ## 4. Request/Response Examples
 
-Specific request and response examples are not provided in the current context. However, the structure of the data is implied by the repository method return types (`CoinModel`, `CryptoChartDataModel`).
+TODO: Provide examples for API requests and responses.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class is utilized to manage and enhance API-related exceptions. It transforms generic API errors into more specific exceptions, such as `ConnectivityException` or `ApiTimeoutException`, providing clearer context for error handling within the application.
+The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context. [S13, S24]
 
 ## 6. Rate Limiting
 
-Information regarding rate limiting is not explicitly detailed in the provided context. However, the presence of `RateLimitException` in the `ExceptionHandler` suggests that rate limiting is a consideration for the underlying CoinGecko API.
+TODO: Document rate limiting policies if applicable.
 
 ## 7. SDK/Client Usage Examples
 
-The application utilizes a custom `HttpClient` instance for making network requests. The `BaseRepository` class provides common methods for performing HTTP operations, such as `delete`, which are then extended by specific repositories like `CoinRepository` and `CoinDetailsRepository`.
+TODO: Provide examples for SDK or client usage.
 
 ## 8. Testing Instructions
 
-Testing instructions are not provided in the current context.
+TODO: Provide instructions for testing API interactions.
+
+## SOURCES
+
+- [S1] README.md
+- [S13] docs/03-features/[feature-name]/platforms/api.md
+- [S15] docs/04-apis/api-overview.md
+- [S16] docs/04-apis/api.md
+- [S17] docs/04-apis/error-handling.md
+- [S18] docs/04-apis/filtering-sorting.md
+- [S19] docs/04-apis/pagination.md
+- [S20] docs/04-apis/rate-limiting.md
+- [S21] docs/04-apis/rest-api/endpoints/README.md
+- [S22] docs/04-apis/rest-api/openapi.yaml
+- [S23] docs/04-apis/rest-api/request-examples.md
+- [S24] docs/04-apis/rest-api/response-examples.md
