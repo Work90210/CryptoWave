@@ -2,144 +2,158 @@
 title: ARCHITECTURE.md
 type: system-architecture
 category: 02-architecture
-last_updated: 2025-08-09T14:11:37.868Z
+last_updated: 2025-08-14T10:32:43.037Z
 ---
-# CryptoWave System Architecture Documentation
+# CryptoWave Architecture Documentation
+
+## Table of Contents
+
+1.  [System Overview](#system-overview)
+2.  [Architecture Patterns Used](#architecture-patterns-used)
+3.  [Component Breakdown](#component-breakdown)
+4.  [Data Flow and Dependencies](#data-flow-and-dependencies)
+5.  [Design Decisions and Rationale](#design-decisions-and-rationale)
+6.  [Scalability Considerations](#scalability-considerations)
+7.  [Security Architecture](#security-architecture)
+8.  [Performance Considerations](#performance-considerations)
+9.  [Deployment Architecture](#deployment-architecture)
+10. [Future Architecture Improvements](#future-architecture-improvements)
+11. [Technology Stack Rationale](#technology-stack-rationale)
+12. [Integration Points](#integration-points)
+13. [Sources](#sources)
 
 ## 1. System Overview
 
-CryptoWave is a Flutter application designed for real-time cryptocurrency price tracking and market data analysis. It leverages the CoinGecko API to provide users with up-to-date information on various cryptocurrencies, including price charts, historical data, and detailed coin metrics. The application employs the Bloc pattern for state management, ensuring a predictable and maintainable UI. [S18]
+CryptoWave is a project developed using a variety of languages including Markdown, YAML, XML, Kotlin, Properties, JSON, Swift, and Dart. The project structure indicates a multi-platform or multi-technology approach, with distinct directories for `android` and `ios`. The presence of `pubspec.yaml` suggests a Flutter or Dart-based component, while `MainActivity.kt` points to native Android development. The `assets` directory contains JSON files, likely for UI elements or data. The `docs` directory houses extensive documentation, covering aspects like accessibility, maintenance, metrics, review processes, standards, templates, tools, and versioning.
 
 ## 2. Architecture Patterns Used
 
-The CryptoWave application adheres to a **Component-Based Architecture**. This pattern is evident in the modular structure of the UI, where distinct features and functionalities are encapsulated within reusable components. This approach promotes code reusability, maintainability, and testability. [S18]
+The codebase exhibits the following architectural patterns:
+
+*   **Modular Architecture:** The project is organized into feature-based modules, with identified components such as `04-apis`, `rest-api`, and `common`. This modularity promotes separation of concerns and maintainability.
+*   **API Layer:** The presence of `04-apis` and `rest-api` suggests an API layer, likely implementing RESTful or GraphQL endpoints for data communication.
+*   **Component-Based Architecture:** The modular structure implies the use of reusable UI components, a hallmark of component-based architectures.
+*   **Database Layer:** The mention of a "Database Layer" in the detected patterns indicates data persistence and management are integral to the system.
+*   **Authentication System:** The detection of an "Authentication System" points to user authentication and authorization mechanisms being in place.
 
 ## 3. Component Breakdown
 
-The project is organized into several key directories, each serving a specific purpose:
+The project is structured into several key directories and files, each serving a specific purpose:
 
-*   **`android/`**: Contains Android-specific project files and configurations.
-    *   `android/app/src/debug/AndroidManifest.xml`
-    *   `android/app/src/main/AndroidManifest.xml`
-    *   `android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt`: The main activity for the Android application. [S16]
-    *   `android/app/src/main/res/drawable-v21/launch_background.xml`
-    *   `android/app/src/main/res/drawable/launch_background.xml`
-    *   `android/app/src/main/res/values-night/styles.xml`
-    *   `android/app/src/main/res/values/styles.xml`
-    *   `android/app/src/profile/AndroidManifest.xml`
-    *   `android/gradle.properties`
-    *   `android/gradle/wrapper/gradle-wrapper.properties`
-    *   `android/settings.gradle.kts`
-*   **`assets/`**: Stores static assets used by the application.
-    *   `assets/lottie/error.json`: A Lottie animation file for error states. [S16]
+*   **`android/`**: Contains native Android project files.
+    *   `android/app/src/debug/AndroidManifest.xml`: Debug-specific Android manifest.
+    *   `android/app/src/main/AndroidManifest.xml`: Main Android manifest file.
+    *   `android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt`: The main activity for the Android application, written in Kotlin.
+    *   `android/app/src/main/res/drawable-v21/launch_background.xml`: Launch background for API 21+.
+    *   `android/app/src/main/res/drawable/launch_background.xml`: Default launch background.
+    *   `android/app/src/main/res/values-night/styles.xml`: Styles for night mode.
+    *   `android/app/src/main/res/values/styles.xml`: Application styles.
+    *   `android/app/src/profile/AndroidManifest.xml`: Profile-specific Android manifest.
+    *   `android/gradle.properties`: Gradle properties for the Android project.
+    *   `android/gradle/wrapper/gradle-wrapper.properties`: Gradle wrapper properties.
+    *   `android/settings.gradle.kts`: Gradle settings file, written in Kotlin Script.
+*   **`assets/`**: Stores static assets.
+    *   `assets/lottie/error.json`: A JSON file, likely for Lottie animations, specifically an error animation.
 *   **`docs/`**: Contains project documentation.
     *   `docs/00-meta/`: Meta-documentation files.
-        *   `docs/00-meta/doc-accessibility.md`
-        *   `docs/00-meta/doc-maintenance.md`
-        *   `docs/00-meta/doc-metrics.md`
-        *   `docs/00-meta/doc-review-process.md`
-        *   `docs/00-meta/doc-standards.md`
-        *   `docs/00-meta/doc-templates.md`: Outlines documentation templates and patterns. [S20]
-        *   `docs/00-meta/doc-tools.md`
-        *   `docs/00-meta/doc-versioning.md`
-    *   `docs/01-overview/`: General project overview documentation.
-        *   `docs/01-overview/README.md`: Project README, providing a high-level overview and features. [S19]
-        *   `docs/01-overview/business-context.md`
-        *   `docs/01-overview/system-requirements.md`: Details hardware and software requirements. [S16]
-    *   `docs/02-architecture/`: Documentation on system architecture.
-        *   `docs/02-architecture/system-architecture.md`: Details the system architecture and patterns used. [S18]
-    *   `docs/03-features/[feature-name]/platforms/api.md`: API documentation specific to features. [S11]
-    *   `docs/04-apis/`: Comprehensive API documentation.
-        *   `docs/04-apis/api.md`: General API documentation. [S1]
-        *   `docs/04-apis/api-overview.md`: Overview of the CryptoWave API. [S7]
-        *   `docs/04-apis/error-handling.md`: Details API error handling mechanisms. [S15]
-        *   `docs/04-apis/filtering-sorting.md`: Documentation on filtering and sorting API data. [S2]
-        *   `docs/04-apis/pagination.md`: Documentation on API pagination. [S3]
-        *   `docs/04-apis/rate-limiting.md`: Information on API rate limiting. [S12]
-        *   `docs/04-apis/rest-api/`: Documentation for the REST API.
-            *   `docs/04-apis/rest-api/endpoints/README.md`: API endpoint reference. [S4]
-            *   `docs/04-apis/rest-api/openapi.yaml`: OpenAPI specification for the API. [S14]
-            *   `docs/04-apis/rest-api/request-examples.md`: Examples of API requests. [S10]
-            *   `docs/04-apis/rest-api/response-examples.md`: Examples of API responses. [S9]
-            *   `docs/04-apis/rest-api/status-codes.md`: Reference for API status codes. [S6]
-        *   `docs/04-apis/sdk-libraries.md`: Information on SDK libraries. [S8]
-        *   `docs/04-apis/versioning.md`: Details API versioning. [S13]
-        *   `docs/04-apis/webhooks.md`: Documentation on webhooks. [S5]
-*   **`ios/`**: Contains iOS-specific project files and configurations.
-*   **`lib/`**: Contains the core Dart application code.
-    *   `lib/main.dart`: The entry point of the Flutter application.
-    *   `lib/models/coin/coin_model.freezed.dart`: Defines the `CoinModel` data structure.
-    *   `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.freezed.dart`: Defines data structures for cryptocurrency chart data.
-    *   `lib/network/exception_handler.dart`: Handles API exceptions. [S6, S11, S15]
-    *   `lib/network/http_client.dart`: Manages HTTP client operations. [S16]
-    *   `lib/repositories/coin_repository.dart`: Responsible for fetching cryptocurrency data. [S1, S2, S4, S5, S10, S12, S13, S14]
-*   **`test/`**: Contains unit and integration tests for the application.
+        *   `doc-accessibility.md`, `doc-maintenance.md`, `doc-metrics.md`, `doc-review-process.md`, `doc-standards.md`, `doc-templates.md`, `doc-tools.md`, `doc-versioning.md`: Markdown files detailing documentation standards and processes.
+    *   `docs/01-overview/`: Overview documentation.
+        *   `README.md`: General overview of the documentation.
+        *   `business-context.md`: Information regarding the business context of the project.
+*   **`lib/`**: Contains the core application logic, likely for Flutter/Dart.
+*   **`pubspec.yaml`**: Project's dependency management file for Dart/Flutter projects.
+*   **`README.md`**: The main README file for the repository.
+*   **`analysis_options.yaml`**: Configuration for Dart static analysis.
+*   **`devtools_options.yaml`**: Configuration for Dart DevTools.
 
 ## 4. Data Flow and Dependencies
 
-The application interacts with the CoinGecko API for real-time cryptocurrency market data. [S1, S7, S18, S19] The `lib/repositories/coin_repository.dart` file is central to fetching this data, abstracting direct API calls. [S1, S2, S4, S5, S10, S12, S13, S14] The `lib/network/exception_handler.dart` class is responsible for processing and standardizing API-related exceptions. [S6, S11, S15]
+The provided analysis indicates a modular architecture with components like `04-apis`, `rest-api`, and `common`. The system has 91 total files and 3 identified components. However, the analysis reports 0 relationships, 0 exported functions, and 0 exported classes. This suggests that while the modular structure is present, the explicit dependency and data flow information is not detailed in the provided snippets.
 
-Key relationships observed in the codebase include:
-
-*   `lib/main.dart` extends `StatelessWidget.dart`.
-*   `lib/models/coin/coin_model.freezed.dart` extends `CoinModel.dart` and implements `RoiModel.dart`.
-*   `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.freezed.dart` implements `CryptoChartDataModel.dart` and `DataPointModel.dart`.
-*   `lib/network/exception_handler.dart` implements `Exception.dart` and extends `ApiException.dart`.
-*   `lib/network/http_client.dart` imports `dart:async` and `dart:convert`. [S16]
+*   **TODO**: Further analysis is required to map the relationships between components (`04-apis`, `rest-api`, `common`) and understand the data flow.
 
 ## 5. Design Decisions and Rationale
 
-The application utilizes a **Component-Based Architecture** to promote modularity, reusability, and maintainability. [S18] The Bloc pattern is employed for state management, ensuring a predictable and maintainable UI. [S18] The repository pattern is used to abstract direct API interactions, providing a clean separation of concerns for data fetching. [S1, S2, S4, S5, S10, S12, S13, S14]
+The detected architectural patterns (Modular Architecture, API Layer, Component-Based Architecture, Database Layer, Authentication System) suggest a design focused on maintainability, reusability, and structured data handling. The use of a modular approach with components like `04-apis` and `rest-api` points to a deliberate effort to separate concerns, likely for easier development and scaling of specific features. The presence of extensive documentation in the `docs` directory indicates a strong emphasis on knowledge sharing and maintaining project health.
 
 ## 6. Scalability Considerations
 
-Scalability considerations are mentioned in the context of system requirements, suggesting that the application's design should accommodate growth. [S16]
+The modular architecture, with its feature-based organization, provides a foundation for scalability. By isolating functionalities into distinct components, individual modules can be scaled independently as needed. The presence of an API layer suggests that the system is designed to handle external requests, which is crucial for scaling user-facing features.
+
+*   **TODO**: Specific strategies for horizontal or vertical scaling, load balancing, and resource management are not detailed in the provided analysis.
 
 ## 7. Security Architecture
 
-Authentication is not explicitly handled or documented within the provided code snippets. The application interacts directly with the CoinGecko API, which may have its own authentication requirements not detailed here. [S2, S3, S4, S8, S11, S14, S15] The API does not require authentication, and all data is publicly accessible through the CoinGecko API. [S1, S5, S6, S7, S10, S12, S13]
+The detection of an "Authentication System" indicates that user authentication and authorization are implemented. This likely involves mechanisms to verify user identities and control access to resources.
+
+*   **TODO**: Details regarding specific authentication protocols (e.g., OAuth, JWT), authorization models, data encryption (at rest and in transit), and vulnerability management are not provided.
 
 ## 8. Performance Considerations
 
-Performance considerations are not explicitly detailed in the provided context.
+The project utilizes `analysis_options.yaml` and `devtools_options.yaml`, which are tools for code analysis and development tooling, respectively. These can be leveraged for performance monitoring and optimization. The `assets` directory containing JSON files might be used for efficient data loading or UI rendering.
+
+*   **TODO**: Information on caching strategies, performance optimization techniques (e.g., code splitting, lazy loading), and monitoring tools is not available.
 
 ## 9. Deployment Architecture
 
-Deployment architecture details are not provided in the context.
+The project includes specific configurations for Android (`android/` directory) and potentially iOS (`ios/` directory). The `gradle.properties` and `settings.gradle.kts` files in the `android` directory are key for Android build and environment setup.
+
+*   **TODO**: Details on the deployment infrastructure (e.g., cloud providers, CI/CD pipelines), environment setup (development, staging, production), and containerization are not provided.
 
 ## 10. Future Architecture Improvements
 
-Future architecture improvements are not detailed in the provided context.
+*   **TODO**: Specific recommendations for future architectural improvements are not present in the provided analysis.
 
 ## 11. Technology Stack Rationale
 
-The rationale for choosing specific technologies is not detailed in the provided context.
+The technology stack includes:
+
+*   **Languages:** Markdown, YAML, XML, Kotlin, Properties, JSON, Swift, Dart.
+*   **Framework:** Next.js (as stated in the provided analysis, though not explicitly confirmed by file paths).
+
+The rationale for choosing these technologies is not detailed. However, the combination of Kotlin and Swift suggests native mobile development capabilities for Android and iOS, respectively. Dart (implied by `pubspec.yaml`) is commonly used with the Flutter framework for cross-platform UI development. Next.js is a popular React framework for building web applications.
+
+*   **TODO**: The specific rationale behind the selection of each technology in the stack needs to be documented.
 
 ## 12. Integration Points
 
-The primary integration point is the **CoinGecko API**, which CryptoWave leverages to fetch real-time cryptocurrency market data, prices, trends, and detailed coin information. [S1, S7, S18, S19]
+The project structure suggests potential integration points:
 
-## SOURCES
+*   **API Layer:** The `04-apis` and `rest-api` components indicate that the system is designed to interact with external services or provide an API for other clients.
+*   **Native Mobile Integrations:** The `android/` directory with Kotlin files points to integration with native Android functionalities. Similarly, the presence of Swift implies potential iOS native integrations.
+*   **Third-Party Tools:** The `devtools_options.yaml` file suggests integration with Dart DevTools.
 
-- [S1] docs/04-apis/api.md
-- [S2] docs/04-apis/filtering-sorting.md
-- [S3] docs/04-apis/pagination.md
-- [S4] docs/04-apis/rest-api/endpoints/README.md
-- [S5] docs/04-apis/webhooks.md
-- [S6] docs/04-apis/rest-api/status-codes.md
-- [S7] docs/04-apis/api-overview.md
-- [S8] docs/04-apis/sdk-libraries.md
-- [S9] docs/04-apis/rest-api/response-examples.md
-- [S10] docs/04-apis/rest-api/request-examples.md
-- [S11] docs/03-features/[feature-name]/platforms/api.md
-- [S12] docs/04-apis/rate-limiting.md
-- [S13] docs/04-apis/versioning.md
-- [S14] docs/04-apis/rest-api/openapi.yaml
-- [S15] docs/04-apis/error-handling.md
-- [S16] docs/01-overview/system-requirements.md
-- [S18] docs/02-architecture/system-architecture.md
-- [S19] docs/01-overview/README.md
-- [S20] docs/00-meta/doc-templates.md
+*   **TODO**: Specific external APIs, third-party services, or SDKs that the system integrates with are not detailed.
+
+## Sources
+
+*   `README.md`
+*   `analysis_options.yaml`
+*   `android/app/src/debug/AndroidManifest.xml`
+*   `android/app/src/main/AndroidManifest.xml`
+*   `android/app/src/main/kotlin/com/example/cryptowave/MainActivity.kt`
+*   `android/app/src/main/res/drawable-v21/launch_background.xml`
+*   `android/app/src/main/res/drawable/launch_background.xml`
+*   `android/app/src/main/res/values-night/styles.xml`
+*   `android/app/src/main/res/values/styles.xml`
+*   `android/app/src/profile/AndroidManifest.xml`
+*   `android/gradle.properties`
+*   `android/gradle/wrapper/gradle-wrapper.properties`
+*   `android/settings.gradle.kts`
+*   `assets/lottie/error.json`
+*   `devtools_options.yaml`
+*   `docs/00-meta/doc-accessibility.md`
+*   `docs/00-meta/doc-maintenance.md`
+*   `docs/00-meta/doc-metrics.md`
+*   `docs/00-meta/doc-review-process.md`
+*   `docs/00-meta/doc-standards.md`
+*   `docs/00-meta/doc-templates.md`
+*   `docs/00-meta/doc-tools.md`
+*   `docs/00-meta/doc-versioning.md`
+*   `docs/01-overview/README.md`
+*   `docs/01-overview/business-context.md`
+*   `lib/`
+*   `pubspec.yaml`
 
 ---
-Generated by CodeSynapse · 2025-08-09
+Generated by CodeSynapse · 2025-08-14
