@@ -2,78 +2,93 @@
 title: API.md
 type: api
 category: 04-apis
-last_updated: 2025-08-09T14:11:55.059Z
+last_updated: 2025-08-14T10:32:45.735Z
 ---
 # CryptoWave API Documentation
 
-This document provides a comprehensive reference for the CryptoWave API, detailing its functionalities, endpoints, and error handling mechanisms.
+## Table of Contents
+
+1.  [API Overview](#api-overview)
+2.  [Authentication](#authentication)
+3.  [Endpoint Reference](#endpoint-reference)
+4.  [Request/Response Examples](#requestresponse-examples)
+5.  [Error Handling](#error-handling)
+6.  [Rate Limiting](#rate-limiting)
+7.  [SDK/Client Usage](#sdkclient-usage)
+8.  [Testing Instructions](#testing-instructions)
+9.  [Sources](#sources)
 
 ## 1. API Overview
 
-CryptoWave is a Flutter application that leverages the CoinGecko API to provide real-time cryptocurrency market data, price charts, and detailed coin information. The application's core functionality relies on fetching and processing data from the CoinGecko API. The application's data fetching and management are handled through a repository pattern, abstracting direct API interactions.
+The CryptoWave API provides access to cryptocurrency market data and trading functionalities. It is a RESTful API designed for developers to integrate cryptocurrency services into their applications.
+
+The API documentation is structured across several files to provide a comprehensive understanding of its features and usage.
+
+*   `docs/04-apis/api-overview.md`: Provides a general overview of the API.
+*   `docs/04-apis/api.md`: Details the core API functionalities.
+*   `docs/04-apis/rest-api/endpoints/README.md`: Lists and describes available REST API endpoints.
+*   `docs/04-apis/rest-api/openapi.yaml`: Defines the API structure using OpenAPI Specification.
 
 ## 2. Authentication
 
-Authentication is not explicitly handled or documented within the provided code snippets. Interactions with the CoinGecko API are assumed to be unauthenticated, relying on the API's public access.
+TODO: Authentication details are not provided in the CONTEXT.
 
-## 3. Endpoint/Function Reference
+## 3. Endpoint Reference
 
-The primary interaction with external data is managed through repositories that abstract API calls. The following repositories are identified:
+The CryptoWave API exposes various endpoints for interacting with cryptocurrency data. The structure and details of these endpoints are defined in the OpenAPI specification and further elaborated in the documentation.
 
-### `lib/repositories/coin_repository.dart`
-
-This repository is responsible for fetching cryptocurrency data.
-
-### `ExceptionHandler` Class
-
-The `ExceptionHandler` class is responsible for processing and standardizing API exceptions.
-
-#### `ExceptionHandler.enhanceException`
-
-This static method within the `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context.
-
-**Parameters:**
-
-*   `error`: The original exception object.
-*   `contextMessage`: A string providing additional context.
+*   **OpenAPI Specification:** `docs/04-apis/rest-api/openapi.yaml` provides a machine-readable definition of the API, including all available endpoints, their parameters, and responses.
+*   **Endpoint Listing:** `docs/04-apis/rest-api/endpoints/README.md` offers a human-readable list and description of the available REST API endpoints.
 
 ## 4. Request/Response Examples
 
-TODO: Provide examples for API requests and responses.
+Examples of API requests and their corresponding responses are available to help developers understand how to interact with the API.
+
+*   `docs/04-apis/rest-api/request-examples.md`: Contains examples of various API requests.
+*   `docs/04-apis/rest-api/response-examples.md`: Contains examples of API responses for different scenarios.
 
 ## 5. Error Handling
 
-The `ExceptionHandler` class is responsible for transforming base API exceptions into domain-specific exceptions with enhanced context.
+The API employs a consistent error handling mechanism to inform clients about issues encountered during request processing.
+
+*   `docs/04-apis/error-handling.md`: Details the error codes, messages, and structures returned by the API.
+*   `lib/network/exception_handler.dart`: This file likely contains the implementation logic for handling network-related exceptions within the application.
 
 ## 6. Rate Limiting
 
-TODO: Information on rate limiting is not available in the provided context.
+To ensure fair usage and stability, the API implements rate limiting.
 
-## 7. SDK/Client Usage Examples
+*   `docs/04-apis/rate-limiting.md`: Explains the rate limits, including request quotas and time windows, and how clients should handle rate limit responses.
 
-TODO: Information on SDK/Client usage examples is not available in the provided context.
+## 7. SDK/Client Usage
+
+The CryptoWave API supports integration through SDK libraries.
+
+*   `docs/04-apis/sdk-libraries.md`: Provides information on available SDKs and guidance on their usage for different programming languages.
 
 ## 8. Testing Instructions
 
-TODO: Information on testing instructions is not available in the provided context.
+TODO: Testing instructions are not provided in the CONTEXT.
 
-## SOURCES
+## Sources
 
-- [S1] docs/04-apis/filtering-sorting.md
-- [S2] docs/04-apis/webhooks.md
-- [S3] docs/03-features/[feature-name]/platforms/api.md
-- [S4] docs/04-apis/api.md
-- [S5] docs/04-apis/rest-api/request-examples.md
-- [S6] docs/04-apis/rest-api/status-codes.md
-- [S7] docs/04-apis/rest-api/response-examples.md
-- [S8] docs/04-apis/pagination.md
-- [S9] docs/04-apis/api-overview.md
-- [S10] docs/04-apis/versioning.md
-- [S11] docs/04-apis/rest-api/endpoints/README.md
-- [S12] docs/04-apis/rest-api/openapi.yaml
-- [S13] docs/04-apis/rate-limiting.md
-- [S14] docs/04-apis/error-handling.md
-- [S15] docs/04-apis/sdk-libraries.md
+*   `docs/03-features/[feature-name]/platforms/api.md`
+*   `docs/04-apis/api-overview.md`
+*   `docs/04-apis/api.md`
+*   `docs/04-apis/error-handling.md`
+*   `docs/04-apis/filtering-sorting.md`
+*   `docs/04-apis/pagination.md`
+*   `docs/04-apis/rate-limiting.md`
+*   `docs/04-apis/rest-api/endpoints/README.md`
+*   `docs/04-apis/rest-api/openapi.yaml`
+*   `docs/04-apis/rest-api/request-examples.md`
+*   `docs/04-apis/rest-api/response-examples.md`
+*   `docs/04-apis/rest-api/status-codes.md`
+*   `docs/04-apis/sdk-libraries.md`
+*   `docs/04-apis/versioning.md`
+*   `docs/04-apis/webhooks.md`
+*   `docs/API-Documentation.md`
+*   `lib/network/exception_handler.dart`
 
 ---
-Generated by CodeSynapse · 2025-08-09
+Generated by CodeSynapse · 2025-08-14
