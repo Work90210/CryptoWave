@@ -9,7 +9,7 @@ The AI documentation system has determined that documents in this category share
 ## Documents in this Category
 
 ### Recently Added
-- Configuration
+- Api Reference
 
 ## AI Organization
 
