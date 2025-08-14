@@ -1,146 +1,62 @@
 ---
-title: COMPONENTS.md
-type: component
-category: 05-platforms
-last_updated: 2025-08-09T14:07:21.082Z
+title: Components
+description: Component catalog and quick links.
+type: component-catalog
+last_updated: 2025-08-09T14:07:18.886Z
+tags:
+  - components
+  - catalog
 ---
-This document provides an overview of the components within the CryptoWave repository, aiming to assist developers in understanding and utilizing them effectively.
+# Components
 
-## 1. Component Library Overview
+This page provides quick links to each component's dedicated documentation.
 
-The CryptoWave application is built using Flutter and leverages various components for its UI, network operations, data modeling, and utility functions. The components are organized into logical directories such as `lib/models`, `lib/network`, `lib/ui`, and `lib/utils`.
+- [api-overview](components/api-overview.md)
+- [app_bar](components/app_bar.md)
+- [base_repository](components/base_repository.md)
+- [business-context](components/business-context.md)
+- [changelog](components/changelog.md)
+- [coin_details](components/coin_details.md)
+- [coin_details_cubit](components/coin_details_cubit.md)
+- [coin_details_cubit.freezed](components/coin_details_cubit.freezed.md)
+- [coin_details_repository](components/coin_details_repository.md)
+- [coin_details_state](components/coin_details_state.md)
+- [coin_model](components/coin_model.md)
+- [coin_model.freezed](components/coin_model.freezed.md)
+- [coin_model.g](components/coin_model.g.md)
+- [coin_repository](components/coin_repository.md)
+- [constants](components/constants.md)
+- [crypto_chart_data_model](components/crypto_chart_data_model.md)
+- [crypto_chart_data_model.freezed](components/crypto_chart_data_model.freezed.md)
+- [crypto_chart_data_model.g](components/crypto_chart_data_model.g.md)
+- [doc-review-process](components/doc-review-process.md)
+- [exception_handler](components/exception_handler.md)
+- [guide](components/guide.md)
+- [home](components/home.md)
+- [home_page_cubit](components/home_page_cubit.md)
+- [home_page_cubit.freezed](components/home_page_cubit.freezed.md)
+- [home_page_state](components/home_page_state.md)
+- [http_client](components/http_client.md)
+- [key-concepts](components/key-concepts.md)
+- [load_failed](components/load_failed.md)
+- [loading](components/loading.md)
+- [logger_service](components/logger_service.md)
+- [main](components/main.md)
+- [MainActivity](components/MainActivity.md)
+- [network_response](components/network_response.md)
+- [network_response.freezed](components/network_response.freezed.md)
+- [primary_button](components/primary_button.md)
+- [quick-start](components/quick-start.md)
+- [README](components/README.md)
+- [service_locator](components/service_locator.md)
+- [stakeholders](components/stakeholders.md)
+- [support-contacts](components/support-contacts.md)
+- [system-boundaries](components/system-boundaries.md)
+- [system-overview](components/system-overview.md)
+- [system-requirements](components/system-requirements.md)
+- [widget_test](components/widget_test.md)
 
-## 2. Component Catalog
-
-### `lib/constants.dart`
-
-This file likely contains application-wide constants.
-
-### `lib/main.dart`
-
-The entry point of the Flutter application.
-
-### `lib/models/coin/coin_model.dart`
-
-Defines the data model for cryptocurrency information.
-- `coin_model.freezed.dart`: Generated code for `coin_model`.
-- `coin_model.g.dart`: Generated code for `coin_model` serialization.
-
-### `lib/models/coin_details/crypto_chart_data_model/crypto_chart_data_model.dart`
-
-Defines the data model for cryptocurrency chart data.
-- `crypto_chart_data_model.freezed.dart`: Generated code for `crypto_chart_data_model`.
-- `crypto_chart_data_model.g.dart`: Generated code for `crypto_chart_data_model` serialization.
-
-### `lib/network/exception_handler.dart`
-
-Handles network-related exceptions.
-
-### `lib/network/http_client.dart`
-
-Provides functionality for making HTTP requests.
-
-### `lib/network/network_response.dart`
-
-Defines the structure for network responses.
-- `network_response.freezed.dart`: Generated code for `network_response`.
-
-### `lib/repositories/base_repository.dart`
-
-An abstract base class for repositories.
-
-### `lib/repositories/coin_details_repository.dart`
-
-Handles fetching cryptocurrency details.
-
-### `lib/repositories/coin_repository.dart`
-
-Responsible for fetching cryptocurrency data. This repository interacts with the CoinGecko API. [S5, S6, S8, S9, S14]
-
-### `lib/ui/coin_details/coin_details.dart`
-
-The UI widget for displaying coin details.
-
-### `lib/ui/coin_details/cubit/coin_details_cubit.dart`
-
-Manages the state and logic for the coin details screen.
-- `coin_details_cubit.freezed.dart`: Generated code for `coin_details_cubit`.
-
-### `lib/ui/coin_details/cubit/coin_details_state.dart`
-
-Defines the states for the coin details cubit.
-
-### `lib/ui/common/app_bar.dart`
-
-A common AppBar component.
-
-### `lib/ui/common/load_failed.dart`
-
-A widget to display when loading fails.
-
-### `lib/ui/common/loading.dart`
-
-A widget to display during loading states.
-
-### `lib/ui/common/primary_button.dart`
-
-A reusable primary button component.
-
-### `lib/ui/home_page/cubit/home_page_cubit.dart`
-
-Manages the state and logic for the home page.
-- `home_page_cubit.freezed.dart`: Generated code code for `home_page_cubit`.
-
-### `lib/ui/home_page/cubit/home_page_state.dart`
-
-Defines the states for the home page cubit.
-
-### `lib/ui/home_page/home.dart`
-
-The main home page widget.
-
-### `lib/utils/logger_service.dart`
-
-A utility for logging messages.
-
-### `lib/utils/service_locator.dart`
-
-Handles service location and dependency injection.
-
-## 3. Props/Parameters Documentation
-
-TODO: Detailed props/parameters for each UI component and repository method are not available in the provided context.
-
-## 4. Usage Patterns
-
-*   **Data Fetching:** Repositories like `coin_repository.dart` are used to abstract API calls, primarily interacting with the CoinGecko API. [S5, S6, S8, S9, S14]
-*   **State Management:** Cubits (`coin_details_cubit.dart`, `home_page_cubit.dart`) are used for managing UI state.
-*   **UI Rendering:** Widgets in `lib/ui` are responsible for displaying data and handling user interactions.
-
-## 5. Styling Guidelines
-
-TODO: Specific styling guidelines are not detailed in the provided context.
-
-## 6. Accessibility Notes
-
-Documentation must adhere to WCAG 2.1 Level AA. [S11]
-
-## 7. Browser Support
-
-TODO: Browser support information is not available in the provided context.
-
-## 8. Migration Guide
-
-TODO: Migration guide information is not available in the provided context.
-
-## SOURCES
-
-- [S5] docs/04-apis/api-overview.md
-- [S6] docs/04-apis/rest-api/endpoints/README.md
-- [S8] docs/04-apis/filtering-sorting.md
-- [S9] docs/04-apis/webhooks.md
-- [S11] docs/00-meta/doc-accessibility.md
-- [S14] docs/04-apis/api.md
+See the full index at [docs/components/INDEX.md](components/INDEX.md).
 
 ---
-Generated by CodeSynapse · 2025-08-09
+Generated by CodeSynapse · 2025-08-14
