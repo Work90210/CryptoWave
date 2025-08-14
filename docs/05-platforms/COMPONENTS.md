@@ -2,7 +2,7 @@
 title: Components
 description: Component catalog and quick links.
 type: component-catalog
-last_updated: 2025-08-09T13:48:14.755Z
+last_updated: 2025-08-09T13:43:22.151Z
 tags:
   - components
   - catalog
